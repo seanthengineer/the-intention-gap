@@ -1,7 +1,7 @@
 # Citation metadata for The Intention Gap.
-# Before release the owner must replace the placeholder author entry and may add
-# repository-code, license and date-released (docs/release_readiness.md). No ORCID, affiliation
-# or DOI is listed because none has been confirmed.
+# Publishing name confirmed by the author. The MIT code license applies to software;
+# original research documentation is separately CC BY 4.0 (LICENSE-docs.md).
+# No release date, ORCID, affiliation, or DOI has been claimed.
 cff-version: 1.2.0
 message: >-
   If you use this project, please cite it as below. It is an independent research project and has
@@ -9,6 +9,8 @@ message: >-
 type: software
 title: "The Intention Gap: Will Generation Z have the families they say they want?"
 version: "1.0.0-rc1"
+repository-code: "https://github.com/seanthengineer/the-intention-gap"
+license: MIT
 abstract: >-
   An independent research project combining four designs to examine U.S. fertility intentions and
   outcomes: stated birth expectations against observed births in the NLSY97 (women born 1980-84),
@@ -18,7 +20,7 @@ abstract: >-
   concludes that whether Generation Z will achieve its desired family size cannot be established
   from existing data. Results are frozen by SHA-256 manifests and independently recomputed.
 authors:
-  - name: "Author name to be confirmed before release"
+  - name: "Sean Nathaniel M."
 keywords:
   - demography
   - fertility

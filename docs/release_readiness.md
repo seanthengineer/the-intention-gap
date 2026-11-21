@@ -1,11 +1,8 @@
 # Release checklist and publication-readiness report
 
-**Status:** publication engineering complete, 2026-11-20. **Not released:**
-- the repository has not been initialised in Git, committed, pushed or published;
-- the GitHub workflows have never run;
-- the Streamlit dashboard is out of scope.
+**Status:** publication engineering complete; the repository was initialized and pushed to a **private** GitHub repository on 2026-11-21. CI source-only jobs passed on Ubuntu and Windows; the integrity workflow passed after a YAML correction. The weekly maintenance workflow has not yet been run. **Not publicly released:** no public visibility, tag or GitHub Release. The Streamlit dashboard is out of scope.
 
-**Decision: REVIEWABLE WITH NONBLOCKING LIMITATIONS.** The engineering is complete and verified locally. Publication still needs the owner decisions in section 6 and authorization for the Git and GitHub phase.
+**Decision: REVIEWABLE WITH NONBLOCKING LIMITATIONS.** Author and project licenses were approved on 2026-11-21. Final visual review, protection settings and public-release authorization remain pending.
 
 ## 1. Deliverables
 
@@ -16,7 +13,7 @@
 | Research pipeline, walkthrough and architecture diagram | [`research_pipeline.md`](research_pipeline.md) |
 | Engineering decisions and development narrative | [`engineering_decisions.md`](engineering_decisions.md) |
 | Technical walkthrough, verified stack and contribution statement | [`technical_walkthrough.md`](technical_walkthrough.md) |
-| Licensing and attribution register; proposed licensing structure | [`licensing_and_attribution.md`](licensing_and_attribution.md); HFD terms archived in [`source_terms/`](source_terms/hfd_user_agreement_2026-11-20.md) |
+| Licensing and attribution register; authorized project licensing structure | [`licensing_and_attribution.md`](licensing_and_attribution.md); HFD terms archived in [`source_terms/`](source_terms/hfd_user_agreement_2026-11-20.md) |
 | Citation audit and consolidated bibliography | [`bibliography.md`](bibliography.md); [`../CITATION.cff`](../CITATION.cff) (validated against CFF 1.2.0) |
 | Publication errata | [`publication_errata.md`](publication_errata.md) |
 | Security and disclosure audit; release inventory and exclusion register | [`security_and_disclosure_audit.md`](security_and_disclosure_audit.md); [`release_inventory.csv`](release_inventory.csv) |
@@ -100,7 +97,7 @@ Also confirmed:
 
 **Limitation.** Linux and macOS Git were not tested. The attributes are platform-independent, and the prepared CI checks out on Ubuntu, Windows (where GitHub runners set `core.autocrlf=true`) and macOS, then runs `verify_freeze.py`.
 
-## 5. Continuous integration (prepared; not run)
+## 5. Continuous integration (GitHub CI and integrity checks exercised)
 
 | Workflow | Trigger | What it does |
 |---|---|---|
@@ -117,18 +114,18 @@ Also confirmed:
 **Validation.**
 - actionlint 1.7.12 and a YAML parse pass.
 - The commands were executed locally on Windows (section 2).
-- The workflows have **not run on GitHub**: Python 3.15.2 availability in `setup-python`, the Linux and macOS runs and the Pyright counts on Linux will first be confirmed by the first push.
+- On GitHub, source-only CI completed successfully on Ubuntu and Windows with Python 3.15.2; the Pyright baseline check also passed. The corrected daily integrity workflow passed a manual run. Weekly maintenance including macOS remains untested. The first integrity and Dependabot runs failed to parse the original workflow YAML; a correction commit fixed that issue.
 
 **Limitations.** GitHub disables scheduled workflows in public repositories after 60 days without repository activity, and scheduled runs can be delayed. A failed scheduled run reports a problem; it never changes anything.
 
 ## 6. Release checklist
 
 **Owner decisions (required before publication):**
-- [ ] Choose the licences and name the copyright holder (proposal: MIT for code, CC BY 4.0 for documentation; `licensing_and_attribution.md` §4). Add `LICENSE` and `LICENSE-docs`.
-- [ ] Replace the placeholder author in `CITATION.cff`. Add `repository-code`, `license` and `date-released` once known.
-- [ ] Confirm or edit the author contribution statement (`technical_walkthrough.md`; README).
-- [ ] Choose the repository name and visibility.
-- [ ] Authorize the Git and GitHub phase.
+- [x] Approve the licences and copyright notice: MIT for original code, CC BY 4.0 for original research writing and presentation; copyright © 2026 Sean Nathaniel M. (`LICENSE`, `LICENSE-docs.md`).
+- [x] Update `CITATION.cff` with the publishing name, software license and repository URL. Do not add a public release date before publication.
+- [x] Confirm and correct the author contribution statement, including independently selected data sources informed by recommendations and Claude Code implementation assistance.
+- [x] Choose the repository name and initial private visibility: `seanthengineer/the-intention-gap`.
+- [x] Authorize and complete initial Git initialization and GitHub push.
 
 **Before the first commit (commands in section 8):**
 - [ ] `python -m tools.release check`: all PASS.
@@ -139,7 +136,7 @@ Also confirmed:
 **After the first push (owner, on GitHub):**
 - [ ] Enable secret scanning, push protection and private vulnerability reporting.
 - [ ] Protect `main`: require the CI workflow and a review for changes to `tools/`, `.github/` and `docs/*_freeze.sha256`.
-- [ ] Confirm that the first CI run passes on Ubuntu and Windows; record the skip counts.
+- [x] Confirm the first CI source-only run passed on Ubuntu and Windows (392 tests, 37 data-dependent skips); the integrity workflow also passed on a subsequent manual run.
 - [ ] Check that the README renders correctly in light and dark mode, including the Mermaid diagrams and images.
 - [ ] Tag the release (`v1.0.0`).
 
@@ -154,9 +151,9 @@ Also confirmed:
 | Archive hash | Recorded beside the archive in `intention-gap-public-release-candidate.zip.sha256`, because an archive cannot contain its own hash |
 | Checks on the archive | The frozen safety scan `audit/verify_final_synthesis.check_archive`: every frozen file present with its manifest hash, internal manifest consistent, and no restricted paths, respondent columns or credentials. The same files were also tested as a source-only checkout and in Git (sections 2 and 4) |
 
-## 8. Release commands (for the authorized Git and GitHub phase; not run)
+## 8. Initial Git commands (historical instructions, already completed)
 
-Prerequisites: Git 2.40 or later; the hash-locked environment installed; the owner decisions in section 6 made; a GitHub repository created by the owner.
+The initial Git initialization, private remote and push were completed on 2026-11-21; **do not rerun these initialization commands** in the existing repository. The commands below are preserved as reproducibility notes, not as instructions to reinitialize or publish publicly.
 
 ```
 cd "<path to>/the-intention-gap"
@@ -199,10 +196,10 @@ The history starts at the publication commit and is not backdated; the research 
 
 **Material blockers to engineering: none.**
 
-**Required owner decisions before publication** (section 6): licences and copyright holder, author name in `CITATION.cff`, confirmation of the contribution statement, and Git/GitHub authorization. None is a defect; all are decisions only the owner can make.
+**Owner decisions completed:** original-code MIT license, original-documentation CC BY 4.0 license, copyright name Sean Nathaniel M., citation metadata, contribution statement, and private GitHub setup. **Still pending:** final visual and security-setting review, explicit authorization to make the repository public, and a public release tag.
 
 **Nonblocking limitations:**
-- The GitHub workflows have not run; Linux and macOS execution is untested (the lock resolves for both).
+- GitHub CI ran successfully on Ubuntu and Windows, including Pyright. Weekly maintenance and the macOS job have not yet run.
 - Python 3.15.2 is the only tested interpreter.
 - Public users cannot run the full-data verifiers without obtaining the source data themselves; five of them stop with an error, rather than SKIP, when data are absent (errata E-11).
 - In a fresh clone, one frozen test needs `python -m tools.release restore-run-record` first (errata E-10).

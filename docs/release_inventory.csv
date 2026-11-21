@@ -8,6 +8,8 @@ path,category,frozen_manifest,licence_class
 .python-version,configuration,,project code
 CITATION.cff,documentation,,project documentation
 CONTRIBUTING.md,documentation,,project documentation
+LICENSE,configuration,,project code
+LICENSE-docs.md,documentation,,project documentation
 README.md,documentation,,project documentation
 SECURITY.md,documentation,,project documentation
 analysis/__init__.py,code,m01_m08_freeze.sha256,project code

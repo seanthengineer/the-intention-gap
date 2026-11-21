@@ -1,6 +1,6 @@
 # Licensing, attribution and data-use register
 
-**Status:** publication preparation, 2026-11-20. Source terms were checked against the providers' current pages on that date (section 1). The project licence in section 4 is a **proposal awaiting the owner's authorization**; no licence has been granted, and the repository contains no `LICENSE` file yet.
+**Status:** project licenses authorized by the owner on 2026-11-21. Source terms were checked against the providers' pages on 2026-11-20 (section 1). The original software is licensed under [MIT](../LICENSE); the original research text and presentation contributions are licensed under [CC BY 4.0](../LICENSE-docs.md). Third-party data retain their own terms.
 
 This document closes the open licensing items of the frozen [`docs/final_sources.md`](final_sources.md) (L-SRC-1 and L-SRC-4) without editing it. Corrections to frozen text are listed in [`docs/publication_errata.md`](publication_errata.md).
 
@@ -43,23 +43,22 @@ The frozen M09 figures do not print the suggested NSFG footer. The visual atlas 
 
 **BLS.** "This project uses NLSY97 public-use data. It is independent and is not affiliated with or endorsed by the Bureau of Labor Statistics."
 
-## 4. Proposed licensing structure (owner authorization required)
+## 4. Project licensing (authorized)
 
-| Material | Proposed licence | Why | Condition |
-|---|---|---|---|
-| Original code: `analysis/`, `audit/`, `tools/`, `tests/`, workflows and configuration | **MIT** | Permissive and widely understood; compatible with the libraries used | Copyright holder to be named by the owner |
-| Original documentation: README and the project's `docs/*.md`, `audit/scientific-audit.md` | **CC BY 4.0** | Suits prose and research records; requires attribution; matches the HFD licence | As above |
-| Project figures (`assets/`) | **CC BY 4.0**, with the HFD notice on M11 figures and the README header | Figures embed HFD-derived values | The HFD notice travels with them |
-| Derived aggregate tables (`data/public/`) | **CC BY 4.0** for the project's contribution; each source's terms continue to apply (section 1) | Mixed sources: HFD (CC BY 4.0) and U.S. government statistics under data-use agreements | Source notices in section 3; no licence is claimed over the source data |
-| Third-party material: HFD terms in `docs/source_terms/`, quoted provider wording | Not relicensed | Quoted for the record | Rights stay with their owners |
-| Raw and respondent-level data | Not published | Restricted, or redistribution discouraged | Kept local |
+**Copyright notice for original contributions:** © 2026 Sean Nathaniel M.
 
-`docs/release_inventory.csv` records the proposed licence class of every published file.
+| Material | Applicable license | Boundary |
+|---|---|---|
+| Original code (`analysis/`, `audit/`, `tools/`, `tests/`), workflows and software configuration | **[MIT](../LICENSE)** | Covers the rights the copyright holder can license in original software, not third-party libraries or datasets. |
+| Original research writing and documentation (README, `docs/*.md`, explanatory audit text) | **[CC BY 4.0](../LICENSE-docs.md)** | Attribution required. Quotes, provider agreements and other third-party text retain their own terms. |
+| Original figure design, captions, explanatory graphics and analytic presentation | **[CC BY 4.0](../LICENSE-docs.md)** | HFD estimates shown in figures remain under their own CC BY 4.0 conditions, including provider attribution. |
+| Original contributions to derived aggregate tables in `data/public/` | **[CC BY 4.0](../LICENSE-docs.md)** | Does not claim ownership of source values or override HFD, CDC, NLSY97, NCHS or Census requirements. |
+| HFD data source terms and third-party materials (`docs/source_terms/` and provider quotations) | **Not relicensed** | Retain their respective copyright, licensing, citation and disclosure terms. |
+| Raw and respondent-level datasets | **Not distributed** | Excluded from the GitHub repository. |
 
-**Owner actions before release:**
-1. Name the copyright holder, then add `LICENSE` (MIT) and `LICENSE-docs` (CC BY 4.0 notice), or choose different licences.
-2. Confirm the notices in section 3.
-3. Confirm the right to license AI-assisted work. Code and text were produced with AI assistance under the owner's direction (README, "Author contribution").
+**Official licensing texts:** The MIT text is included in [LICENSE](../LICENSE). The [CC BY 4.0 legal code](https://creativecommons.org/licenses/by/4.0/legalcode) is linked by [LICENSE-docs.md](../LICENSE-docs.md).
+
+**Author contribution and AI assistance:** Sean Nathaniel M. selected the datasets personally, informed by technical recommendations, directed research decisions and reviewed the results. Claude Code assisted with substantive coding and repetitive implementation, tests, verifiers and documentation. The project licenses only rights the stated copyright holder can grant. See [technical walkthrough](technical_walkthrough.md#author-contribution-and-ai-assistance).
 
 ## 5. Frozen artifacts and redistribution
 
