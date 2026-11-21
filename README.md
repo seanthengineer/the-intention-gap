@@ -118,7 +118,9 @@ python audit/verify_final_synthesis.py      # claim matrix; raw-data checks repo
 
 ## Author contribution and status
 
-The author posed the question, defined its scope, chose the data, made the governing methodological decisions, and reviewed and approved every stage. Implementation (code, tests, verifiers and documentation) was carried out with an AI coding assistant under the author's direction; [the walkthrough](docs/technical_walkthrough.md#author-contribution-and-ai-assistance) details the division of work. This is an independent portfolio research project: **not peer-reviewed**, and not affiliated with or endorsed by any data provider. A Streamlit dashboard prototype for the first chapter exists locally but is **not part of this repository**; it will be added only if a dashboard phase is authorized.
+**Sean Nathaniel M.** developed the research question, personally selected data sources with input from technical recommendations, directed methodological decisions, and reviewed and approved the scientific results. Claude Code supported implementation, including Python coding, repetitive tasks, tests, verifiers and documentation. The [technical walkthrough](docs/technical_walkthrough.md#author-contribution-and-ai-assistance) explains the division of work.
+
+This is an independent portfolio research project, **not peer-reviewed**. The Streamlit prototype remains local and outside this repository.
 
 ## Data, licensing and attribution
 
@@ -127,4 +129,4 @@ The author posed the question, defined its scope, chose the data, made the gover
 - **CDC/NCHS.** NSFG and natality data. The analyses and conclusions are the author's; NCHS is responsible only for the initial data release.
 - **Census.** This product uses the Census Bureau Data API but is not endorsed or certified by the Census Bureau.
 
-No provider endorses this project. A licence for the project's own code and text has been proposed (MIT for code, CC BY 4.0 for documentation) but is **not yet granted**. See [licensing and attribution](docs/licensing_and_attribution.md).
+No provider endorses this project. Original project **code** is under the [MIT License](LICENSE); original **research writing and presentation** are under [CC BY 4.0](LICENSE-docs.md). Third-party datasets and other materials retain their own terms. See [licensing and attribution](docs/licensing_and_attribution.md).
