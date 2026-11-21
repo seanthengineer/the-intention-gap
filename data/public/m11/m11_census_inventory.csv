@@ -1,0 +1,26 @@
+file,description,scenario,rows,year_min,year_max,period
+np2023_a1.csv,"Projected age-specific fertility rates, women 14-54, by nativity/race/Hispanic group, 2023-2100",all (not scenario-specific),306,2023,2100,July 1 of YEAR-1 to June 30 of YEAR
+np2023_a2.csv,"Projected age-specific death rates by nativity, sex and group",all (not scenario-specific),1728,2023,2100,July 1 of YEAR-1 to June 30 of YEAR
+np2023_a3.csv,"Projected life expectancy at birth by nativity, sex and group",all (not scenario-specific),1728,2023,2100,July 1 of YEAR-1 to June 30 of YEAR
+np2023_a4.csv,"Projected survival ratios by nativity, sex and group",all (not scenario-specific),1728,2023,2100,July 1 of YEAR-1 to June 30 of YEAR
+np2023_a5.csv,"Projected total fertility rates by nativity/race/Hispanic group, 2023-2100",all (not scenario-specific),78,2023,2100,July 1 of YEAR-1 to June 30 of YEAR
+np2023_d1_mid.csv,"Projected population by single year of age, sex, race and Hispanic origin, 2022-2100",main series,4332,2022,2100,July 1 of YEAR
+np2023_d1_hi.csv,"Projected population by single year of age, sex, race and Hispanic origin, 2022-2100",high immigration,4332,2022,2100,July 1 of YEAR
+np2023_d1_low.csv,"Projected population by single year of age, sex, race and Hispanic origin, 2022-2100",low immigration,4332,2022,2100,July 1 of YEAR
+np2023_d1_zero.csv,"Projected population by single year of age, sex, race and Hispanic origin, 2022-2100",zero immigration,4332,2022,2100,July 1 of YEAR
+np2023_d2_mid.csv,"Projected births by sex, race and Hispanic origin, 2023-2100",main series,1260,2023,2100,July 1 of YEAR-1 to June 30 of YEAR
+np2023_d2_hi.csv,"Projected births by sex, race and Hispanic origin, 2023-2100",high immigration,1260,2023,2100,July 1 of YEAR-1 to June 30 of YEAR
+np2023_d2_low.csv,"Projected births by sex, race and Hispanic origin, 2023-2100",low immigration,1260,2023,2100,July 1 of YEAR-1 to June 30 of YEAR
+np2023_d2_zero.csv,"Projected births by sex, race and Hispanic origin, 2023-2100",zero immigration,1260,2023,2100,July 1 of YEAR-1 to June 30 of YEAR
+np2023_d3_mid.csv,"Projected deaths by single year of age, sex, race and Hispanic origin",main series,1260,2023,2100,July 1 of YEAR-1 to June 30 of YEAR
+np2023_d3_hi.csv,"Projected deaths by single year of age, sex, race and Hispanic origin",high immigration,1260,2023,2100,July 1 of YEAR-1 to June 30 of YEAR
+np2023_d3_low.csv,"Projected deaths by single year of age, sex, race and Hispanic origin",low immigration,1260,2023,2100,July 1 of YEAR-1 to June 30 of YEAR
+np2023_d3_zero.csv,"Projected deaths by single year of age, sex, race and Hispanic origin",zero immigration,1260,2023,2100,July 1 of YEAR-1 to June 30 of YEAR
+np2023_d4_mid.csv,"Projected net international migration by single year of age, sex, race and Hispanic origin",main series,1260,2023,2100,July 1 of YEAR-1 to June 30 of YEAR
+np2023_d4_hi.csv,"Projected net international migration by single year of age, sex, race and Hispanic origin",high immigration,1260,2023,2100,July 1 of YEAR-1 to June 30 of YEAR
+np2023_d4_low.csv,"Projected net international migration by single year of age, sex, race and Hispanic origin",low immigration,1260,2023,2100,July 1 of YEAR-1 to June 30 of YEAR
+np2023_d4_zero.csv,"Projected net international migration by single year of age, sex, race and Hispanic origin",zero immigration,1260,2023,2100,July 1 of YEAR-1 to June 30 of YEAR
+np2023_d5_mid.csv,"Projected population by single year of age, sex, race, Hispanic origin and nativity",main series,2580,2022,2100,July 1 of YEAR
+np2023_d5_hi.csv,"Projected population by single year of age, sex, race, Hispanic origin and nativity",high immigration,2580,2022,2100,July 1 of YEAR
+np2023_d5_low.csv,"Projected population by single year of age, sex, race, Hispanic origin and nativity",low immigration,2580,2022,2100,July 1 of YEAR
+np2023_d5_zero.csv,"Projected population by single year of age, sex, race, Hispanic origin and nativity",zero immigration,2580,2022,2100,July 1 of YEAR

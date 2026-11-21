@@ -1,0 +1,16 @@
+population,measure,n,weighted,unweighted,difference
+all,wants,2429,0.698867,0.701112,-0.00224466
+all,intends,2429,0.627737,0.624949,0.00278865
+all,divergence_among_wanters,1703,0.112373,0.113329,-0.000955957
+all,explicit_among_wanters,1703,0.0655731,0.0681151,-0.00254203
+all,any_children,2425,0.145548,0.154227,-0.00867889
+female,wants,1349,0.640646,0.653076,-0.0124299
+female,intends,1349,0.558732,0.567828,-0.00909631
+female,divergence_among_wanters,881,0.122683,0.127128,-0.00444516
+female,explicit_among_wanters,881,0.078092,0.0828604,-0.00476836
+female,any_children,1349,0.192406,0.209044,-0.0166375
+male,wants,1080,0.756788,0.761111,-0.0043233
+male,intends,1080,0.696388,0.696296,9.13588e-05
+male,divergence_among_wanters,822,0.103691,0.0985401,0.00515076
+male,explicit_among_wanters,822,0.0550299,0.0523114,0.00271842
+male,any_children,1076,0.0987914,0.0855019,0.0132896

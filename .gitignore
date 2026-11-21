@@ -1,0 +1,85 @@
+# Survey data: raw NLSY97 extracts and derived respondent-level files stay local.
+# Only the aggregate dashboard data in data/public/ is published.
+data/*
+!data/public/
+
+# Respondent-level files, wherever they are saved
+**/intention_gap_nlsy97*
+**/intention_gap_cohort*
+*.dat
+*.dct
+*.cdb
+*.NLSY97
+*.sas
+*.sps
+*-value-labels.do
+
+# Local outputs, logs and review archives
+*.log
+*.7z
+
+# Raw or binary data formats never belong in the public repository
+*.pdf
+*.xls
+*.xlsx
+*.sav
+*.dta
+*.parquet
+*.gz
+*.pkl
+*.pickle
+*.joblib
+*.tmp
+*.zip
+output/
+outputs/
+audit/*.txt
+audit/*.csv
+
+# Volatile M11 run record, rewritten by every run (frozen copy: docs/m11_frozen_run_record.json)
+data/public/m11/forecast/m11_run_record.json
+
+# Owner's local exploratory scripts
+/inspect_data.py
+/audit_data.py
+
+# Local Claude Code orchestration instructions (not part of the public repository)
+**/CLAUDE.md
+.claude/
+
+# Streamlit secrets
+.streamlit/secrets.toml
+
+# Virtual environments and local configuration
+.venv/
+venv/
+env/
+.env
+.env.*
+
+# Python caches and build artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Test and notebook artifacts
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Streamlit prototype: deferred until a dashboard phase is authorized (kept local)
+/streamlit_app.py
+/tests/test_dashboard.py
+/assets/dashboard.png
+/.streamlit/config.toml

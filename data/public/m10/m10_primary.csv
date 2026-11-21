@@ -1,0 +1,4 @@
+test,role,age_group,model,exposure,estimate_per10,se,ci_low,ci_high,t,p_value,n,clusters,k,wild_bootstrap_p,holm_p
+beta 20-24 = 0 (model C),primary,20-24,C state + year FE (primary),burden30_pct,-2.774364204,1.512286742,-5.81188152,0.2631531116,-1.834549049,0.07252583463,510,51,61,0.0858,
+beta 25-29 = 0 (model C),secondary,25-29,C state + year FE (primary),burden30_pct,-0.05565995988,1.420475882,-2.908769736,2.797449817,-0.03918402317,0.9688997118,510,51,61,0.9674,0.9688997118
+beta 20-24 - beta 25-29 = 0 (stacked),secondary,both,stacked,,-2.718704244,2.000976726,-6.737784279,1.300375791,,0.18034351,1020,51,122,0.1836,0.36068702

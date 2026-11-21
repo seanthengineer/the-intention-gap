@@ -1,0 +1,13 @@
+{
+ "protocol": "docs/m10_analysis_protocol.md",
+ "sha256": "9c79a78fd175db617c10d09c8bd53cb278e4d799d590d0b675a51d2b86e061dd",
+ "locked_utc": "2026-11-20T08:24:39+00:00",
+ "state": "No housing-fertility association computed before locking; not externally preregistered",
+ "amendments": [
+  {
+   "utc": "2026-11-20T08:24:49+00:00",
+   "previous_sha256": "be9eb3b03fa2ab41569927719b7c4aa893cbab7ba56811c7798118d43e24793f",
+   "reason": "outcome column name typo; no definitional change; before any model fit"
+  }
+ ]
+}

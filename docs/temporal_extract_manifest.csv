@@ -1,0 +1,17 @@
+priority,reference_number,question_name,survey_year,round,status,evidence,purpose
+key,R0000100,PUBID,1997,1,in temporal extract,data/raw/intention_gap_nlsy97_temporal.cdb,Join key
+required,U0863600,YFER-4861,2015,17,in temporal extract,Codebook: same title and wording as T4356900; universe All; 0-100; -1 (13) and -2 (194) among all respondents,Later-baseline stated chance
+required,U0014600,CV_MARSTAT_COLLAPSED,2015,17,in temporal extract,Codebook: same coding as T3611100 (0-4); -3 invalid skip (38),Model D feature at the later baseline (model D not scored)
+required,U0017100,SAMPLING_WEIGHT_CC,2015,17,in temporal extract,Codebook: Round 17 cumulative-cases weight; two implied decimals,Weighted description of the later baseline
+required,U4953300,CV_INTERVIEW_CMONTH,2021,20,in temporal extract,Codebook: months 501-514,Follow-up interview month (all after every anniversary)
+required,U4944700-U4946100,CV_CHILD_BIRTH_MONTH.01 to .15,2021,20,in temporal extract,Codebook: 15 consecutive slots,Follow-up birth roster
+required,U6360000,CV_INTERVIEW_CMONTH,2023,21,in temporal extract,Codebook: months 525-537,Follow-up interview month (all after every anniversary)
+required,U6351600-U6353000,CV_CHILD_BIRTH_MONTH.01 to .15,2023,21,in temporal extract,Codebook: 15 consecutive slots,Follow-up birth roster
+required,R1489700,VSTRAT,1997,1,in temporal extract,Codebook: values 1-117 for all 8984 respondents,Variance stratum for design-based standard errors
+required,R1489800,VPSU,1997,1,in temporal extract,Codebook: values 1-2; two PSUs in every stratum,Variance primary sampling unit for design-based standard errors
+model D only,U0008800,CV_HGC_EVER_EDT,2015,17,in temporal extract; not equivalent to CV_HGC_0910,Includes college years (13-20) and is measured at the survey date; capped at 12 it matches the 2009 value for 95.3% of women but not for 22% of those below grade 12 in 2009,Model D not scored (methodology section 12)
+recommended,,YSAQ2-314,2015,17,not downloaded; location not verified,Not in the Round 17 CAPI fertility section; Round 16 SAQ and Round 19 (YFER-SAQ2-314) carry the item,Later-baseline pregnancy status (descriptive sensitivity)
+recommended,,YSAQ2-314C,2015,17,not downloaded; location not verified,As YSAQ2-314,Later-baseline pregnancy status (descriptive sensitivity)
+recommended,,YSAQ2-315,2015,17,not downloaded; location not verified,As YSAQ2-314,Later-baseline pregnancy status (descriptive sensitivity)
+recommended,,YSAQ2-316,2015,17,not downloaded; location not verified,As YSAQ2-314,Later-baseline pregnancy status (descriptive sensitivity)
+optional,,SAMPLING_WEIGHT_CC,2023,21,not downloaded; reference number not located,NLS guidance: the final-year weight may be used for a sample limited to that year's respondents,Weighting sensitivity for women interviewed in Round 21

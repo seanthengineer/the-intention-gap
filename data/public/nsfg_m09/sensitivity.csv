@@ -1,0 +1,43 @@
+analysis,variant,measure,n,estimate,se,ci_low,ci_high,difference,p_value,reliability
+age proxy,conservative,divergence among wanters,1703,0.112373,0.00984254,0.0933701,0.133716,,,reliable
+age proxy,conservative,explicit among wanters,1703,0.0655731,0.0074491,0.051434,0.0821749,,,reliable
+age proxy,conservative,sterility among wanters,1703,0.0468004,0.0081325,0.0318741,0.0660091,,,reliable
+age proxy,conservative,female - male divergence,,,0.0209218,-0.0228576,0.060842,0.0189922,0.36763,
+age proxy,inclusive,divergence among wanters,1882,0.112818,0.00956136,0.0943329,0.133498,,,reliable
+age proxy,inclusive,explicit among wanters,1882,0.0663029,0.00747288,0.0521104,0.0829441,,,reliable
+age proxy,inclusive,sterility among wanters,1882,0.0465148,0.00751505,0.0326308,0.0640666,,,reliable
+age proxy,inclusive,female - male divergence,,,0.0184472,-0.0167631,0.0570368,0.0201369,0.279376,
+age proxy,all ages,divergence among wanters,4854,0.198053,0.00940247,0.179487,0.217653,,,reliable
+age proxy,all ages,explicit among wanters,4854,0.0993004,0.00645754,0.0867209,0.113033,,,reliable
+age proxy,all ages,sterility among wanters,4854,0.0987531,0.0081272,0.0830395,0.116315,,,reliable
+age proxy,all ages,female - male divergence,,,0.014963,0.0160638,0.0759249,0.0459944,0.00317745,
+eligibility,RWANT = 1 or 'probably want',divergence among wanters,1740,0.108973,0.00938332,0.0908512,0.129298,,,reliable
+eligibility,RWANT = 1 or 'probably want',explicit among wanters,1740,0.0723227,0.00785692,0.0573618,0.0897433,,,reliable
+eligibility,RWANT = 1 or 'probably want',sterility among wanters,1740,0.0453844,0.00781498,0.0310316,0.06382,,,reliable
+intention item,joint item,divergence among wanters,372,0.157549,0.0254805,0.109716,0.21598,,,reliable
+intention item,joint item,explicit among wanters,372,0.0954242,0.0191999,0.0604811,0.141407,,,reliable
+intention item,joint item,sterility among wanters,372,0.0621247,0.0184073,0.0306041,0.110309,,,reliable
+intention item,individual item,divergence among wanters,1331,0.0984773,0.0101847,0.0789832,0.120899,,,reliable
+intention item,individual item,explicit among wanters,1331,0.0563908,0.00839349,0.0407612,0.0757351,,,reliable
+intention item,individual item,sterility among wanters,1331,0.0420866,0.00727637,0.0287374,0.0592659,,,reliable
+intention item,joint - individual,explicit among wanters,,,0.0215183,-0.00400956,0.0820764,0.0390334,0.0746841,
+sterility handling,sterility-linked excluded from denominator,explicit among wanters,1626,0.0687926,0.00771635,0.054131,0.0859619,,,reliable
+sterility handling,sterility-linked counted as discordant (INTENT = 2),divergence among wanters,1703,0.112373,0.00984254,0.0933701,0.133716,,,reliable
+unknown intentions,excluded (yes/no answers only),explicit share,1607,0.0697411,0.00780284,0.0549116,0.0870967,,,reliable
+unknown intentions,kept in denominator as not explicit (lower bound),explicit share,1703,0.0655731,0.0074491,0.051434,0.0821749,,,reliable
+unknown intentions,counted as explicit negative (upper bound),explicit share,1703,0.0785366,0.00815985,0.0629533,0.0965405,,,reliable
+weighting,unweighted,divergence among wanters,1703,0.113329,0.00768374,,,,,
+variance method,JKn delete-one-cluster jackknife,divergence among wanters,1703,0.112373,0.00985495,,,,,
+variance method,Taylor linearization (primary),divergence among wanters,1703,0.112373,0.00984254,0.0933701,0.133716,,,reliable
+weighting,unweighted,explicit among wanters,1703,0.0681151,0.00610693,,,,,
+variance method,JKn delete-one-cluster jackknife,explicit among wanters,1703,0.0655731,0.00745563,,,,,
+variance method,Taylor linearization (primary),explicit among wanters,1703,0.0655731,0.0074491,0.051434,0.0821749,,,reliable
+weighting,unweighted,sterility among wanters,1703,0.0452143,0.0050363,,,,,
+variance method,JKn delete-one-cluster jackknife,sterility among wanters,1703,0.0468004,0.00817699,,,,,
+variance method,Taylor linearization (primary),sterility among wanters,1703,0.0468004,0.0081325,0.0318741,0.0660091,,,reliable
+sex contrast design,separate files (independent samples),female - male divergence,,,0.0202934,-0.0216006,0.059585,0.0189922,0.353086,
+sex contrast design,pooled design (primary),female - male divergence,,,0.0209218,-0.0228576,0.060842,0.0189922,0.36763,
+sex contrast design,separate files (independent samples),female - male explicit,,,0.0152605,-0.00746347,0.0535878,0.0230622,0.13598,
+sex contrast design,pooled design (primary),female - male explicit,,,0.0158299,-0.00860232,0.0547266,0.0230622,0.150365,
+sex contrast design,separate files (independent samples),female - male sterility,,,0.0148281,-0.0337307,0.0255907,-0.00406997,0.784662,
+sex contrast design,pooled design (primary),female - male sterility,,,0.013877,-0.031828,0.0236881,-0.00406997,0.770313,

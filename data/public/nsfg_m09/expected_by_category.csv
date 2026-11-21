@@ -1,0 +1,31 @@
+cohort,population,category,measure,n,estimate,se,ci_low,ci_high,reliability
+conservative,all,positive intention,expected_additional,1491,2.31391,0.0342105,2.24548,2.38234,reliable
+conservative,all,positive intention,children,1490,0.134631,0.0188136,0.0969979,0.172263,reliable
+conservative,all,explicit negative,expected_additional,116,0.0189512,0.0188737,-0.0188018,0.0567041,flag: relative SE > 30%
+conservative,all,explicit negative,children,116,0.328717,0.0921967,0.144296,0.513138,reliable
+conservative,all,sterility-linked,expected_additional,77,0,0,0,0,reliable
+conservative,all,sterility-linked,children,77,0.178883,0.0522387,0.0743899,0.283376,reliable
+conservative,all,unknown intention,expected_additional,15,,,,,suppress: n < 30
+conservative,all,unknown intention,children,15,,,,,suppress: n < 30
+conservative,all,not provided or other,expected_additional,4,,,,,suppress: n < 30
+conservative,all,not provided or other,children,4,,,,,suppress: n < 30
+conservative,female,positive intention,expected_additional,756,2.25221,0.0420252,2.16815,2.33628,reliable
+conservative,female,positive intention,children,756,0.198846,0.0301352,0.138567,0.259125,reliable
+conservative,female,explicit negative,expected_additional,73,0,0,0,0,reliable
+conservative,female,explicit negative,children,73,0.441927,0.139812,0.162262,0.721592,flag: relative SE > 30%
+conservative,female,sterility-linked,expected_additional,39,0,0,0,0,reliable
+conservative,female,sterility-linked,children,39,0.277237,0.0776366,0.121941,0.432534,reliable
+conservative,female,unknown intention,expected_additional,11,,,,,suppress: n < 30
+conservative,female,unknown intention,children,11,,,,,suppress: n < 30
+conservative,female,not provided or other,expected_additional,2,,,,,suppress: n < 30
+conservative,female,not provided or other,children,2,,,,,suppress: n < 30
+conservative,male,positive intention,expected_additional,735,2.36397,0.0551661,2.25362,2.47432,reliable
+conservative,male,positive intention,children,734,0.0824097,0.0217261,0.038951,0.125869,reliable
+conservative,male,explicit negative,expected_additional,43,0.0416001,0.0409673,-0.0403468,0.123547,flag: relative SE > 30%
+conservative,male,explicit negative,children,43,0.193417,0.100614,-0.00784081,0.394674,flag: relative SE > 30%
+conservative,male,sterility-linked,expected_additional,38,0,0,0,0,reliable
+conservative,male,sterility-linked,children,38,0.102979,0.0674811,-0.0320035,0.237961,flag: relative SE > 30%
+conservative,male,unknown intention,expected_additional,4,,,,,suppress: n < 30
+conservative,male,unknown intention,children,4,,,,,suppress: n < 30
+conservative,male,not provided or other,expected_additional,2,,,,,suppress: n < 30
+conservative,male,not provided or other,children,2,,,,,suppress: n < 30

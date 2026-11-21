@@ -1,0 +1,79 @@
+cohort,population,item,response,n,events,estimate,se,ci_low,ci_high,effective_n,reliability
+conservative,all,INTENT,intends,2429,1518,0.627737,0.0145479,0.597858,0.656905,1061.13,reliable
+conservative,all,INTENT,does not intend,2429,864,0.347354,0.0134366,0.320475,0.374979,1206.73,reliable
+conservative,all,INTENT,does not know,2429,39,0.021084,0.00381409,0.0141374,0.030187,1363.5,reliable
+conservative,all,INTENT,not provided,2429,8,0.00382513,0.00150827,0.00142778,0.00822892,1609.76,reliable
+conservative,all,RWANT,yes,2429,1703,0.698867,0.0128051,0.672408,0.724374,1233.47,reliable
+conservative,all,RWANT,no,2429,648,0.255131,0.010683,0.233925,0.277239,1600.28,reliable
+conservative,all,RWANT,don't know,2429,68,0.0417689,0.00654068,0.0296597,0.0569852,899.12,reliable
+conservative,all,RWANT,refused,2429,10,0.00423347,0.00183073,0.00139891,0.00976226,1208.77,reliable
+conservative,all,intention category among wanters,positive intention,1703,1491,0.874663,0.0114858,0.849689,0.896831,798.957,reliable
+conservative,all,intention category among wanters,explicit negative,1703,116,0.0655731,0.0074491,0.051434,0.0821749,1061.67,reliable
+conservative,all,intention category among wanters,sterility-linked,1703,77,0.0468004,0.0081325,0.0318741,0.0660091,648.501,reliable
+conservative,all,intention category among wanters,unknown intention,1703,15,0.0109469,0.0037072,0.00482342,0.0212119,757.432,reliable
+conservative,all,intention category among wanters,not provided or other,1703,4,0.00201665,0.00121593,0.000358914,0.0062676,1308.75,reliable
+conservative,female,INTENT,intends,1349,766,0.558732,0.022065,0.513364,0.603382,487.061,reliable
+conservative,female,INTENT,does not intend,1349,551,0.405984,0.0200989,0.365519,0.447421,574.181,reliable
+conservative,female,INTENT,does not know,1349,29,0.0315686,0.00742481,0.0184412,0.0501721,533.385,reliable
+conservative,female,INTENT,not provided,1349,3,0.00371571,0.00221753,0.000677071,0.0114166,724.055,reliable
+conservative,female,RWANT,yes,1349,881,0.640646,0.0186162,0.602077,0.67791,638.919,reliable
+conservative,female,RWANT,no,1349,427,0.312888,0.0182095,0.276654,0.350905,623.599,reliable
+conservative,female,RWANT,don't know,1349,36,0.0444684,0.00846138,0.0290863,0.0647641,570.823,reliable
+conservative,female,RWANT,refused,1349,5,0.00199721,0.00109795,0.000364416,0.00614302,1349,reliable
+conservative,female,intention category among wanters,positive intention,881,756,0.857007,0.0172086,0.818725,0.889875,398.392,reliable
+conservative,female,intention category among wanters,explicit negative,881,73,0.078092,0.0103513,0.0586077,0.101526,646.853,reliable
+conservative,female,intention category among wanters,sterility-linked,881,39,0.0445911,0.00805128,0.0298822,0.0637191,632.717,reliable
+conservative,female,intention category among wanters,unknown intention,881,11,0.016872,0.00699282,0.00588311,0.0375163,326.568,reliable
+conservative,female,intention category among wanters,not provided or other,881,2,0.00343835,0.0025716,0.000321222,0.013499,498.828,reliable
+conservative,male,INTENT,intends,1080,752,0.696388,0.0207262,0.652785,0.737517,473.602,reliable
+conservative,male,INTENT,does not intend,1080,313,0.289025,0.0198494,0.249712,0.330844,501.855,reliable
+conservative,male,INTENT,does not know,1080,10,0.0106533,0.00399617,0.00421167,0.0220824,635.078,reliable
+conservative,male,INTENT,not provided,1080,5,0.00393398,0.00218277,0.000844977,0.0112517,791.38,reliable
+conservative,male,RWANT,yes,1080,822,0.756788,0.0200352,0.713978,0.796115,441.22,reliable
+conservative,male,RWANT,no,1080,221,0.197671,0.0154501,0.167473,0.23069,639.312,reliable
+conservative,male,RWANT,don't know,1080,32,0.0390833,0.00880165,0.0234122,0.0608978,466.477,reliable
+conservative,male,RWANT,refused,1080,5,0.00645823,0.00359384,0.00137569,0.0185013,478.04,reliable
+conservative,male,intention category among wanters,positive intention,822,735,0.889533,0.0148291,0.85603,0.917547,430.281,reliable
+conservative,male,intention category among wanters,explicit negative,822,43,0.0550299,0.0112131,0.0347699,0.0821951,398.245,reliable
+conservative,male,intention category among wanters,sterility-linked,822,38,0.048661,0.0124519,0.0268487,0.080312,287.496,reliable
+conservative,male,intention category among wanters,unknown intention,822,4,0.00595696,0.0037073,0.000976963,0.0190657,414.862,reliable
+conservative,male,intention category among wanters,not provided or other,822,2,0.000819325,0.000591023,4.38582e-06,0.00605845,822,reliable
+inclusive,all,INTENT,intends,2726,1676,0.621582,0.0141469,0.592566,0.649962,1129.39,reliable
+inclusive,all,INTENT,does not intend,2726,1000,0.355271,0.0131458,0.328955,0.382258,1273.68,reliable
+inclusive,all,INTENT,does not know,2726,42,0.0196721,0.00335989,0.0135191,0.0276161,1641.59,reliable
+inclusive,all,INTENT,not provided,2726,8,0.00347499,0.00137157,0.00129559,0.0074819,1768.88,reliable
+inclusive,all,RWANT,yes,2726,1882,0.689751,0.0123143,0.664369,0.714307,1356.05,reliable
+inclusive,all,RWANT,no,2726,749,0.26284,0.010543,0.241892,0.284622,1675,reliable
+inclusive,all,RWANT,don't know,2726,85,0.0435636,0.00617578,0.0320364,0.0577298,1049.76,reliable
+inclusive,all,RWANT,refused,2726,10,0.00384595,0.00166,0.0012744,0.00885679,1336,reliable
+inclusive,all,intention category among wanters,positive intention,1882,1643,0.87525,0.011154,0.851042,0.896798,843.685,reliable
+inclusive,all,intention category among wanters,explicit negative,1882,134,0.0663029,0.00747288,0.0521104,0.0829441,1065.68,reliable
+inclusive,all,intention category among wanters,sterility-linked,1882,86,0.0465148,0.00751505,0.0326308,0.0640666,754.932,reliable
+inclusive,all,intention category among wanters,unknown intention,1882,15,0.0100763,0.0033716,0.0044933,0.0193812,843.524,reliable
+inclusive,all,intention category among wanters,not provided or other,1882,4,0.00185627,0.00111957,0.000330126,0.0057718,1421.01,reliable
+inclusive,female,INTENT,intends,1511,848,0.561,0.0205327,0.518841,0.602514,561.742,reliable
+inclusive,female,INTENT,does not intend,1511,629,0.405975,0.0184812,0.368778,0.443992,678.965,reliable
+inclusive,female,INTENT,does not know,1511,31,0.0296076,0.00684767,0.0174763,0.0467118,589.208,reliable
+inclusive,female,INTENT,not provided,1511,3,0.00341817,0.00204402,0.000619926,0.0105261,784.042,reliable
+inclusive,female,RWANT,yes,1511,977,0.639213,0.01712,0.603844,0.673492,756.645,reliable
+inclusive,female,RWANT,no,1511,484,0.311774,0.0167487,0.27843,0.346635,735.553,reliable
+inclusive,female,RWANT,don't know,1511,45,0.0471759,0.00886146,0.0310361,0.0683771,550.46,reliable
+inclusive,female,RWANT,refused,1511,5,0.00183729,0.00100749,0.000347302,0.00556792,1511,reliable
+inclusive,female,intention category among wanters,positive intention,977,834,0.85751,0.0160597,0.822011,0.888284,455.965,reliable
+inclusive,female,intention category among wanters,explicit negative,977,86,0.0800978,0.00952315,0.0620461,0.101388,781.961,reliable
+inclusive,female,intention category among wanters,sterility-linked,977,44,0.0436661,0.00741311,0.0300439,0.0611071,731.371,reliable
+inclusive,female,intention category among wanters,unknown intention,977,11,0.0155558,0.00642815,0.00544784,0.0345275,356.693,reliable
+inclusive,female,intention category among wanters,not provided or other,977,2,0.00317012,0.00237085,0.000296208,0.0124501,541.093,reliable
+inclusive,male,INTENT,intends,1215,828,0.680372,0.0194856,0.639636,0.719161,550.979,reliable
+inclusive,male,INTENT,does not intend,1215,371,0.306068,0.0190146,0.268285,0.345892,565.112,reliable
+inclusive,male,INTENT,does not know,1215,11,0.0100303,0.00353175,0.00425015,0.0199286,765.827,reliable
+inclusive,male,INTENT,not provided,1215,5,0.00353012,0.00195942,0.000757684,0.0101033,881.394,reliable
+inclusive,male,RWANT,yes,1215,905,0.738794,0.0203432,0.695536,0.77887,448.583,reliable
+inclusive,male,RWANT,no,1215,265,0.215353,0.016508,0.183004,0.250549,596.5,reliable
+inclusive,male,RWANT,don't know,1215,40,0.0400582,0.00800714,0.0255914,0.0594466,576.972,reliable
+inclusive,male,RWANT,refused,1215,5,0.00579523,0.00322693,0.00123317,0.016619,532.281,reliable
+inclusive,male,intention category among wanters,positive intention,905,809,0.890144,0.0136325,0.859614,0.91602,506.529,reliable
+inclusive,male,intention category among wanters,explicit negative,905,48,0.0547204,0.0105911,0.0354753,0.0801471,443.913,reliable
+inclusive,male,intention category among wanters,sterility-linked,905,42,0.0489067,0.0114909,0.0285278,0.0775765,339.12,reliable
+inclusive,male,intention category among wanters,unknown intention,905,4,0.00547561,0.00338538,0.000913506,0.017414,457.409,reliable
+inclusive,male,intention category among wanters,not provided or other,905,2,0.00075312,0.00054269,4.26904e-06,0.00552027,905,reliable

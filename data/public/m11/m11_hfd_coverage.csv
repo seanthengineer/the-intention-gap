@@ -1,0 +1,52 @@
+file,title,last_modified,index,first,last,first_observed,last_observed,ages,birth_order,rows,value_cells,missing_cells,missing_share
+USAadjtfrRR.txt,"United States, Tempo-adjusted total fertility rates, Bongaarts-Feeney method",27/06/2026,Year,1934,2023,1934,2023,,False,90,90,0,0
+USAadjtfrRRbo.txt,"United States, Tempo-adjusted total fertility rates by birth order, Bongaarts-Feeney method",27/06/2026,Year,1934,2023,1934,2023,,True,90,540,0,0
+USAasfrRR.txt,"United States, Period fertility rates by calendar year and age (Lexis squares, age in completed years (ACY))",27/06/2026,Year,1933,2024,1933,2024,12-55,False,4048,4048,0,0
+USAasfrRRbo.txt,"United States, Period fertility rates by calendar year, age and birth order (Lexis squares, age in completed years (ACY))",27/06/2026,Year,1933,2024,1933,2024,12-55,True,4048,24288,0,0
+USAasfrTR.txt,"United States, Period fertility rates by calendar year, age and birth cohort (Lexis triangles)",27/06/2026,Year,1933,2024,1933,2024,12-55,False,7912,15824,0,0
+USAasfrTRbo.txt,"United States, Period fertility rates by calendar year, age, birth cohort and birth order (Lexis triangles)",27/06/2026,Year,1933,2024,1933,2024,12-55,True,7912,55384,0,0
+USAasfrVH.txt,"United States, Cohort fertility rates by birth cohort and age (horizontal parallelograms, age in completed years (ACY))",27/06/2026,Cohort,1878,2011,1878,2011,12-55,False,5896,11792,1892,0.1604477612
+USAasfrVHbo.txt,"United States, Cohort fertility rates by birth cohort, age and birth order (horizontal parallelograms, age in completed years (ACY))",27/06/2026,Cohort,1878,2011,1878,2011,12-55,True,5896,41272,11352,0.2750533049
+USAasfrVV.txt,"United States, Period fertility rates by calendar year, age reached during the year (ARDY) and birth cohort (vertical parallelograms)",27/06/2026,Year,1933,2024,1933,2024,12-55,False,4048,8096,0,0
+USAasfrVVbo.txt,"United States, Period fertility rates by calendar year, age reached during the year (ARDY), birth cohort and birth order (vertical parallelograms)",27/06/2026,Year,1933,2024,1933,2024,12-55,True,4048,28336,0,0
+USAbirthsRR.txt,"United States, Live births by calendar year and age (Lexis squares, age in completed years (ACY))",27/06/2026,Year,1933,2024,1933,2024,12-55,False,4048,4048,0,0
+USAbirthsRRbo.txt,"United States, Live births by calendar year, age and birth order (Lexis squares, age in completed years (ACY))",27/06/2026,Year,1933,2024,1933,2024,12-55,True,4048,24288,0,0
+USAbirthsTR.txt,"United States, Live births by calendar year, age and birth cohort (Lexis triangles)",27/06/2026,Year,1933,2024,1933,2024,12-55,False,7912,15824,0,0
+USAbirthsTRbo.txt,"United States, Live births by calendar year, age, birth cohort and birth order (Lexis triangles)",27/06/2026,Year,1933,2024,1933,2024,12-55,True,7912,55384,0,0
+USAbirthsVH.txt,"United States, Live births by birth cohort and age (horizontal parallelograms, age in completed years (ACY))",27/06/2026,Cohort,1878,2011,1878,2011,12-55,False,5896,11792,1892,0.1604477612
+USAbirthsVHbo.txt,"United States, Live births by birth cohort, age and birth order (horizontal parallelograms, age in completed years (ACY))",27/06/2026,Cohort,1878,2011,1878,2011,12-55,True,5896,41272,11352,0.2750533049
+USAbirthsVV.txt,"United States, Live births by calendar year, age reached during the year (ARDY) and birth cohort (vertical parallelograms)",27/06/2026,Year,1933,2024,1933,2024,12-55,False,4048,8096,0,0
+USAbirthsVVbo.txt,"United States, Live births by calendar year, age reached during the year (ARDY), birth cohort and birth order (vertical parallelograms)",27/06/2026,Year,1933,2024,1933,2024,12-55,True,4048,28336,0,0
+USAcbrRR.txt,"United States, Crude birth rate",27/06/2026,Year,1933,2024,1933,2024,,False,92,92,0,0
+USAcbrRRbo.txt,"United States, Crude birth rate by birth order",27/06/2026,Year,1933,2024,1933,2024,,True,92,552,0,0
+USAccfrVH.txt,"United States, Cumulative cohort fertility rates (horizontal parallelograms",27/06/2026,Cohort,1918,2011,1918,2011,12-55,False,4136,8272,909,0.1098887814
+USAccfrVHbo.txt,"United States, Cumulative cohort fertility rates by birth order (horizontal parallelograms",27/06/2026,Cohort,1918,2011,1918,2011,12-55,True,4136,28952,5454,0.1883807682
+USAcft.txt,"United States, Cohort fertility tables, birth orders 1 to 5+",27/06/2026,Cohort,1918,1999,1918,1999,12-55,False,3608,97416,15128,0.155292765
+USAcpfrRR.txt,"United States, Cumulative period fertility rates (Lexis squares)",27/06/2026,Year,1933,2024,1933,2024,12-55,False,4048,4048,0,0
+USAcpfrRRbo.txt,"United States, Cumulative period fertility rates by birth order (Lexis squares)",27/06/2026,Year,1933,2024,1933,2024,12-55,True,4048,24288,0,0
+USAcpfrVV.txt,"United States, Cumulative period fertility rates (vertical parallelograms)",27/06/2026,Year,1933,2024,1933,2024,12-55,False,4048,8096,0,0
+USAcpfrVVbo.txt,"United States, Cumulative period fertility rates by birth order (vertical parallelograms)",27/06/2026,Year,1933,2024,1933,2024,12-55,True,4048,28336,0,0
+USAexposRR.txt,"United States, Female population exposure by calendar year and age (Lexis squares, age in completed years (ACY))",27/06/2026,Year,1933,2024,1933,2024,12-55,False,4048,4048,0,0
+USAexposRRpa.txt,"United States, Female exposure to risk by calendar year, age and parity",27/06/2026,Year,1963,2024,1963,2024,12-55,False,2728,13640,325,0.02382697947
+USAexposTR.txt,"United States, Female population exposure by calendar year, age and birth cohort (Lexis triangles)",27/06/2026,Year,1933,2024,1933,2024,12-55,False,8096,16192,0,0
+USAexposVH.txt,"United States, Female population exposure by birth cohort and age (horizontal parallelograms, age in completed years (ACY))",27/06/2026,Cohort,1878,2011,1878,2011,12-55,False,5896,11792,1892,0.1604477612
+USAexposVV.txt,"United States, Female population exposure by calendar year, age reached during the year (ARDY) and birth cohort (vertical parallelograms)",27/06/2026,Year,1933,2024,1933,2024,12-55,False,4048,8096,0,0
+USAmabRR.txt,"United States, Period mean ages at birth and period mean ages at birth by age 40",27/06/2026,Year,1933,2024,1933,2024,,False,92,184,0,0
+USAmabRRbo.txt,"United States, Period mean ages at birth by birth order and period mean ages at birth by birth order by age 40",27/06/2026,Year,1933,2024,1933,2024,,True,92,1104,0,0
+USAmabVH.txt,"United States, Cohort mean ages at birth and cohort mean ages at birth by age 40",27/06/2026,Cohort,1918,1984,1918,1984,,False,67,201,10,0.04975124378
+USAmabVHbo.txt,"United States, Cohort mean ages at birth by birth order and cohort mean ages at birth by birth order by age 40",27/06/2026,Cohort,1918,1984,1918,1984,,True,67,871,60,0.06888633754
+USAmi.txt,"United States, Conditional fertility rates by calendar year, age and birth order",27/06/2026,Year,1963,2024,1963,2024,12-55,False,2728,13640,921,0.06752199413
+USApatfr.txt,"United States, Parity- and age-adjusted total fertility rate",27/06/2026,Year,1963,2024,1963,2024,,True,62,372,0,0
+USApft.txt,"United States, Period fertility tables, birth orders 1 to 5+",27/06/2026,Year,1963,2024,1963,2024,12-55,False,2728,95480,3367,0.03526392962
+USApmab.txt,"United States, Period table mean ages at birth by birth order",27/06/2026,Year,1963,2024,1963,2024,,True,62,372,0,0
+USApprVHbo.txt,"United States, Cohort parity progression ratios",27/06/2026,Cohort,1918,1974,1918,1974,,True,57,285,0,0
+USAsdmabRR.txt,"United States, Standard deviation in period mean ages at birth and standard deviation in period mean ages at birth by age 40",27/06/2026,Year,1933,2024,1933,2024,,False,92,184,0,0
+USAsdmabRRbo.txt,"United States, Standard deviation in period mean ages at birth by birth order and standard deviation in period mean ages at birth by birth order by age 40",27/06/2026,Year,1933,2024,1933,2024,,True,92,1104,0,0
+USAsdmabVH.txt,"United States, Standard deviation in cohort mean ages at birth and standard deviation in cohort mean ages at birth by age 40",27/06/2026,Cohort,1918,1984,1918,1984,,False,67,201,10,0.04975124378
+USAsdmabVHbo.txt,"United States, Standard deviation in cohort mean ages at birth by birth order and standard deviation in cohort mean ages at birth by birth order by age 40",27/06/2026,Cohort,1918,1984,1918,1984,,True,67,871,60,0.06888633754
+USAtfrRR.txt,"United States, Period total fertility rates and period total fertility rates by age 40",27/06/2026,Year,1933,2024,1933,2024,,False,92,184,0,0
+USAtfrRRbo.txt,"United States, Period total fertility rates by birth order and period total fertility rates by birth order by age 40",27/06/2026,Year,1933,2024,1933,2024,,True,92,1104,0,0
+USAtfrVH.txt,"United States, Completed cohort fertility and completed cohort fertility by age 40",27/06/2026,Cohort,1918,1984,1918,1984,,False,67,201,10,0.04975124378
+USAtfrVHbo.txt,"United States, Completed cohort fertility by birth order and completed cohort fertility by birth order by age 40",27/06/2026,Cohort,1918,1984,1918,1984,,True,67,871,60,0.06888633754
+USAtotbirthsRR.txt,"United States, Total live births",27/06/2026,Year,1933,2024,1933,2024,,False,92,92,0,0
+USAtotbirthsRRbo.txt,"United States, Total live births by birth order",27/06/2026,Year,1933,2024,1933,2024,,True,92,552,0,0

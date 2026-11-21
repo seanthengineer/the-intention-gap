@@ -1,0 +1,65 @@
+scenario,year,births,women_15_49,rebasing,fertility_lower80,fertility_upper80,fertility_lower95,fertility_upper95,fertility_range_label,scenario_label
+mid,2025,3653673.102,78247068,cohort,3506921.826,3806565.358,3431637.672,3890074.772,"births at the bounds of the nominal TFR historical-error intervals (not calibrated), main-series population",immigration scenario at the point fertility forecast; not a probability
+mid,2026,3665797.162,78604863.21,cohort,3397530.764,3955245.668,3263559.904,4117610.594,"births at the bounds of the nominal TFR historical-error intervals (not calibrated), main-series population",immigration scenario at the point fertility forecast; not a probability
+mid,2027,3676909.457,78885706.24,cohort,3302481.905,4093788.716,3119962.718,4333277.15,"births at the bounds of the nominal TFR historical-error intervals (not calibrated), main-series population",immigration scenario at the point fertility forecast; not a probability
+mid,2028,3686346.169,79154200.98,cohort,3213974.223,4228144.7,2988935.553,4546484.137,"births at the bounds of the nominal TFR historical-error intervals (not calibrated), main-series population",immigration scenario at the point fertility forecast; not a probability
+mid,2029,3693818.709,79379010.99,cohort,3132813.746,4355284.981,2871197.436,4752127.627,"births at the bounds of the nominal TFR historical-error intervals (not calibrated), main-series population",immigration scenario at the point fertility forecast; not a probability
+mid,2030,3698984.019,79523652.7,cohort,3055842.488,4477482.993,2761970.901,4953883.753,"births at the bounds of the nominal TFR historical-error intervals (not calibrated), main-series population",immigration scenario at the point fertility forecast; not a probability
+mid,2031,3701901.732,79661142.2,cohort,2978889.372,4600397.908,2655202.474,5161217.108,"births at the bounds of the nominal TFR historical-error intervals (not calibrated), main-series population",immigration scenario at the point fertility forecast; not a probability
+mid,2032,3702957.78,79743162.8,cohort,2902866.233,4723571.538,2551886.279,5373239.565,"births at the bounds of the nominal TFR historical-error intervals (not calibrated), main-series population",immigration scenario at the point fertility forecast; not a probability
+mid,2033,3702157.406,79795902.31,cohort,2829090.602,4844655.54,2453648.928,5585953.76,"births at the bounds of the nominal TFR historical-error intervals (not calibrated), main-series population",immigration scenario at the point fertility forecast; not a probability
+mid,2034,3699554.904,79851390.77,cohort,2757590.11,4963285.312,2360325.458,5798652.235,"births at the bounds of the nominal TFR historical-error intervals (not calibrated), main-series population",immigration scenario at the point fertility forecast; not a probability
+mid,2035,3694843.156,79825527.72,cohort,2687066.656,5080583.288,2270165.62,6013599.107,"births at the bounds of the nominal TFR historical-error intervals (not calibrated), main-series population",immigration scenario at the point fertility forecast; not a probability
+mid,2036,3687314.566,79736163.65,cohort,2618497.368,5192401.136,2184526.539,6223906.402,"births at the bounds of the nominal TFR historical-error intervals (not calibrated), main-series population",immigration scenario at the point fertility forecast; not a probability
+mid,2037,3676949.572,79703782.56,cohort,2553639.567,5294387.794,2105454.104,6421397.707,"births at the bounds of the nominal TFR historical-error intervals (not calibrated), main-series population",immigration scenario at the point fertility forecast; not a probability
+mid,2038,3664286.386,79618514.49,cohort,2492925.121,5386040.121,2033089.317,6604232.587,"births at the bounds of the nominal TFR historical-error intervals (not calibrated), main-series population",immigration scenario at the point fertility forecast; not a probability
+mid,2039,3649765.399,79460312.71,cohort,2437669.74,5464557.912,1968710.699,6766249.34,"births at the bounds of the nominal TFR historical-error intervals (not calibrated), main-series population",immigration scenario at the point fertility forecast; not a probability
+mid,2040,3633640.516,79229057.83,cohort,2388260.05,5528436.236,1912488.424,6903750.754,"births at the bounds of the nominal TFR historical-error intervals (not calibrated), main-series population",immigration scenario at the point fertility forecast; not a probability
+hi,2025,3653673.102,78247068,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+hi,2026,3679323.901,78843290.96,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+hi,2027,3704022.991,79360291.91,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+hi,2028,3727027.155,79862456.93,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+hi,2029,3747962.213,80318360.99,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+hi,2030,3766399.681,80691558.31,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+hi,2031,3782317.121,81055308.49,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+hi,2032,3796029.946,81361455.66,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+hi,2033,3807552.352,81637320.63,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+hi,2034,3816882.327,81914790.3,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+hi,2035,3823666.226,82109162.84,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+hi,2036,3827158.692,82237905.09,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+hi,2037,3827322.319,82421708.03,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+hi,2038,3824678.384,82549849.62,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+hi,2039,3819651.67,82602596.66,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+hi,2040,3812494.052,82580486.42,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+low,2025,3653673.102,78247068,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+low,2026,3656594.332,78443121.61,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+low,2027,3658462.145,78563803.63,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+low,2028,3658672.121,78673862.86,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+low,2029,3656996.775,78742008.02,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+low,2030,3653153.66,78731767.89,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+low,2031,3647258.932,78715979.49,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+low,2032,3639751.586,78646220.16,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+low,2033,3630630.547,78547925.71,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+low,2034,3619986.045,78453192.87,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+low,2035,3607547.856,78278373.86,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+low,2036,3592625.771,78041499.39,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+low,2037,3575214.154,77863014.89,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+low,2038,3555858.961,77633419.47,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+low,2039,3535004.62,77332426.25,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+low,2040,3512904.803,76959476.2,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+zero,2025,3653673.102,78247068,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+zero,2026,3637707.059,78112486.26,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+zero,2027,3620603.79,77905826.51,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+zero,2028,3601888.12,77692204.28,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+zero,2029,3581466.275,77440392.74,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+zero,2030,3559187.438,77113937.85,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+zero,2031,3535292.42,76785356.8,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+zero,2032,3510330.261,76406023.66,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+zero,2033,3484294.203,75999826.32,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+zero,2034,3457353.788,75599068.68,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+zero,2035,3429301.43,75120916.69,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+zero,2036,3399490.626,74583844.84,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+zero,2037,3367927.956,74108107.17,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+zero,2038,3335168.741,73584751.91,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+zero,2039,3301657.91,72992895.46,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability
+zero,2040,3267628.65,72330904.52,cohort,,,,,,immigration scenario at the point fertility forecast; not a probability

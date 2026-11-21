@@ -1,0 +1,50 @@
+{
+ "protocol_sha256": "9c79a78fd175db617c10d09c8bd53cb278e4d799d590d0b675a51d2b86e061dd",
+ "diagnostics": {
+  "20-24": {
+   "observations": 510,
+   "clusters": 51,
+   "within_state_sd_exposure": 1.7163339850677453,
+   "two_way_residual_sd_exposure": 1.382168956762463,
+   "breusch_pagan_lm": 0.062135750127976196,
+   "breusch_pagan_p": 0.8031515985259664,
+   "vif_within": {
+    "burden30_pct": 1.0179460916498762,
+    "unemployment_pct": 1.0529516525356455,
+    "log_median_household_income": 1.0368674680625587
+   },
+   "wooldridge_ar_coefficient": -0.16394211549968077,
+   "wooldridge_t_vs_minus_half": 5.853462738310284,
+   "wooldridge_p": 3.6944824953943756e-07,
+   "wooldridge_pairs": 306,
+   "pesaran_cd": -1.3766240862109353,
+   "pesaran_cd_p": 0.16862850013460817,
+   "max_leverage": 0.15632692795958397
+  },
+  "25-29": {
+   "observations": 510,
+   "clusters": 51,
+   "within_state_sd_exposure": 1.7163339850677453,
+   "two_way_residual_sd_exposure": 1.382168956762463,
+   "breusch_pagan_lm": 0.22443784276410933,
+   "breusch_pagan_p": 0.6356791116488341,
+   "vif_within": {
+    "burden30_pct": 1.0179460916498762,
+    "unemployment_pct": 1.0529516525356455,
+    "log_median_household_income": 1.0368674680625587
+   },
+   "wooldridge_ar_coefficient": -0.09936184191617851,
+   "wooldridge_t_vs_minus_half": 4.18432868597135,
+   "wooldridge_p": 0.00011542494963699378,
+   "wooldridge_pairs": 306,
+   "pesaran_cd": -1.5895715937363426,
+   "pesaran_cd_p": 0.1119314043083917,
+   "max_leverage": 0.15632692795958397
+  }
+ },
+ "sample": {
+  "rows_per_age_group": 510,
+  "stacked_rows": 1020,
+  "clusters": 51
+ }
+}

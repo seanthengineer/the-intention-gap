@@ -1,0 +1,5 @@
+grouping,level,n,positives,logistic_roc_auc,boosting_roc_auc,note
+sex,female,205,19,0.460951,0.443407,estimated
+sex,male,192,9,,,fewer than 10 positives
+intention_branch,individual,302,18,0.458529,0.400333,estimated
+intention_branch,joint,95,10,0.538824,0.468824,estimated

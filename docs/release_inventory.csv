@@ -1,0 +1,265 @@
+path,category,frozen_manifest,licence_class
+.gitattributes,configuration,,project code
+.github/dependabot.yml,continuous integration,,project code
+.github/workflows/ci.yml,continuous integration,,project code
+.github/workflows/integrity.yml,continuous integration,,project code
+.github/workflows/maintenance.yml,continuous integration,,project code
+.gitignore,configuration,,project code
+.python-version,configuration,,project code
+CITATION.cff,documentation,,project documentation
+CONTRIBUTING.md,documentation,,project documentation
+README.md,documentation,,project documentation
+SECURITY.md,documentation,,project documentation
+analysis/__init__.py,code,m01_m08_freeze.sha256,project code
+analysis/acs_housing.py,code,m10_freeze.sha256,project code
+analysis/analyze_calibration.py,code,m01_m08_freeze.sha256,project code
+analysis/birth_history_audit.py,code,m01_m08_freeze.sha256,project code
+analysis/build_outcomes.py,code,m01_m08_freeze.sha256,project code
+analysis/cdc_natality.py,code,m10_freeze.sha256,project code
+analysis/expanded_histories.py,code,m01_m08_freeze.sha256,project code
+analysis/export_dashboard_data.py,code,m01_m08_freeze.sha256,project code
+analysis/final_synthesis.py,code,final_synthesis_freeze.sha256,project code
+analysis/hfd.py,code,m11_freeze.sha256,project code
+analysis/m10_covariates.py,code,m10_freeze.sha256,project code
+analysis/m10_descriptive.py,code,m10_freeze.sha256,project code
+analysis/m10_models.py,code,m10_freeze.sha256,project code
+analysis/m10_panel.py,code,m10_freeze.sha256,project code
+analysis/m11_backtest.py,code,m11_freeze.sha256,project code
+analysis/m11_cohorts.py,code,m11_freeze.sha256,project code
+analysis/m11_feasibility.py,code,m11_freeze.sha256,project code
+analysis/m11_figures.py,code,m11_freeze.sha256,project code
+analysis/m11_forecast.py,code,m11_freeze.sha256,project code
+analysis/m11_models.py,code,m11_freeze.sha256,project code
+analysis/m11_origin_local.py,code,m11_freeze.sha256,project code
+analysis/m11_protocol.py,code,m11_freeze.sha256,project code
+analysis/m11_scenarios.py,code,m11_freeze.sha256,project code
+analysis/m11_sources.py,code,m11_freeze.sha256,project code
+analysis/nlsy97.py,code,m01_m08_freeze.sha256,project code
+analysis/nsfg.py,code,nsfg_m09_freeze.sha256,project code
+analysis/nsfg_descriptive.py,code,nsfg_m09_freeze.sha256,project code
+analysis/nsfg_models.py,code,nsfg_m09_freeze.sha256,project code
+analysis/population_validity.py,code,m01_m08_freeze.sha256,project code
+analysis/pregnancy_status.py,code,m01_m08_freeze.sha256,project code
+analysis/robustness_analysis.py,code,m01_m08_freeze.sha256,project code
+analysis/supplement_extract.py,code,m01_m08_freeze.sha256,project code
+analysis/survey_design.py,code,nsfg_m09_freeze.sha256,project code
+analysis/temporal_validation.py,code,m01_m08_freeze.sha256,project code
+assets/figures/baseline_comparison.png,figure,m01_m08_freeze.sha256,project figure
+assets/figures/final_evidence_map.png,figure,final_synthesis_freeze.sha256,project figure
+assets/figures/final_headline_panels.png,figure,final_synthesis_freeze.sha256,project figure
+assets/figures/m10_between_within.png,figure,m10_freeze.sha256,project figure
+assets/figures/m10_coefficients.png,figure,m10_freeze.sha256,project figure
+assets/figures/m10_trends.png,figure,m10_freeze.sha256,project figure
+assets/figures/m11_cohort_observability.png,figure,m11_freeze.sha256,project figure with HFD-derived values (CC BY 4.0 attribution)
+assets/figures/m11_fc_age_profiles.png,figure,m11_freeze.sha256,project figure with HFD-derived values (CC BY 4.0 attribution)
+assets/figures/m11_fc_backtest_relative_mae.png,figure,m11_freeze.sha256,project figure with HFD-derived values (CC BY 4.0 attribution)
+assets/figures/m11_fc_births_scenarios.png,figure,m11_freeze.sha256,project figure with HFD-derived values (CC BY 4.0 attribution)
+assets/figures/m11_fc_genz_cohorts.png,figure,m11_freeze.sha256,project figure with HFD-derived values (CC BY 4.0 attribution)
+assets/figures/m11_fc_interval_calibration.png,figure,m11_freeze.sha256,project figure with HFD-derived values (CC BY 4.0 attribution)
+assets/figures/m11_fc_sensitivity.png,figure,m11_freeze.sha256,project figure with HFD-derived values (CC BY 4.0 attribution)
+assets/figures/m11_fc_tfr_forecast.png,figure,m11_freeze.sha256,project figure with HFD-derived values (CC BY 4.0 attribution)
+assets/figures/m11_tfr_sources.png,figure,m11_freeze.sha256,project figure with HFD-derived values (CC BY 4.0 attribution)
+assets/figures/nsfg_age_profile.png,figure,nsfg_m09_freeze.sha256,project figure
+assets/figures/nsfg_explicit_negative_subgroups.png,figure,nsfg_m09_freeze.sha256,project figure
+assets/figures/nsfg_intention_decomposition.png,figure,nsfg_m09_freeze.sha256,project figure
+assets/figures/nsfg_model_evaluation.png,figure,nsfg_m09_freeze.sha256,project figure
+assets/figures/stated_expectation_calibration.png,figure,m01_m08_freeze.sha256,project figure
+assets/figures/stated_expectation_distribution.png,figure,m01_m08_freeze.sha256,project figure
+assets/readme/header-dark.svg,figure,,project figure with HFD-derived values (CC BY 4.0 attribution)
+assets/readme/header-light.svg,figure,,project figure with HFD-derived values (CC BY 4.0 attribution)
+audit/__init__.py,code,m01_m08_freeze.sha256,project code
+audit/nsfg_stage3_checks.py,code,nsfg_m09_freeze.sha256,project code
+audit/scientific-audit.md,code,,project code
+audit/verify_final_synthesis.py,code,final_synthesis_freeze.sha256,project code
+audit/verify_freeze.py,code,m10_freeze.sha256,project code
+audit/verify_m10.py,code,m10_freeze.sha256,project code
+audit/verify_m11.py,code,m11_freeze.sha256,project code
+audit/verify_m11_forecast.py,code,m11_freeze.sha256,project code
+audit/verify_models.py,code,m01_m08_freeze.sha256,project code
+audit/verify_nsfg_m09.py,code,nsfg_m09_freeze.sha256,project code
+audit/verify_outcomes.py,code,m01_m08_freeze.sha256,project code
+audit/verify_temporal.py,code,m01_m08_freeze.sha256,project code
+data/public/dashboard_summary.json,public aggregate data,m01_m08_freeze.sha256,derived data: NLSY97 (BLS) public-use terms
+data/public/final/final_evidence_table.csv,public aggregate data,final_synthesis_freeze.sha256,derived data: mixed sources (all of the above)
+data/public/final/final_population_map.csv,public aggregate data,final_synthesis_freeze.sha256,derived data: mixed sources (all of the above)
+data/public/m10/m10_desc_associations.csv,public aggregate data,m10_freeze.sha256,derived data: Census ACS and CDC WONDER natality terms
+data/public/m10/m10_desc_burden_measures.csv,public aggregate data,m10_freeze.sha256,derived data: Census ACS and CDC WONDER natality terms
+data/public/m10/m10_desc_by_year.csv,public aggregate data,m10_freeze.sha256,derived data: Census ACS and CDC WONDER natality terms
+data/public/m10/m10_desc_pre_post.csv,public aggregate data,m10_freeze.sha256,derived data: Census ACS and CDC WONDER natality terms
+data/public/m10/m10_desc_variance.csv,public aggregate data,m10_freeze.sha256,derived data: Census ACS and CDC WONDER natality terms
+data/public/m10/m10_loso.csv,public aggregate data,m10_freeze.sha256,derived data: Census ACS and CDC WONDER natality terms
+data/public/m10/m10_model_summary.json,public aggregate data,m10_freeze.sha256,derived data: Census ACS and CDC WONDER natality terms
+data/public/m10/m10_models.csv,public aggregate data,m10_freeze.sha256,derived data: Census ACS and CDC WONDER natality terms
+data/public/m10/m10_noise_stability.csv,public aggregate data,m10_freeze.sha256,derived data: Census ACS and CDC WONDER natality terms
+data/public/m10/m10_primary.csv,public aggregate data,m10_freeze.sha256,derived data: Census ACS and CDC WONDER natality terms
+data/public/m10/m10_robustness.csv,public aggregate data,m10_freeze.sha256,derived data: Census ACS and CDC WONDER natality terms
+data/public/m10/m10_simex.csv,public aggregate data,m10_freeze.sha256,derived data: Census ACS and CDC WONDER natality terms
+data/public/m11/forecast/m11_fc_asfr_diagnostics.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_asfr_forecast.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_asfr_observed_1995_2024.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_census_alignment.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_census_births.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_census_births_comparison.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_census_births_unrebased.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_census_rebasing_test.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_census_tfr_comparison.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_check_2025.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_cohort_backtest_summary.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_cohort_interval_coverage.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_cohort_transform_validation.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_data_dictionary.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_direct_reconciliation.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_genz_endpoints_2040.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_genz_trajectories.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_interval_calibration.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_interval_calibration_by_era.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_interval_coverage_pooled.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_interval_records.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_mean_age_by_shape_method.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_realtime_selection.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_realtime_selection_accuracy.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_reconstruction_backtest.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_reference_completion_shares.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_rob_2040_by_method_and_window.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_rob_cohort_conventions.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_rob_error_growth.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_rob_interval_calibration_1977.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_rob_origin_sensitivity.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_rob_pandemic_origin_2019.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_rob_parameter_stability.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_rob_selection_from_1977.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_rob_training_windows.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_shape_metrics_by_era.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_shape_metrics_by_horizon.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_shape_selection.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_summary.json,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_tfr_backtest_records.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_tfr_forecast.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_tfr_forecast_all_methods.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_tfr_forecast_secondary_2025.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_tfr_metrics_by_era.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_tfr_metrics_by_horizon.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_tfr_metrics_primary.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_fc_tfr_selection.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_pr_origin_local_choices.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_pr_origin_local_cohort_comparison.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_pr_origin_local_cohort_errors.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_pr_origin_local_interval_coverage.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_pr_origin_local_tfr_comparison.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/forecast/m11_pr_summary.json,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/m11_backtest_design.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/m11_census_births_reproduction.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/m11_census_inventory.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/m11_census_scenarios.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/m11_census_vs_observed.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/m11_cohort_observability.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/m11_completed_share_reference.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/m11_denominator_comparison.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/m11_hfd_coverage.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/m11_hfd_nchs_births_2024_by_age.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/m11_hfd_nchs_reconciliation.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/m11_hfd_period_missing.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/m11_nchs_2025_rates.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/m11_nchs_single_year_2024_2025.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/m11_source_inventory.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/m11_source_status.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/m11_structural_periods.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/m11/m11_validation_checks.csv,public aggregate data,m11_freeze.sha256,derived data: HFD CC BY 4.0 attribution; NCHS and Census sources
+data/public/nsfg_m09/estimates.csv,public aggregate data,nsfg_m09_freeze.sha256,derived data: NCHS NSFG data-use terms
+data/public/nsfg_m09/expected_by_category.csv,public aggregate data,nsfg_m09_freeze.sha256,derived data: NCHS NSFG data-use terms
+data/public/nsfg_m09/feature_dictionary.csv,public aggregate data,nsfg_m09_freeze.sha256,derived data: NCHS NSFG data-use terms
+data/public/nsfg_m09/model_bootstrap.csv,public aggregate data,nsfg_m09_freeze.sha256,derived data: NCHS NSFG data-use terms
+data/public/nsfg_m09/model_calibration.csv,public aggregate data,nsfg_m09_freeze.sha256,derived data: NCHS NSFG data-use terms
+data/public/nsfg_m09/model_class_counts.csv,public aggregate data,nsfg_m09_freeze.sha256,derived data: NCHS NSFG data-use terms
+data/public/nsfg_m09/model_coefficients.csv,public aggregate data,nsfg_m09_freeze.sha256,derived data: NCHS NSFG data-use terms
+data/public/nsfg_m09/model_holdout.csv,public aggregate data,nsfg_m09_freeze.sha256,derived data: NCHS NSFG data-use terms
+data/public/nsfg_m09/model_importance.csv,public aggregate data,nsfg_m09_freeze.sha256,derived data: NCHS NSFG data-use terms
+data/public/nsfg_m09/model_leakage_screen.csv,public aggregate data,nsfg_m09_freeze.sha256,derived data: NCHS NSFG data-use terms
+data/public/nsfg_m09/model_partitions.csv,public aggregate data,nsfg_m09_freeze.sha256,derived data: NCHS NSFG data-use terms
+data/public/nsfg_m09/model_results.json,public aggregate data,nsfg_m09_freeze.sha256,derived data: NCHS NSFG data-use terms
+data/public/nsfg_m09/model_robustness.csv,public aggregate data,nsfg_m09_freeze.sha256,derived data: NCHS NSFG data-use terms
+data/public/nsfg_m09/model_selection.csv,public aggregate data,nsfg_m09_freeze.sha256,derived data: NCHS NSFG data-use terms
+data/public/nsfg_m09/model_stability.csv,public aggregate data,nsfg_m09_freeze.sha256,derived data: NCHS NSFG data-use terms
+data/public/nsfg_m09/model_subgroups.csv,public aggregate data,nsfg_m09_freeze.sha256,derived data: NCHS NSFG data-use terms
+data/public/nsfg_m09/parity_contrasts.csv,public aggregate data,nsfg_m09_freeze.sha256,derived data: NCHS NSFG data-use terms
+data/public/nsfg_m09/response_distributions.csv,public aggregate data,nsfg_m09_freeze.sha256,derived data: NCHS NSFG data-use terms
+data/public/nsfg_m09/sample_flow.csv,public aggregate data,nsfg_m09_freeze.sha256,derived data: NCHS NSFG data-use terms
+data/public/nsfg_m09/sensitivity.csv,public aggregate data,nsfg_m09_freeze.sha256,derived data: NCHS NSFG data-use terms
+data/public/nsfg_m09/sex_differences.csv,public aggregate data,nsfg_m09_freeze.sha256,derived data: NCHS NSFG data-use terms
+data/public/nsfg_m09/subgroup_tests.csv,public aggregate data,nsfg_m09_freeze.sha256,derived data: NCHS NSFG data-use terms
+data/public/nsfg_m09/subgroups.csv,public aggregate data,nsfg_m09_freeze.sha256,derived data: NCHS NSFG data-use terms
+data/public/nsfg_m09/weighted_vs_unweighted.csv,public aggregate data,nsfg_m09_freeze.sha256,derived data: NCHS NSFG data-use terms
+docs/bibliography.md,documentation,,project documentation
+docs/engineering_decisions.md,documentation,,project documentation
+docs/environment_and_code_quality.md,documentation,,project documentation
+docs/extract_manifest.csv,research record,m01_m08_freeze.sha256,project documentation
+docs/final_claim_evidence_matrix.csv,research record,final_synthesis_freeze.sha256,project documentation
+docs/final_executive_summary.md,documentation,final_synthesis_freeze.sha256,project documentation
+docs/final_limitations_register.md,documentation,final_synthesis_freeze.sha256,project documentation
+docs/final_readiness_assessment.md,documentation,final_synthesis_freeze.sha256,project documentation
+docs/final_reproducibility_guide.md,documentation,final_synthesis_freeze.sha256,project documentation
+docs/final_sources.md,documentation,final_synthesis_freeze.sha256,project documentation
+docs/final_synthesis_freeze.sha256,research record,,project documentation
+docs/final_synthesis_manuscript.md,documentation,final_synthesis_freeze.sha256,project documentation
+docs/frozen_model_parameters.json,research record,m01_m08_freeze.sha256,project documentation
+docs/licensing_and_attribution.md,documentation,,project documentation
+docs/m01_m08_freeze.sha256,research record,,project documentation
+docs/m01_m08_freeze_record.md,documentation,,project documentation
+docs/m10_analysis_protocol.md,documentation,m10_freeze.sha256,project documentation
+docs/m10_data_feasibility.md,documentation,m10_freeze.sha256,project documentation
+docs/m10_freeze.sha256,research record,,project documentation
+docs/m10_housing_fertility.md,documentation,m10_freeze.sha256,project documentation
+docs/m10_protocol_lock.json,research record,m10_freeze.sha256,project documentation
+docs/m11_data_feasibility.md,documentation,m11_freeze.sha256,project documentation
+docs/m11_decision_log.md,documentation,m11_freeze.sha256,project documentation
+docs/m11_fertility_forecasts.md,documentation,m11_freeze.sha256,project documentation
+docs/m11_forecast_protocol.md,documentation,m11_freeze.sha256,project documentation
+docs/m11_freeze.sha256,research record,,project documentation
+docs/m11_freeze_revision_F21-1.md,documentation,m11_freeze.sha256,project documentation
+docs/m11_frozen_run_record.json,research record,m11_freeze.sha256,project documentation
+docs/m11_protocol_lock.json,research record,m11_freeze.sha256,project documentation
+docs/methodology.md,documentation,m01_m08_freeze.sha256,project documentation
+docs/nsfg_m09.md,documentation,nsfg_m09_freeze.sha256,project documentation
+docs/nsfg_m09_freeze.sha256,research record,,project documentation
+docs/nsfg_stage3_validation.md,documentation,nsfg_m09_freeze.sha256,project documentation
+docs/publication_errata.md,documentation,,project documentation
+docs/release_readiness.md,documentation,,project documentation
+docs/research_pipeline.md,documentation,,project documentation
+docs/security_and_disclosure_audit.md,documentation,,project documentation
+docs/source_terms/hfd_user_agreement_2026-11-20.md,documentation,,third-party terms quoted for the record
+docs/technical_walkthrough.md,documentation,,project documentation
+docs/temporal_extract_manifest.csv,research record,m01_m08_freeze.sha256,project documentation
+docs/visual_atlas.md,documentation,,project documentation
+pyrightconfig.json,configuration,,project code
+requirements-audit.txt,configuration,,project code
+requirements-dev.txt,configuration,,project code
+requirements-lock.txt,configuration,,project code
+requirements-research.txt,configuration,nsfg_m09_freeze.sha256,project code
+requirements.txt,configuration,,project code
+tests/__init__.py,tests,m01_m08_freeze.sha256,project code
+tests/test_analyze_calibration.py,tests,m01_m08_freeze.sha256,project code
+tests/test_build_outcomes.py,tests,m01_m08_freeze.sha256,project code
+tests/test_expanded_histories.py,tests,m01_m08_freeze.sha256,project code
+tests/test_final_synthesis.py,tests,final_synthesis_freeze.sha256,project code
+tests/test_final_synthesis_freeze.py,tests,final_synthesis_freeze.sha256,project code
+tests/test_freeze_integrity.py,tests,m10_freeze.sha256,project code
+tests/test_m01_m08_freeze.py,tests,,project code
+tests/test_m10_data.py,tests,m10_freeze.sha256,project code
+tests/test_m10_models.py,tests,m10_freeze.sha256,project code
+tests/test_m11_data.py,tests,m11_freeze.sha256,project code
+tests/test_m11_forecast.py,tests,m11_freeze.sha256,project code
+tests/test_m11_freeze.py,tests,m11_freeze.sha256,project code
+tests/test_nsfg_m09.py,tests,nsfg_m09_freeze.sha256,project code
+tests/test_nsfg_stage3.py,tests,nsfg_m09_freeze.sha256,project code
+tests/test_population_validity.py,tests,m01_m08_freeze.sha256,project code
+tests/test_pregnancy_status.py,tests,m01_m08_freeze.sha256,project code
+tests/test_release_tools.py,tests,,project code
+tests/test_robustness_analysis.py,tests,m01_m08_freeze.sha256,project code
+tests/test_supplement_extract.py,tests,m01_m08_freeze.sha256,project code
+tests/test_survey_design.py,tests,m01_m08_freeze.sha256,project code
+tests/test_temporal_validation.py,tests,m01_m08_freeze.sha256,project code
+tools/__init__.py,code,,project code
+tools/pyright_baseline.json,code,,project code
+tools/pyright_baseline.py,code,,project code
+tools/readme_header.py,code,,project code
+tools/release.py,code,,project code

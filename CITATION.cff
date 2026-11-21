@@ -1,0 +1,57 @@
+# Citation metadata for The Intention Gap.
+# Before release the owner must replace the placeholder author entry and may add
+# repository-code, license and date-released (docs/release_readiness.md). No ORCID, affiliation
+# or DOI is listed because none has been confirmed.
+cff-version: 1.2.0
+message: >-
+  If you use this project, please cite it as below. It is an independent research project and has
+  not been peer reviewed. Please also cite the original data sources listed under references.
+type: software
+title: "The Intention Gap: Will Generation Z have the families they say they want?"
+version: "1.0.0-rc1"
+abstract: >-
+  An independent research project combining four designs to examine U.S. fertility intentions and
+  outcomes: stated birth expectations against observed births in the NLSY97 (women born 1980-84),
+  wanting and intending children among adults aged about 18-27 in the 2022-2023 NSFG, rental cost
+  burden and state birth rates (ACS and CDC WONDER, 2014-2024), and forecasts of the U.S. total
+  fertility rate and Generation Z cohort fertility to 2040 from the Human Fertility Database. It
+  concludes that whether Generation Z will achieve its desired family size cannot be established
+  from existing data. Results are frozen by SHA-256 manifests and independently recomputed.
+authors:
+  - name: "Author name to be confirmed before release"
+keywords:
+  - demography
+  - fertility
+  - fertility intentions
+  - Generation Z
+  - survey statistics
+  - forecasting
+  - reproducible research
+references:
+  - type: data
+    title: "Human Fertility Database"
+    authors:
+      - name: "Max Planck Institute for Demographic Research"
+      - name: "Vienna Institute of Demography"
+    url: "https://www.humanfertility.org"
+    notes: "USA release of 2 July 2026; data downloaded 20 November 2026; CC BY 4.0."
+  - type: data
+    title: "National Longitudinal Survey of Youth 1997 cohort, 1997-2023 (rounds 1-21)"
+    authors:
+      - name: "Bureau of Labor Statistics, U.S. Department of Labor"
+    publisher:
+      name: "Center for Human Resource Research (CHRR), The Ohio State University"
+    year: 2026
+  - type: data
+    title: "National Survey of Family Growth, 2022-2023. Public use data file and documentation"
+    authors:
+      - name: "National Center for Health Statistics"
+  - type: data
+    title: "Natality on CDC WONDER Online Database"
+    authors:
+      - name: "Centers for Disease Control and Prevention, National Center for Health Statistics"
+    url: "https://wonder.cdc.gov/"
+  - type: data
+    title: "American Community Survey 1-Year Estimates (tables B25070, B25072, B23025, B19013)"
+    authors:
+      - name: "U.S. Census Bureau"

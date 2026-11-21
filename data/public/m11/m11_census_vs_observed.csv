@@ -1,0 +1,4 @@
+projection_year,period,census_assumed_tfr,observed_tfr_nchs_calendar,observed_tfr_hfd_calendar,census_projected_births,observed_births_jul_jun,observed_births_mean_of_calendar_years
+2023,July 2022 to June 2023,1.6356,1.621,1.595,3627038,,3631887.5
+2024,July 2023 to June 2024,1.6345,1.5995,1.593,3632362,,3612475.5
+2025,July 2024 to June 2025,1.6333,1.576,,3636874,3633398,3620473

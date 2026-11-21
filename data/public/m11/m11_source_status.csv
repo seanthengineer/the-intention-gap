@@ -1,0 +1,5 @@
+source,checks,pass,warn,fail,status
+HFD USA,18,16,2,0,WARN
+NCHS 2025,11,7,4,0,WARN
+Census population estimates,2,2,0,0,PASS
+Census 2023 projections,8,7,1,0,WARN

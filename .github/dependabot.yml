@@ -1,0 +1,10 @@
+# Keeps the SHA-pinned GitHub Actions current through reviewable pull requests.
+# Python dependencies are deliberately excluded: the research environment is validated as a whole
+# and is not upgraded merely because newer versions exist (docs/environment_and_code_quality.md).
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 3

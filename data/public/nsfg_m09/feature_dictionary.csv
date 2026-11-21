@@ -1,0 +1,33 @@
+variable,description,role,justification,missing_in_model_sample
+AGER,Age at interview,primary feature,Demographic; measured at interview; also defines the cohort range (18-26/27).,0
+children,"Live births (women, PARITY) or biological children fathered (men, FA-1/FA-2)",primary feature,"Fertility history up to interview; PARITY is imputed by CDC, men's refusals are missing and imputed inside the pipeline.",1
+HIEDUC,"Highest completed schooling (recode, 1-11)",primary feature,Socioeconomic; CDC-imputed recode; treated as ordinal.,0
+POVERTY,"Family income as % of poverty threshold (recode, 50-700)",primary feature,"Socioeconomic; CDC-imputed, top- and bottom-coded.",0
+NUMKDHH,"Children under 18 in the household (recode, top-coded)",primary feature,Household composition at interview.,0
+sex,Respondent file (female or male),primary feature,Questionnaire differs by sex; Stage 3 contrast not significant.,0
+interview_year,Interview year (YEAR),primary feature,Period of interview; cohort bounds differ by year.,0
+race_ethnicity,HISPRACE2 (recode),primary feature,Demographic.,0
+labor_force,LABORFOR grouped (recode),primary feature,Socioeconomic status.,0
+metro,METRO (recode),primary feature,Place of residence.,0
+religion,RELIGION (recode),primary feature,Religious affiliation.,0
+insurance,CURR_INS (recode),primary feature,Socioeconomic status.,0
+partnership,"RMARIT: married, cohabiting, neither",sensitivity feature only,"Determines whether the joint (JINTEND) or individual (INTEND) item was asked, so it encodes questionnaire routing of the target item; excluded from the primary model.",0
+EVRMARRY,Ever married (recode),sensitivity feature only,Partnership history correlated with current partnership (routing); sensitivity only.,0
+RWANT,Wants a(nother) child (GA-1/HA-2),excluded: target construction,Defines eligibility (constant = 1 in the sample).,0
+JINTEND,Joint intention (GB-1/HB-2),excluded: target construction,Answer defines the label.,1271
+INTEND,Individual intention (GC-1/HC-2),excluded: target construction,Answer defines the label.,336
+INTENT,CDC intention recode,excluded: target construction,Direct recode of the label.,0
+ADDEXP,Expected additional births (recode),excluded: deterministic function,Set to 0 when the intention answer is 'no' (CDC specification).,0
+ADDEXP_I,ADDEXP imputation flag,excluded: deterministic function,Depends on the intention answers.,0
+JSUREINT / SUREINT,Certainty of intention,excluded: intention block,Asked only after the intention answer; conditional on the label.,
+JINTENDN / INTENDN / EXPECTL / EXPECTS / JEXPECTL / JEXPECTS,Number intended or expected,excluded: intention block,Asked conditional on the intention answer.,
+JINTNEXT / INTNEXT,Timing of next birth,excluded: intention block,Asked only of intenders.,
+PROBWANT,Probably wants (follow-up to RWANT = don't know),excluded: target construction,Desire item; constant (missing) in the sample.,1607
+PWANT,"Partner wants a(nother) baby (women, GA-2)",excluded: intention block,"Same questionnaire block, asked immediately before the joint intention; partner desire is a near-equivalent of the joint answer.",
+RSTRSTAT / PSTRSTAT,Respondent / partner sterility status,excluded: routing determinant,Decide whether the intention question is asked and whether INTENT = 2 is assigned.,
+FECUND / INFERT,Fecundity and infertility recodes (women),excluded: routing determinant,Built from the sterility status that routes the intention items; female-only.,
+MARSTAT / RMARIT / RMARITAL / FMARITAL,Marital and cohabiting status,excluded from primary (routing),Choose the joint or individual item.,
+CURRPREG,Current pregnancy (women) / partner's pregnancy (men),excluded: not comparable,Different meaning by sex; added to ADDEXP by CDC.,0
+WGT2022_2023 / VEST / VECL,Survey weight and design codes,excluded: design,"Used for grouping and weighted evaluation, never as predictors.",
+CaseID,Respondent identifier,excluded: identifier,Not read.,
+CMINTVW,Interview century month,excluded: redundant timing,Interview year is used; month adds no defensible signal.,0

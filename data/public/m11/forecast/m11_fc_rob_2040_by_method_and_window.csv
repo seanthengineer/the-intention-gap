@@ -1,0 +1,28 @@
+training,method,tfr_2040
+expanding_1933 (primary),naive,1.59315
+expanding_1933 (primary),mean10,1.692825265
+expanding_1933 (primary),drift10,1.243876874
+expanding_1933 (primary),drift10_damped,1.422336638
+expanding_1933 (primary),converge30,1.825240801
+expanding_1933 (primary),ses,1.593150167
+expanding_1933 (primary),holt_damped,1.548292397
+expanding_1933 (primary),ar_level,1.698780578
+expanding_1933 (primary),ari,1.591840935
+expanding_1977,naive,1.59315
+expanding_1977,mean10,1.692825265
+expanding_1977,drift10,1.243876874
+expanding_1977,drift10_damped,1.422336638
+expanding_1977,converge30,1.825240801
+expanding_1977,ses,1.593150167
+expanding_1977,holt_damped,1.549952354
+expanding_1977,ar_level,1.641834675
+expanding_1977,ari,1.591485025
+rolling_30,naive,1.59315
+rolling_30,mean10,1.692825265
+rolling_30,drift10,1.243876874
+rolling_30,drift10_damped,1.422336638
+rolling_30,converge30,1.825240801
+rolling_30,ses,1.593150167
+rolling_30,holt_damped,1.548443875
+rolling_30,ar_level,1.306026374
+rolling_30,ari,1.591570706

@@ -1,0 +1,35 @@
+# Daily lightweight integrity check of the default branch: freeze manifests, release inventory,
+# credential and disclosure scan, and the freeze and release unit tests. Read-only; it never
+# regenerates, retrains or modifies anything.
+name: Daily integrity
+
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0  # v7.1.0
+        with:
+          python-version-file: .python-version
+      - name: Install the hash-locked environment
+        run: python -m pip install --only-binary=:all: --require-hashes -r requirements-lock.txt
+      - name: Freeze manifests
+        run: python audit/verify_freeze.py
+      - name: Release checks
+        run: python -m tools.release check
+      - name: Freeze and release tests
+        run: >-
+          python -m unittest
+          tests.test_freeze_integrity tests.test_m01_m08_freeze tests.test_m11_freeze
+          tests.test_final_synthesis_freeze tests.test_release_tools

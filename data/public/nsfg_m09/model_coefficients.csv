@@ -1,0 +1,31 @@
+term,coefficient,odds_ratio,sign_stability
+numeric__AGER,0.112146,1.11868,1
+numeric__children,0.116591,1.12366,0.995
+numeric__HIEDUC,0.0305761,1.03105,0.755
+numeric__POVERTY,-0.157503,0.854275,1
+numeric__NUMKDHH,0.0890963,1.09319,0.995
+numeric__missingindicator_children,-0.0164235,0.983711,0.625
+categorical__sex_female,0.0433799,1.04433,0.895
+categorical__sex_male,-0.0434548,0.957476,0.9
+categorical__interview_year_2022,0.023705,1.02399,0.745
+categorical__interview_year_2023,-0.0237799,0.976501,0.745
+categorical__race_ethnicity_Hispanic,-0.0114385,0.988627,0.725
+categorical__race_ethnicity_non-Hispanic Black,-0.0182812,0.981885,0.735
+categorical__race_ethnicity_non-Hispanic White,0.0116506,1.01172,0.735
+categorical__race_ethnicity_non-Hispanic other or multiple,0.0179941,1.01816,0.74
+categorical__labor_force_caring for home or family,0.00787844,1.00791,0.63
+categorical__labor_force_in school,-0.0145144,0.98559,0.7
+categorical__labor_force_looking for work,0.0119157,1.01199,0.645
+categorical__labor_force_other,0.0120625,1.01214,0.76
+categorical__labor_force_working,-0.0174172,0.982734,0.71
+categorical__metro_nonmetropolitan,-0.024726,0.975577,0.935
+categorical__metro_other metropolitan,0.0352907,1.03592,0.875
+categorical__metro_principal city,-0.0106396,0.989417,0.615
+categorical__religion_Catholic,-0.0582533,0.943411,0.975
+categorical__religion_Protestant,-0.0143756,0.985727,0.71
+categorical__religion_no religion,0.101051,1.10633,1
+categorical__religion_other religion,-0.028497,0.971905,0.975
+categorical__insurance_Medicaid or state plan,0.0187544,1.01893,0.735
+categorical__insurance_other government,0.0170455,1.01719,0.745
+categorical__insurance_private,-0.0656131,0.936493,0.955
+categorical__insurance_uninsured or single-service,0.0297384,1.03018,0.92

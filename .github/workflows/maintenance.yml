@@ -1,0 +1,58 @@
+# Weekly maintenance: a clean install of the locked environment on Linux, Windows and macOS (detects
+# yanked or unavailable wheels), the full source-only suite, and a dependency vulnerability audit of
+# the lock file. It reports problems; it never updates dependencies or changes research outputs.
+name: Weekly maintenance
+
+on:
+  schedule:
+    - cron: "41 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  clean-install:
+    name: Clean install and source-only tests (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0  # v7.1.0
+        with:
+          python-version-file: .python-version
+      - name: Install from the lock file without the pip cache
+        run: |
+          python -m pip install --no-cache-dir --only-binary=:all: --require-hashes -r requirements-lock.txt
+          python -m pip check
+      - name: Source-only suite
+        run: |
+          python audit/verify_freeze.py
+          python -m tools.release restore-run-record
+          python -m unittest
+          python audit/verify_final_synthesis.py
+
+  dependency-audit:
+    name: Dependency vulnerability audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0  # v7.1.0
+        with:
+          python-version-file: .python-version
+      - name: Audit the locked dependencies (PyPI advisory database)
+        run: |
+          python -m pip install --only-binary=:all: --require-hashes -r requirements-audit.txt
+          pip-audit --require-hashes --disable-pip -r requirements-lock.txt

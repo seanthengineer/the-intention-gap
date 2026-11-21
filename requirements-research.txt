@@ -1,0 +1,11 @@
+# Research and audit environment: the dashboard requirements plus the
+# independent survey-estimation library used by audit/nsfg_stage3_checks.py
+# (Check 18) and audit/verify_nsfg_m09.py. The dashboard needs only
+# requirements.txt.
+-r requirements.txt
+msgspec==0.22.0
+polars==2.1.0
+polars-runtime-32==2.1.0
+svy==0.37.0
+svy-io==0.9.0
+svy_rs==0.21.0

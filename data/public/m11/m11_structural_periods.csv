@@ -1,0 +1,9 @@
+feature,year,tfr,mean_age_at_birth
+series start,1933,2.012,27.97
+baby-boom peak (max 1933-1970),1957,3.738,26.37
+post-boom trough (min 1970-1990),1976,1.739,25.85
+pre-recession peak (max 1990-2015),2007,2.122,27.95
+pandemic year,2020,1.634,29.72
+latest HFD year,2024,1.593,30.12
+largest one-year fall,1965,2.926,26.52
+largest one-year rise,1946,2.83,27.31

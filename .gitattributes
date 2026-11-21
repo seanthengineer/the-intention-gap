@@ -1,0 +1,16 @@
+# Git must store and check out every file byte for byte.
+#
+# 221 research files are frozen by SHA-256 manifests (docs/*_freeze.sha256). They use LF, CRLF
+# and mixed line endings, so any line-ending normalisation, working-tree re-encoding, ident
+# expansion or content filter would break their hashes on checkout. The first rule therefore
+# unsets every converting attribute for all paths, whatever core.autocrlf or core.eol is set to.
+# No later rule may set text, eol, filter, ident or working-tree-encoding
+# (enforced by python -m tools.release check).
+* -text -eol -filter -ident -working-tree-encoding
+
+# Binary images: no textual diff or merge.
+*.png binary
+
+# The generated release inventory is shown collapsed in GitHub diffs. Lock files and freeze
+# manifests stay expanded so that changes to them are reviewed.
+docs/release_inventory.csv linguist-generated

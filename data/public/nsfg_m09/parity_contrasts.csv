@@ -1,0 +1,13 @@
+cohort,population,measure,comparison,n parents,n childless,difference,se,ci_low,ci_high,p_value
+conservative,all,wants,parents - childless,374,2051,-0.195496,0.0327897,-0.261085,-0.129906,1.42137e-07
+conservative,all,intends,parents - childless,374,2051,-0.229798,0.0395629,-0.308936,-0.150661,2.56071e-07
+conservative,all,divergence_among_wanters,parents - childless,217,1485,0.079676,0.0377175,0.00422977,0.155122,0.0388193
+conservative,all,explicit_among_wanters,parents - childless,217,1485,0.0571178,0.0322516,-0.00739509,0.121631,0.0816391
+conservative,female,wants,parents - childless,282,1067,-0.147461,0.0396618,-0.226797,-0.0681256,0.000443763
+conservative,female,intends,parents - childless,282,1067,-0.182495,0.0455917,-0.273692,-0.0912979,0.000174681
+conservative,female,divergence_among_wanters,parents - childless,161,720,0.0744649,0.0418772,-0.00930195,0.158232,0.0804423
+conservative,female,explicit_among_wanters,parents - childless,161,720,0.049785,0.0366735,-0.0235729,0.123143,0.1797
+conservative,male,wants,parents - childless,92,984,-0.227378,0.0721613,-0.371722,-0.0830336,0.00253865
+conservative,male,intends,parents - childless,92,984,-0.250889,0.0828809,-0.416675,-0.0851025,0.00363507
+conservative,male,divergence_among_wanters,parents - childless,56,765,0.081391,0.0782478,-0.0751279,0.23791,0.302435
+conservative,male,explicit_among_wanters,parents - childless,56,765,0.0588534,0.0598047,-0.0607738,0.178481,0.329021

@@ -1,0 +1,13 @@
+table,columns,interval_type,meaning
+m11_fc_tfr_forecast,"lower80, upper80, lower95, upper95",historical-error interval (nominal level),Log-normal; spread = RMS of no-change log errors at each horizon over all backtest origins. Failed the prespecified calibration criterion (pseudo-real-time 80% coverage 0.96). Not a validated probability interval.
+m11_fc_tfr_forecast,"sens1977_*, quantile_*","historical-error interval (nominal level), sensitivity",Spread from origins 1977+ (under-covers at long horizons) or empirical error quantiles. Not calibrated.
+m11_fc_tfr_forecast,"model_lower*, model_upper*",model-dependent uncertainty range,Random-walk model variance from one-step residuals; under-covered historically.
+m11_fc_tfr_forecast_secondary_2025,lower80 ... upper95,historical-error interval (nominal level),Same spreads as the primary forecast; secondary forecast containing a reconstructed non-HFD 2025 value.
+m11_fc_check_2025,"band_lower, band_upper",descriptive band,Reconstructed 2025 TFR (E2) +/- 2 x RMSE of a four-year ratio-method backtest; not a confidence or prediction interval.
+m11_fc_check_2025,"lower80 ... upper95, inside_primary_*",historical-error interval (nominal level),Primary 2025 forecast interval and whether each 2025 estimate falls inside it.
+"m11_fc_genz_trajectories, m11_fc_genz_endpoints_2040",lower80 ... upper95,historical-error interval (nominal level),Log-normal on the projected increment; spread from pseudo-cohort backtest errors (fixed strategy). Pseudo-real-time 80% coverage 0.78-0.96 by horizon; over-covers at long horizons; not calibrated.
+m11_fc_genz_endpoints_2040,projected_2040_S*,model-dependent uncertainty range,"Endpoints under alternative age-profile methods; sensitivity, not a probability interval."
+m11_fc_asfr_forecast,asfr_*_tfr_driven,"historical-error interval (nominal level), propagated",Fixed age shape scaled to the TFR interval bounds; inherits the TFR interval's lack of calibration.
+m11_fc_census_births,"fertility_lower*, fertility_upper*","historical-error interval (nominal level), propagated",Main-series births at the TFR interval bounds; fertility uncertainty only.
+m11_fc_census_births,"scenario (hi, low, zero, mid)",scenario range,Census immigration scenarios at the point fertility forecast; no probability interpretation.
+"m11_fc_rob_2040_by_method_and_window, m11_fc_tfr_forecast_all_methods","tfr_2040, forecast",model-dependent uncertainty range,Alternative methods and training windows; not probability intervals.

@@ -1,0 +1,15 @@
+feature,missing,univariate_auc,flag
+AGER,0,0.597325,none
+EVRMARRY,0,0.520945,none
+HIEDUC,0,0.507034,none
+NUMKDHH,0,0.566496,none
+POVERTY,0,0.616746,none
+children,1,0.578218,none
+insurance,0,0.576006,none
+interview_year,0,0.508356,none
+labor_force,0,0.554236,none
+metro,0,0.527406,none
+partnership,0,0.523907,none
+race_ethnicity,0,0.507611,none
+religion,0,0.595963,none
+sex,0,0.552807,none

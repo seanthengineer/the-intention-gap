@@ -1,0 +1,25 @@
+{
+ "protocol": "docs/m11_forecast_protocol.md",
+ "protocol_sha256": "b99eb898445d46d3d567d11653cf268fc1502c70240f35e1540f3a3d96347672",
+ "locked_utc": "2026-11-20T11:40:30+00:00",
+ "amendments": 0,
+ "started_utc": "2026-11-20T12:55:04+00:00",
+ "finished_utc": "2026-11-20T12:56:19+00:00",
+ "code_sha256": {
+  "analysis/m11_protocol.py": "b5f2680e6aa38e437776c40a7de2c88b237444042956921efb95afcc7e5f9636",
+  "analysis/m11_models.py": "ce907c84539d2ea7d27e57ba33b2ce22266b26e70f7ba6513d5cee80d45a7db1",
+  "analysis/m11_backtest.py": "ce6513ee68e746a83d7492b2bfe62afaa42bd73d1de256dcc57f346a6afb1ebf",
+  "analysis/m11_cohorts.py": "839c81880ac71ee8b62ab0ed3c503e51e250c43d7d6417efa29844be04a4f35f",
+  "analysis/m11_scenarios.py": "c0fb11a593d656d9474d0cf96bec58586316aaa81fb4a2126c6304c0a08529d7",
+  "analysis/m11_forecast.py": "0aa5670264f25ac09d06e41cd084e151d72e1894ca5d1ce25cbbc908d7104c30",
+  "analysis/hfd.py": "1c68f890430d43afcc5860e1f22df691697a7d0332f21b310976c5715eb638a0",
+  "analysis/m11_sources.py": "e429cb60ad4eb8dc8b8d5aed0f7dd998d65ca01d6de712b8adf9a322c8a82393",
+  "analysis/m11_origin_local.py": "383e1e23d17c5b9b57f530b78638a47b7ad3527aa8e21ac17e2438e1c7031d99",
+  "analysis/m11_figures.py": "ca285d17e090aa215836970420a2ef02e749cd6830dabd5d987517bab5c8da23"
+ },
+ "hfd_zip_sha256": "27b13850efd807a443e376f65ce265ee30ca78ef565a4a8e4852ba8045cf6b31",
+ "python": "3.15.2",
+ "numpy": "2.5.5",
+ "pandas": "3.1.1",
+ "scipy": "1.18.1"
+}

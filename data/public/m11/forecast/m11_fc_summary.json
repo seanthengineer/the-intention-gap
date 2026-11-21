@@ -1,0 +1,246 @@
+{
+ "protocol_sha256": "b99eb898445d46d3d567d11653cf268fc1502c70240f35e1540f3a3d96347672",
+ "locked_utc": "2026-11-20T11:40:30+00:00",
+ "selected_tfr_method": "naive",
+ "selected_coverage80_h5_10_15": 0.9629629629629628,
+ "intervals_historically_calibrated": false,
+ "tfr_2040": {
+  "forecast": 1.5931499999999998,
+  "lower80": 1.0471196810861012,
+  "upper80": 2.4239129187863075,
+  "lower95": 0.8385201891444058,
+  "upper95": 3.026912118943502
+ },
+ "tfr_2040_all_methods": {
+  "naive": 1.5931499999999998,
+  "mean10": 1.6928252647254773,
+  "drift10": 1.2438768736069565,
+  "drift10_damped": 1.4223366379937097,
+  "converge30": 1.8252408005795302,
+  "ses": 1.593150167389919,
+  "holt_damped": 1.5482923974551677,
+  "ar_level": 1.698780578100837,
+  "ari": 1.5918409352691574
+ },
+ "final_params": {
+  "naive": {
+   "sigma": 0.039820467547633735
+  },
+  "mean10": {},
+  "drift10": {
+   "drift": -0.015467510952199781
+  },
+  "drift10_damped": {
+   "drift": -0.015467510952199781,
+   "phi": 0.9
+  },
+  "converge30": {
+   "target": 0.63571160770342
+  },
+  "ses": {
+   "alpha": 0.9999,
+   "sigma": 0.039822455511630724
+  },
+  "holt_damped": {
+   "alpha": 0.9999,
+   "beta": 0.403829194336916,
+   "phi": 0.8,
+   "level": 0.46571213231627795,
+   "trend": -0.00734666208923479,
+   "sigma": 0.035639493631731224
+  },
+  "ar_level": {
+   "order": 3,
+   "intercept": 0.007786234302479884,
+   "phi": [
+    1.595200773951634,
+    -0.7931472214018306,
+    0.1864825272094338
+   ],
+   "sigma": 0.03454066654133923
+  },
+  "ari": {
+   "order": 3,
+   "phi": [
+    0.6710177561175099,
+    -0.39591995325790963,
+    0.32498562790893815
+   ],
+   "sigma": 0.03279065386867044
+  }
+ },
+ "reconstruction_2025": {
+  "tfr": {
+   "E1_vintage2025_july1": 1.5747034626725294,
+   "E2_ratio_2024": 1.5774317220525644,
+   "E3_ratio_2021_2024": 1.5740892667339037
+  },
+  "primary": 1.5774317220525644,
+  "rmse": 0.002330830541661696,
+  "descriptive_band_2rmse": [
+   1.572770060969241,
+   1.5820933831358879
+  ]
+ },
+ "secondary_2040": 1.5774317220525644,
+ "selected_shape_method": "S0_fixed",
+ "asfr_sum_max_gap": 2.220446049250313e-16,
+ "asfr_diagnostics": {
+  "min_rate": 4.999968615832685e-06,
+  "negative_rates": 0,
+  "max_second_difference_log_forecast": 0.2715425630946444,
+  "max_second_difference_log_observed_1995_2024": 0.29303708876757373,
+  "jump_off_shape_l1": 1.255366692629446e-05,
+  "max_annual_shape_l1_forecast": 0.0,
+  "max_annual_shape_l1_observed_1995_2024": 0.027815166697335938
+ },
+ "cohort_transform": {
+  "method": "T2",
+  "acceptable": true,
+  "mean_abs_error": 0.001019745720230416
+ },
+ "genz": {
+  "1995": {
+   "observed_2024": 0.88243,
+   "projected_2040": 1.748365663940288,
+   "lower80": 1.5679673869664743,
+   "upper80": 1.976235514243059,
+   "completion_label": "nearly complete by historical standards"
+  },
+  "1996": {
+   "observed_2024": 0.7501199999999999,
+   "projected_2040": 1.7113757282424094,
+   "lower80": 1.5125903553439835,
+   "upper80": 1.9619868858436895,
+   "completion_label": "nearly complete by historical standards"
+  },
+  "1997": {
+   "observed_2024": 0.62644,
+   "projected_2040": 1.675160732538653,
+   "lower80": 1.4619198847563475,
+   "upper80": 1.9428273779883405,
+   "completion_label": "nearly complete by historical standards"
+  },
+  "1998": {
+   "observed_2024": 0.5115000000000001,
+   "projected_2040": 1.6368492600463396,
+   "lower80": 1.413239844384035,
+   "upper80": 1.9159083390281042,
+   "completion_label": "nearly complete by historical standards"
+  },
+  "1999": {
+   "observed_2024": 0.40842,
+   "projected_2040": 1.5975548931803545,
+   "lower80": 1.3676394580519686,
+   "upper80": 1.8825787884911767,
+   "completion_label": "nearly complete by historical standards"
+  },
+  "2000": {
+   "observed_2024": 0.32178,
+   "projected_2040": 1.5601858359831908,
+   "lower80": 1.3278643158704968,
+   "upper80": 1.8461542402149096,
+   "completion_label": "nearly complete by historical standards"
+  },
+  "2001": {
+   "observed_2024": 0.25107,
+   "projected_2040": 1.5237696895433763,
+   "lower80": 1.2921679926631118,
+   "upper80": 1.8068932857797333,
+   "completion_label": "nearly complete by historical standards"
+  },
+  "2002": {
+   "observed_2024": 0.18875,
+   "projected_2040": 1.4812372154322573,
+   "lower80": 1.2524111360745145,
+   "upper80": 1.7592907910464466,
+   "completion_label": "nearly complete by historical standards"
+  },
+  "2003": {
+   "observed_2024": 0.1328,
+   "projected_2040": 1.4285795074349772,
+   "lower80": 1.2036927565613027,
+   "upper80": 1.7006923231117366,
+   "completion_label": "substantial but incomplete"
+  },
+  "2004": {
+   "observed_2024": 0.08593,
+   "projected_2040": 1.3659656536302718,
+   "lower80": 1.1457236190807605,
+   "upper80": 1.631977499310163,
+   "completion_label": "substantial but incomplete"
+  },
+  "2005": {
+   "observed_2024": 0.048920000000000005,
+   "projected_2040": 1.2930719395666184,
+   "lower80": 1.0776668140833432,
+   "upper80": 1.5535798711526851,
+   "completion_label": "substantial but incomplete"
+  },
+  "2006": {
+   "observed_2024": 0.025009999999999998,
+   "projected_2040": 1.2114604045224928,
+   "lower80": 1.0008743976914172,
+   "upper80": 1.4674896782438942,
+   "completion_label": "substantial but incomplete"
+  },
+  "2007": {
+   "observed_2024": 0.011859999999999999,
+   "projected_2040": 1.1223975012991185,
+   "lower80": 0.9162965771549536,
+   "upper80": 1.3754642293548176,
+   "completion_label": "substantial but incomplete"
+  },
+  "2008": {
+   "observed_2024": 0.00489,
+   "projected_2040": 1.0267391651149451,
+   "lower80": 0.8248930710131538,
+   "upper80": 1.2782702508275732,
+   "completion_label": "substantial but incomplete"
+  },
+  "2009": {
+   "observed_2024": 0.00165,
+   "projected_2040": 0.9262564765558724,
+   "lower80": 0.7293238046455583,
+   "upper80": 1.1764856626709623,
+   "completion_label": "partial"
+  },
+  "2010": {
+   "observed_2024": 0.00045,
+   "projected_2040": 0.8243078699626247,
+   "lower80": 0.6337988677024565,
+   "upper80": 1.072121277098141,
+   "completion_label": "partial"
+  },
+  "2011": {
+   "observed_2024": 9e-05,
+   "projected_2040": 0.7232033689224012,
+   "lower80": 0.5410406580315272,
+   "upper80": 0.9667085567036133,
+   "completion_label": "partial"
+  },
+  "2012": {
+   "observed_2024": 1e-05,
+   "projected_2040": 0.6249256917594975,
+   "lower80": 0.4612434224510024,
+   "upper80": 0.8466954369139672,
+   "completion_label": "partial"
+  }
+ },
+ "cohort_accumulation_max_gap": 2.220446049250313e-16,
+ "census_rebasing": "cohort",
+ "births_2040": {
+  "mid": 3633640.516182371,
+  "hi": 3812494.051716731,
+  "low": 3512904.8031594846,
+  "zero": 3267628.6495241327
+ },
+ "births_2040_mid_fertility80": [
+  2388260.0498926155,
+  5528436.236010292
+ ],
+ "robustness": {
+  "selection_from_1977": "naive",
+  "gamma_selected": 0.8410867785010812
+ }
+}

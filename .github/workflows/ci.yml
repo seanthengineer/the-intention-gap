@@ -1,0 +1,95 @@
+# Source-only verification on every push and pull request.
+# Restricted survey data, licensed source files and API keys are never available here; tests and
+# verifiers that need them report SKIP, which the summary step keeps distinct from failures.
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Source-only verification (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Check out (byte-exact; see .gitattributes)
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Python from .python-version
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0  # v7.1.0
+        with:
+          python-version-file: .python-version
+
+      - name: Install the hash-locked research environment
+        run: |
+          python -m pip install --only-binary=:all: --require-hashes -r requirements-lock.txt
+          python -m pip check
+
+      - name: Freeze manifests (221 frozen files, five manifests)
+        run: python audit/verify_freeze.py
+
+      - name: Release checks (inventory, frozen hashes, credential and disclosure scan, links, Git attributes)
+        run: python -m tools.release check
+
+      - name: README header matches frozen data
+        run: python -m tools.readme_header --check
+
+      - name: Restore the live M11 run record from its hash-verified frozen copy
+        run: python -m tools.release restore-run-record
+
+      - name: Unit tests (tests needing restricted data are skipped and counted)
+        run: python -m unittest -v 2>&1 | tee unittest.log
+
+      - name: Final synthesis verifier, source-only mode (absent inputs SKIP; any FAIL fails the job)
+        run: python audit/verify_final_synthesis.py
+
+      - name: Survey validation checks without data (all SKIP expected)
+        run: python audit/nsfg_stage3_checks.py
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Source-only verification (${{ matrix.os }})"
+            echo
+            echo '```'
+            tail -n 3 unittest.log 2>/dev/null || echo "unit tests did not run"
+            echo '```'
+            echo "Skipped tests need restricted data (NLSY97, NSFG, HFD, ACS, CDC WONDER) and run only locally with --require-data."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  static-analysis:
+    name: Pyright policy (baseline for frozen code, zero for tooling)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0  # v7.1.0
+        with:
+          python-version-file: .python-version
+      - name: Install research and development environments
+        run: |
+          python -m pip install --only-binary=:all: --require-hashes -r requirements-lock.txt
+          python -m pip install --only-binary=:all: --require-hashes -r requirements-dev.txt
+      - name: Pyright against the recorded baseline
+        run: python -m tools.pyright_baseline

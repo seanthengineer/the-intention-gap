@@ -1,0 +1,8 @@
+{
+ "protocol": "docs/m11_forecast_protocol.md",
+ "sha256": "b99eb898445d46d3d567d11653cf268fc1502c70240f35e1540f3a3d96347672",
+ "drafted_utc": "2026-11-20T11:38:00+00:00",
+ "locked_utc": "2026-11-20T11:40:30+00:00",
+ "state": "No forecasting model fitted and no forecast error, backtest metric, interval coverage or cohort projection computed before locking; HFD series inspected descriptively in the feasibility stage; internal lock, not external preregistration",
+ "amendments": []
+}

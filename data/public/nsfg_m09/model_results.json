@@ -1,0 +1,190 @@
+{
+ "config": {
+  "cohort": "conservative",
+  "eligibility": "RWANT = 1 with a yes/no intention answer",
+  "feature_set": "primary",
+  "seed": 2023,
+  "holdout": {
+   "folds": 4,
+   "fold": 0,
+   "grouping": "VEST x VECL cluster"
+  },
+  "selection": {
+   "folds": 5,
+   "repeats": 5,
+   "metric": "pr_auc"
+  },
+  "threshold_rule": "maximum F1 on development out-of-fold predictions",
+  "bootstrap_replicates": 2000,
+  "stability": {
+   "seeds": 20,
+   "folds": 5
+  },
+  "robustness": {
+   "seeds": 5,
+   "folds": 5
+  },
+  "permutation_repeats": 50,
+  "grids": {
+   "logistic": {
+    "C": [
+     0.01,
+     0.03,
+     0.1,
+     0.3,
+     1.0,
+     3.0
+    ],
+    "class_weight": [
+     null,
+     "balanced"
+    ]
+   },
+   "boosting": {
+    "max_iter": [
+     50,
+     100,
+     200
+    ],
+    "min_samples_leaf": [
+     20,
+     40
+    ],
+    "class_weight": [
+     null,
+     "balanced"
+    ]
+   }
+  },
+  "boosting_fixed": {
+   "max_depth": 2,
+   "learning_rate": 0.05,
+   "l2_regularization": 1.0
+  }
+ },
+ "chosen": {
+  "dummy": {},
+  "logistic": {
+   "C": 0.01,
+   "class_weight": null
+  },
+  "boosting": {
+   "max_iter": 50,
+   "min_samples_leaf": 40,
+   "class_weight": "balanced"
+  }
+ },
+ "thresholds": {
+  "dummy": 0.07172557172557173,
+  "logistic": 0.0791135380386095,
+  "boosting": 0.565480858733407
+ },
+ "holdout": [
+  {
+   "model": "dummy",
+   "params": "{}",
+   "roc_auc": 0.5,
+   "pr_auc": 0.0705289673,
+   "prevalence": 0.0705289673,
+   "brier": 0.0655594646,
+   "brier_skill": 0.0,
+   "log_loss": 0.2550412442,
+   "constant_prediction": true,
+   "weighted_roc_auc": 0.5,
+   "weighted_pr_auc": 0.0548526392,
+   "weighted_prevalence": 0.0548526392,
+   "weighted_brier": 0.0521633297,
+   "weighted_brier_skill": 0.0,
+   "threshold": 0.0717255717,
+   "tp": 28,
+   "fp": 369,
+   "fn": 0,
+   "tn": 0,
+   "precision": 0.0705289673,
+   "recall": 1.0,
+   "f1": 0.1317647059,
+   "balanced_accuracy": 0.5,
+   "accuracy": 0.0705289673,
+   "calibration_slope": null,
+   "calibration_intercept": null,
+   "calibration_in_the_large": null,
+   "mean_predicted": 0.0727272727
+  },
+  {
+   "model": "logistic",
+   "params": "{\"C\": 0.01, \"class_weight\": null}",
+   "roc_auc": 0.5100658149,
+   "pr_auc": 0.0776552908,
+   "prevalence": 0.0705289673,
+   "brier": 0.0669202227,
+   "brier_skill": -0.0207560898,
+   "log_loss": 0.2608353725,
+   "constant_prediction": false,
+   "weighted_roc_auc": 0.5485755508,
+   "weighted_pr_auc": 0.0667815013,
+   "weighted_prevalence": 0.0548526392,
+   "weighted_brier": 0.0532237014,
+   "weighted_brier_skill": -0.0203279134,
+   "threshold": 0.079113538,
+   "tp": 7,
+   "fp": 92,
+   "fn": 21,
+   "tn": 277,
+   "precision": 0.0707070707,
+   "recall": 0.25,
+   "f1": 0.1102362205,
+   "balanced_accuracy": 0.5003387534,
+   "accuracy": 0.7153652393,
+   "calibration_slope": -0.0852383275,
+   "calibration_intercept": -2.798969517,
+   "calibration_in_the_large": -0.0589195638,
+   "mean_predicted": 0.0744228511
+  },
+  {
+   "model": "boosting",
+   "params": "{\"max_iter\": 50, \"min_samples_leaf\": 40, \"class_weight\": \"balanced\"}",
+   "roc_auc": 0.4367982966,
+   "pr_auc": 0.0665357546,
+   "prevalence": 0.0705289673,
+   "brier": 0.2322108458,
+   "brier_skill": -2.5419881362,
+   "log_loss": 0.6550093662,
+   "constant_prediction": false,
+   "weighted_roc_auc": 0.4073357345,
+   "weighted_pr_auc": 0.0472806849,
+   "weighted_prevalence": 0.0548526392,
+   "weighted_brier": 0.2271309148,
+   "weighted_brier_skill": -3.3542257748,
+   "threshold": 0.5654808587,
+   "tp": 3,
+   "fp": 79,
+   "fn": 25,
+   "tn": 290,
+   "precision": 0.0365853659,
+   "recall": 0.1071428571,
+   "f1": 0.0545454545,
+   "balanced_accuracy": 0.4465253581,
+   "accuracy": 0.7380352645,
+   "calibration_slope": -0.4840558348,
+   "calibration_intercept": -2.7299890667,
+   "calibration_in_the_large": -2.4901703437,
+   "mean_predicted": 0.4476578887
+  }
+ ],
+ "partition_counts": [
+  {
+   "partition": "development",
+   "respondents": 1210,
+   "clusters": 61,
+   "explicit negative": 88,
+   "prevalence": 0.0727272727
+  },
+  {
+   "partition": "holdout",
+   "respondents": 397,
+   "clusters": 19,
+   "explicit negative": 28,
+   "prevalence": 0.0705289673
+  }
+ ]
+}

@@ -1,0 +1,9 @@
+h,covered80,covered95,evaluations,evaluated_origins,strategy
+5,0.7633928571,0.9040178571,448,25,origin-local selection
+10,0.8463687151,0.9273743017,358,20,origin-local selection
+15,0.7126865672,0.8320895522,268,15,origin-local selection
+16,0.72,0.836,250,14,origin-local selection
+5,0.6227678571,0.8035714286,448,25,"fixed (naive x S0_fixed x T2), same origins"
+10,0.5921787709,0.7206703911,358,20,"fixed (naive x S0_fixed x T2), same origins"
+15,0.7350746269,0.7723880597,268,15,"fixed (naive x S0_fixed x T2), same origins"
+16,0.76,0.788,250,14,"fixed (naive x S0_fixed x T2), same origins"
