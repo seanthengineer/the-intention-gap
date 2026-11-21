@@ -132,17 +132,13 @@ Not used: statsmodels, PyTorch, Poetry, Docker. A prototype Streamlit dashboard 
 
 ## Author contribution and AI assistance
 
-*Draft for the author to confirm before release.*
+**Sean Nathaniel M.** conceived and directed the project, defined the research question and birth-cohort scope, and personally selected the data sources, informed by technical recommendations. He acquired source datasets requiring manual access, evaluated proposed methodologies, set research priorities, reviewed analytical results and limitations, requested corrections, and approved each milestone and scientific freeze.
 
-- **Research direction and decisions (the author).**
-  - Posed the research question, defined Generation Z as the 1995–2012 birth cohorts, and set each chapter's scope.
-  - Directed the work as numbered assignments and chose the data sources.
-  - Downloaded the data that need a personal account or manual export (NLSY97 extracts, the CDC WONDER natality exports, the HFD archive).
-  - Made the governing decisions: authorizing machine learning for one chapter only, not submitting respondent IDs for custom weights, and the controlled M11 revision.
-  - Reviewed every assignment, requested corrections, and approved each freeze.
-- **Implementation (AI-assisted).** Code, tests, independent verifiers, documentation and figures were written with an AI coding assistant (Anthropic's Claude, through Claude Code) working under the author's direction and review. The engineering decisions document records where that implementation was wrong and how it was caught.
-- **Third-party work.** Python libraries are listed in `requirements-lock.txt`. Methods are cited in [`bibliography.md`](bibliography.md). The data belong to their providers ([`licensing_and_attribution.md`](licensing_and_attribution.md)).
-- **Status.** An independent research project, **not peer-reviewed** and not affiliated with any data provider.
+**Development assistance.** Claude Code assisted with Python implementation, substantial and repetitive coding, test and independent-verifier development, figures, and technical documentation, under the author's direction and review. This is an accurate description of AI-assisted implementation, not a claim that every line of code was handwritten by the author or that AI assistance was limited to boilerplate.
+
+**Third-party work.** The project uses established methods cited in [bibliography.md](bibliography.md), third-party libraries pinned in `requirements-lock.txt`, and data belonging to their respective providers under their own terms ([licensing and attribution](licensing_and_attribution.md)).
+
+This is independent portfolio research, **not peer-reviewed**, and not endorsed by any data provider.
 
 ## What would improve the research
 
