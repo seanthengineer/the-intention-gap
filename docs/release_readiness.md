@@ -13,7 +13,7 @@
 | Research pipeline, walkthrough and architecture diagram | [`research_pipeline.md`](research_pipeline.md) |
 | Engineering decisions and development narrative | [`engineering_decisions.md`](engineering_decisions.md) |
 | Technical walkthrough, verified stack and contribution statement | [`technical_walkthrough.md`](technical_walkthrough.md) |
-| Licensing and attribution register; proposed licensing structure | [`licensing_and_attribution.md`](licensing_and_attribution.md); HFD terms archived in [`source_terms/`](source_terms/hfd_user_agreement_2026-11-20.md) |
+| Licensing and attribution register; authorized project licensing structure | [`licensing_and_attribution.md`](licensing_and_attribution.md); HFD terms archived in [`source_terms/`](source_terms/hfd_user_agreement_2026-11-20.md) |
 | Citation audit and consolidated bibliography | [`bibliography.md`](bibliography.md); [`../CITATION.cff`](../CITATION.cff) (validated against CFF 1.2.0) |
 | Publication errata | [`publication_errata.md`](publication_errata.md) |
 | Security and disclosure audit; release inventory and exclusion register | [`security_and_disclosure_audit.md`](security_and_disclosure_audit.md); [`release_inventory.csv`](release_inventory.csv) |
@@ -97,7 +97,7 @@ Also confirmed:
 
 **Limitation.** Linux and macOS Git were not tested. The attributes are platform-independent, and the prepared CI checks out on Ubuntu, Windows (where GitHub runners set `core.autocrlf=true`) and macOS, then runs `verify_freeze.py`.
 
-## 5. Continuous integration (prepared; not run)
+## 5. Continuous integration (GitHub CI and integrity checks exercised)
 
 | Workflow | Trigger | What it does |
 |---|---|---|
@@ -114,7 +114,7 @@ Also confirmed:
 **Validation.**
 - actionlint 1.7.12 and a YAML parse pass.
 - The commands were executed locally on Windows (section 2).
-- The workflows have **not run on GitHub**: Python 3.15.2 availability in `setup-python`, the Linux and macOS runs and the Pyright counts on Linux will first be confirmed by the first push.
+- On GitHub, source-only CI completed successfully on Ubuntu and Windows with Python 3.15.2; the Pyright baseline check also passed. The corrected daily integrity workflow passed a manual run. Weekly maintenance including macOS remains untested. The first integrity and Dependabot runs failed to parse the original workflow YAML; a correction commit fixed that issue.
 
 **Limitations.** GitHub disables scheduled workflows in public repositories after 60 days without repository activity, and scheduled runs can be delayed. A failed scheduled run reports a problem; it never changes anything.
 
@@ -196,10 +196,10 @@ The history starts at the publication commit and is not backdated; the research 
 
 **Material blockers to engineering: none.**
 
-**Required owner decisions before publication** (section 6): licences and copyright holder, author name in `CITATION.cff`, confirmation of the contribution statement, and Git/GitHub authorization. None is a defect; all are decisions only the owner can make.
+**Owner decisions completed:** original-code MIT license, original-documentation CC BY 4.0 license, copyright name Sean Nathaniel M., citation metadata, contribution statement, and private GitHub setup. **Still pending:** final visual and security-setting review, explicit authorization to make the repository public, and a public release tag.
 
 **Nonblocking limitations:**
-- The GitHub workflows have not run; Linux and macOS execution is untested (the lock resolves for both).
+- GitHub CI ran successfully on Ubuntu and Windows, including Pyright. Weekly maintenance and the macOS job have not yet run.
 - Python 3.15.2 is the only tested interpreter.
 - Public users cannot run the full-data verifiers without obtaining the source data themselves; five of them stop with an error, rather than SKIP, when data are absent (errata E-11).
 - In a fresh clone, one frozen test needs `python -m tools.release restore-run-record` first (errata E-10).
