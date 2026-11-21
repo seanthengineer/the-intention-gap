@@ -98,7 +98,7 @@ DIRECT_PATTERNS = {
 }
 TEXT_SUFFIXES = (".py", ".md", ".csv", ".json", ".txt", ".toml", ".cfg", ".ini", ".yml", ".yaml", ".cff",
                  ".sha256", ".svg", ".html")
-TEXT_NAMES = (".gitignore", ".gitattributes", ".python-version")
+TEXT_NAMES = (".gitignore", ".gitattributes", ".python-version", "LICENSE")
 BINARY_SUFFIXES = (".png",)
 RESPONDENT_COLUMNS = {"respondent_id", "pubid", "caseid", "household_id", "sidcode", "secu", "sest", "hhid"}
 RESPONDENT_PATTERN = re.compile(r"^(pubid|caseid)(_\w+)?$|^respondent_?id$|^[a-z]\d{7}$")
