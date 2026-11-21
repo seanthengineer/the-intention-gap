@@ -1,11 +1,8 @@
 # Release checklist and publication-readiness report
 
-**Status:** publication engineering complete, 2026-11-20. **Not released:**
-- the repository has not been initialised in Git, committed, pushed or published;
-- the GitHub workflows have never run;
-- the Streamlit dashboard is out of scope.
+**Status:** publication engineering complete; the repository was initialized and pushed to a **private** GitHub repository on 2026-11-21. CI source-only jobs passed on Ubuntu and Windows; the integrity workflow passed after a YAML correction. The weekly maintenance workflow has not yet been run. **Not publicly released:** no public visibility, tag or GitHub Release. The Streamlit dashboard is out of scope.
 
-**Decision: REVIEWABLE WITH NONBLOCKING LIMITATIONS.** The engineering is complete and verified locally. Publication still needs the owner decisions in section 6 and authorization for the Git and GitHub phase.
+**Decision: REVIEWABLE WITH NONBLOCKING LIMITATIONS.** Author and project licenses were approved on 2026-11-21. Final visual review, protection settings and public-release authorization remain pending.
 
 ## 1. Deliverables
 
@@ -124,11 +121,11 @@ Also confirmed:
 ## 6. Release checklist
 
 **Owner decisions (required before publication):**
-- [ ] Choose the licences and name the copyright holder (proposal: MIT for code, CC BY 4.0 for documentation; `licensing_and_attribution.md` §4). Add `LICENSE` and `LICENSE-docs`.
-- [ ] Replace the placeholder author in `CITATION.cff`. Add `repository-code`, `license` and `date-released` once known.
-- [ ] Confirm or edit the author contribution statement (`technical_walkthrough.md`; README).
-- [ ] Choose the repository name and visibility.
-- [ ] Authorize the Git and GitHub phase.
+- [x] Approve the licences and copyright notice: MIT for original code, CC BY 4.0 for original research writing and presentation; copyright © 2026 Sean Nathaniel M. (`LICENSE`, `LICENSE-docs.md`).
+- [x] Update `CITATION.cff` with the publishing name, software license and repository URL. Do not add a public release date before publication.
+- [x] Confirm and correct the author contribution statement, including independently selected data sources informed by recommendations and Claude Code implementation assistance.
+- [x] Choose the repository name and initial private visibility: `seanthengineer/the-intention-gap`.
+- [x] Authorize and complete initial Git initialization and GitHub push.
 
 **Before the first commit (commands in section 8):**
 - [ ] `python -m tools.release check`: all PASS.
@@ -139,7 +136,7 @@ Also confirmed:
 **After the first push (owner, on GitHub):**
 - [ ] Enable secret scanning, push protection and private vulnerability reporting.
 - [ ] Protect `main`: require the CI workflow and a review for changes to `tools/`, `.github/` and `docs/*_freeze.sha256`.
-- [ ] Confirm that the first CI run passes on Ubuntu and Windows; record the skip counts.
+- [x] Confirm the first CI source-only run passed on Ubuntu and Windows (392 tests, 37 data-dependent skips); the integrity workflow also passed on a subsequent manual run.
 - [ ] Check that the README renders correctly in light and dark mode, including the Mermaid diagrams and images.
 - [ ] Tag the release (`v1.0.0`).
 
@@ -154,9 +151,9 @@ Also confirmed:
 | Archive hash | Recorded beside the archive in `intention-gap-public-release-candidate.zip.sha256`, because an archive cannot contain its own hash |
 | Checks on the archive | The frozen safety scan `audit/verify_final_synthesis.check_archive`: every frozen file present with its manifest hash, internal manifest consistent, and no restricted paths, respondent columns or credentials. The same files were also tested as a source-only checkout and in Git (sections 2 and 4) |
 
-## 8. Release commands (for the authorized Git and GitHub phase; not run)
+## 8. Initial Git commands (historical instructions, already completed)
 
-Prerequisites: Git 2.40 or later; the hash-locked environment installed; the owner decisions in section 6 made; a GitHub repository created by the owner.
+The initial Git initialization, private remote and push were completed on 2026-11-21; **do not rerun these initialization commands** in the existing repository. The commands below are preserved as reproducibility notes, not as instructions to reinitialize or publish publicly.
 
 ```
 cd "<path to>/the-intention-gap"
