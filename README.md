@@ -5,7 +5,7 @@
 
 # The Intention Gap
 
-**An independent research project testing whether the evidence can support a popular claim: that young Americans will fall short of the families they say they want.** Four studies, seven official data sources, one integrated answer, with every material claim traced to a frozen value and every chapter's headline results independently recomputed.
+**An independent applied machine-learning and demographic research project testing whether the evidence supports the claim that young Americans will fall short of the families they say they want.** Four studies combine predictive calibration, supervised classification, statistical inference and forecasting across seven official data sources to produce one integrated answer. Every material claim is traced to a frozen value, and each chapter's headline results are independently recomputed.
 
 [Manuscript](docs/final_synthesis_manuscript.md) · [Visual atlas](docs/visual_atlas.md) · [How it was built](docs/engineering_decisions.md) · [Technical walkthrough](docs/technical_walkthrough.md) · [Reproduce](#reproducibility)
 
@@ -83,7 +83,7 @@ All 21 figures, with populations, units, uncertainty and limitations: **[visual 
 ## Technical implementation
 
 - **Survey statistics.** Design-based estimation with weights, strata and clusters, Korn–Graubard intervals and NCHS reliability suppression for the NSFG; a JKn jackknife and missing-outcome bounds for the NLSY97. The NSFG estimates are cross-checked against a separate survey library.
-- **Machine learning with guardrails.** Leakage-audited features, household- and cluster-grouped splits, a dummy baseline, and calibration checks with scikit-learn. The negative result is reported as such.
+- **Machine learning with guardrails.** Logistic recalibration of historical expectations and penalized logistic regression versus gradient boosting for fertility intentions, with leakage-audited features, household- and cluster-grouped splits, a dummy baseline, cross-validation, and discrimination and calibration checks using scikit-learn. Negative predictive results are reported as such.
 - **Causal-inference hygiene without causal claims.** Two-way fixed effects, cluster-robust and wild-bootstrap inference, and a protocol hashed and locked before fitting.
 - **Forecasting.** ARIMA, exponential smoothing and benchmark methods written directly in NumPy/SciPy; 72 pseudo-real-time backtest origins; cohort projection on Lexis triangles; interval calibration tested, and failing.
 - **Verification engineering.** Independent recomputation for each chapter, a 155-check claim-to-evidence matrix, SHA-256 freeze manifests, Git rules that keep frozen bytes identical, hash-locked dependencies, and a release scanner for credentials and disclosure risks.
