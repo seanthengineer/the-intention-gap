@@ -142,6 +142,6 @@ python audit/verify_final_synthesis.py      # claim matrix; raw-data checks repo
 - **NLSY97.** Bureau of Labor Statistics public-use data.
 - **CDC/NCHS.** NSFG and natality data. The analyses and conclusions are the author's; NCHS is responsible only for the initial data release.
 - **Census.** This product uses the Census Bureau Data API but is not endorsed or certified by the Census Bureau.
-- **Website photographs.** Two photographs by Carol M. Highsmith from the Library of Congress, with no known restrictions on publication. Details: [website/README.md](website/README.md#assets).
+- **Website photographs.** The Intentions photograph by David Brossard is licensed under CC BY-SA 2.0. The Housing photograph by Carol M. Highsmith is from the Library of Congress, which lists no known publication restrictions. [Photograph sources and credits](website/README.md#assets).
 
 No provider endorses this project. Original project **code** is under the [MIT License](LICENSE); original **research writing and presentation** are under [CC BY 4.0](LICENSE-docs.md). Third-party datasets and other materials retain their own terms. See [licensing and attribution](docs/licensing_and_attribution.md).

@@ -273,8 +273,12 @@ website/astro.config.mjs,website,,project code
 website/package-lock.json,website,,project code
 website/package.json,website,,project code
 website/public/favicon.svg,website,,project code
+website/public/photos/brossard-washington-square-1024.jpg,website,,photograph: CC BY-SA 2.0 (David Brossard)
+website/public/photos/brossard-washington-square-640.jpg,website,,photograph: CC BY-SA 2.0 (David Brossard)
 website/public/photos/highsmith-asu-palm-walk-2018.jpg,website,,"public-domain photograph (Library of Congress, no known restrictions)"
 website/public/photos/highsmith-huntington-homes-2015.jpg,website,,"public-domain photograph (Library of Congress, no known restrictions)"
+website/public/photos/highsmith-shepherd-row-houses-1024.jpg,website,,"public-domain photograph (Library of Congress, no known restrictions)"
+website/public/photos/highsmith-shepherd-row-houses-640.jpg,website,,"public-domain photograph (Library of Congress, no known restrictions)"
 website/scripts/check-data.mjs,website,,project code
 website/scripts/check-text.mjs,website,,project code
 website/scripts/prepare-data.mjs,website,,project code
@@ -308,6 +312,7 @@ website/src/scripts/nav.ts,website,,project code
 website/src/scripts/particles.ts,website,,project code
 website/src/scripts/people.ts,website,,project code
 website/src/scripts/stages.ts,website,,project code
+website/src/styles/editorial.css,website,,project code
 website/src/styles/global.css,website,,project code
 website/src/styles/sections.css,website,,project code
 website/tsconfig.json,website,,project code

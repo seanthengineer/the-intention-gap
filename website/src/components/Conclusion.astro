@@ -9,21 +9,26 @@ const prim = data.m10.primary.find((p) => p.role === "primary")!;
 const f2040 = data.m11.forecast[data.m11.forecast.length - 1];
 const e = Object.fromEntries(data.m11.endpoints.map((x) => [x.c, x]));
 ---
-<section class="section blueprint" id="conclusion" aria-labelledby="ch5">
-  <div class="wrap">
-    <div class="grid answer-block">
-      <div class="ch-meta c-1-4"><span class="ch-num">Conclusion</span><span class="ch-code">Synthesis · frozen November 2026</span></div>
-      <div class="c-4-13">
-        <h2 class="big" id="ch5">Whether Generation Z will have the families it wants cannot be established from the existing data.</h2>
-        <p class="standfirst">
-          A population-level answer would need two things no source provides: a numeric desired family size for Generation Z, and the completed
-          lifetime fertility of the same cohorts. An answer about individuals would also need the same people followed over time. What the evidence does
-          support is a set of separate, bounded statements. None of them is a measured gap between desire and achievement.
-        </p>
+<section class="section conclusion" id="conclusion" aria-labelledby="ch5">
+  <header class="conclusion-opening">
+    <div class="wrap grid">
+      <div class="conclusion-meta c-1-4">
+        <span class="conclusion-label">Conclusion</span>
+        <span class="conclusion-code">Synthesis · frozen November 2026</span>
       </div>
+      <h2 class="conclusion-title c-4-13" id="ch5">Whether Generation Z will have the families it wants cannot be established from the existing data.</h2>
+    </div>
+  </header>
+  <div class="wrap conclusion-evidence">
+    <div class="grid conclusion-context">
+      <p class="standfirst c-4-13">
+        A population-level answer would need two things no source provides: a numeric desired family size for Generation Z, and the completed
+        lifetime fertility of the same cohorts. An answer about individuals would also need the same people followed over time. What the evidence does
+        support is a set of separate, bounded statements. None of them is a measured gap between desire and achievement.
+      </p>
     </div>
 
-    <div class="cols-2">
+    <div class="conclusion-ledger">
       <div>
         <h3>What the evidence supports</h3>
         <ol class="ledger-list">
@@ -41,7 +46,8 @@ const e = Object.fromEntries(data.m11.endpoints.map((x) => [x.c, x]));
             <span class="kind">Conditional projection · not completed fertility</span></li>
         </ol>
       </div>
-      <div>
+      <div class="conclusion-companion">
+        <div>
         <h3>What must not be inferred</h3>
         <ol class="ledger-list not">
           <li><strong>A gap, by subtraction.</strong> Survey answers and projected cohort fertility describe different people, measures and times.</li>
@@ -50,12 +56,15 @@ const e = Object.fromEntries(data.m11.endpoints.map((x) => [x.c, x]));
           <li><strong>Causes from the housing results.</strong> They are associations between states and years.</li>
           <li><strong>Population estimates from the NLSY97 results.</strong> They are unweighted results for one earlier cohort.</li>
         </ol>
-        <h3 style="margin-top:var(--s-48)">What would answer the question</h3>
-        <ol class="ledger-list">
-          <li>A numeric desired family-size question asked of Generation Z.</li>
-          <li>Following the same respondents until their childbearing years end, around age 45.</li>
-          <li>Forecasts whose probability intervals pass a calibration check.</li>
-        </ol>
+        </div>
+        <div class="conclusion-future">
+          <h3>What would answer the question</h3>
+          <ol class="ledger-list">
+            <li>A numeric desired family-size question asked of Generation Z.</li>
+            <li>Following the same respondents until their childbearing years end, around age 45.</li>
+            <li>Forecasts whose probability intervals pass a calibration check.</li>
+          </ol>
+        </div>
       </div>
     </div>
     <div class="further">
@@ -66,3 +75,165 @@ const e = Object.fromEntries(data.m11.endpoints.map((x) => [x.c, x]));
     </div>
   </div>
 </section>
+
+<style>
+  .section.conclusion {
+    padding-block: 0;
+  }
+
+  .conclusion-opening {
+    position: relative;
+    isolation: isolate;
+    padding-block: clamp(3.5rem, 7.7vw, 7.5rem);
+    background: #20201f;
+    color: var(--paper-light);
+  }
+
+  .conclusion-opening::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0 0 0 67%;
+    border-inline-start: 1px solid #403c37;
+    background: var(--ink);
+  }
+
+  .conclusion-opening .grid {
+    align-items: start;
+    row-gap: clamp(1.75rem, 4vw, 3.5rem);
+  }
+
+  .conclusion-meta {
+    display: grid;
+    gap: 0.5rem;
+    justify-items: start;
+  }
+
+  .conclusion-meta::before {
+    content: "";
+    inline-size: 2.5rem;
+    block-size: 2px;
+    margin-bottom: 0.5rem;
+    background: var(--oxblood-soft);
+  }
+
+  .conclusion-label {
+    color: var(--paper);
+    font: 500 clamp(1.4rem, 1.1rem + 0.65vw, 2rem)/1.1 var(--serif);
+  }
+
+  .conclusion-code {
+    color: #c9baa8;
+    font: 400 0.78rem/1.5 var(--mono);
+  }
+
+  .conclusion-title {
+    max-width: 24ch;
+    font-size: clamp(2.25rem, 1.3rem + 3.8vw, 4.85rem);
+    font-weight: 390;
+    line-height: 1.02;
+    font-variation-settings: "opsz" 60;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+  }
+
+  .conclusion-evidence {
+    padding-block: clamp(2.5rem, 5vw, 4.5rem) clamp(3.5rem, 8vw, 7rem);
+  }
+
+  .conclusion-context {
+    margin-block-end: clamp(2.5rem, 5vw, 4.5rem);
+    padding-block-end: clamp(2.5rem, 5vw, 4.5rem);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .conclusion-context .standfirst {
+    margin: 0;
+    padding-inline-start: clamp(0.75rem, 2vw, 1.75rem);
+    border-inline-start: 2px solid var(--oxblood);
+    font-size: clamp(1.125rem, 0.98rem + 0.55vw, 1.38rem);
+  }
+
+  .conclusion-ledger {
+    display: grid;
+    gap: clamp(2.75rem, 6vw, 6rem);
+  }
+
+  .conclusion-companion {
+    display: grid;
+    align-content: start;
+    gap: clamp(2.75rem, 5.5vw, 4.75rem);
+  }
+
+  .conclusion-ledger h3 {
+    margin-block-end: clamp(1rem, 2.4vw, 1.75rem);
+    font-size: clamp(1.75rem, 1.25rem + 1.45vw, 2.7rem);
+    font-weight: 440;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+
+  .conclusion-ledger li {
+    padding-block: clamp(0.85rem, 1.5vw, 1.25rem);
+    padding-inline-start: clamp(1.8rem, 3vw, 2.75rem);
+  }
+
+  .conclusion-ledger li::before {
+    top: clamp(0.85rem, 1.5vw, 1.25rem);
+  }
+
+  .conclusion-ledger li:first-child {
+    border-top-color: var(--ink);
+  }
+
+  .conclusion-ledger .kind {
+    margin-top: 0.35rem;
+    font-size: 0.8rem;
+    letter-spacing: 0;
+    text-transform: none;
+    line-height: 1.5;
+  }
+
+  .conclusion-future {
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border-top: 2px solid var(--oxblood);
+    background: var(--paper-light);
+  }
+
+  .conclusion-future li:last-child {
+    padding-block-end: 0;
+  }
+
+  .conclusion-evidence .further {
+    margin-top: clamp(2.75rem, 6vw, 5rem);
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.85rem;
+  }
+
+  @media (min-width: 60em) {
+    .conclusion-ledger {
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    }
+
+    .conclusion-meta {
+      padding-top: 0.5rem;
+    }
+  }
+
+  @media print {
+    .conclusion-opening {
+      background: transparent;
+      color: var(--ink);
+    }
+
+    .conclusion-opening::after {
+      display: none;
+    }
+
+    .conclusion-label,
+    .conclusion-code {
+      color: var(--ink);
+    }
+  }
+</style>

@@ -21,12 +21,12 @@ const CAT: Record<string, string> = {
 };
 const NCHS = "Data Source: National Center for Health Statistics, National Survey of Family Growth, 2022-2023. Analyses and conclusions are the author's, not NCHS's.";
 ---
-<section class="section" id="intentions" aria-labelledby="ch2">
+<section class="section editorial-chapter" id="intentions" aria-labelledby="ch2">
   <div class="wrap">
     <header class="grid chapter-head">
-      <div class="ch-meta c-1-4"><span class="ch-num">Chapter 2</span><span class="ch-code">M09 · NSFG 2022–2023</span></div>
+      <div class="ch-meta c-1-4"><span class="ch-num">Chapter <b>2</b></span><span class="ch-code">M09 · NSFG 2022–2023</span></div>
       <div class="c-4-13">
-        <h2 class="ch-title" id="ch2">What the oldest members of Generation Z say they want</h2>
+        <h2 class="ch-title" id="ch2">What the oldest members of Generation&nbsp;Z say they want</h2>
         <p class="standfirst">
           The National Survey of Family Growth asked a nationally representative sample whether they want a child, or another child, and whether
           they intend to have one. The answers describe a moment, not a life: they were given at one interview, by people who mostly have many
@@ -42,19 +42,22 @@ const NCHS = "Data Source: National Center for Health Statistics, National Surve
       <div class="not"><dt>Not</dt><dd>Births, or completed family size</dd></div>
     </dl>
 
-    <div class="grid" style="row-gap:var(--s-32)">
+    <div class="grid editorial-photo-spread" style="row-gap:var(--s-32)">
       <div class="c-1-8">
         <Photo
-          src="highsmith-asu-palm-walk-2018.jpg"
-          alt="Dithered photograph of the Palm Walk at Arizona State University in Tempe: a long path lined with palms, with people walking in the distance."
-          ratio="4 / 3"
-          focusY={0.62}
-          contrast={1.25}
-          lift={0.06}
-          credit="Palm Walk, Arizona State University, Tempe, 2018. Carol M. Highsmith, Library of Congress (public domain). Illustrative; the people shown are not survey respondents."
+          src="brossard-washington-square-1024.jpg"
+          alt="People sit, talk and walk near the Washington Square Arch in late-day sunlight."
+          credit="July Evening in Washington Square, New York City, 2021. David Brossard."
+          documentary={{
+            width: 1024, height: 724, small: "brossard-washington-square-640.jpg",
+            sizes: "(min-width: 900px) 53vw, 92vw",
+            source: "https://www.flickr.com/photos/string_bass_dave/51729207037/",
+            license: { label: "CC BY-SA 2.0", url: "https://creativecommons.org/licenses/by-sa/2.0/" },
+            context: "Resized for the web. The people shown are not NSFG survey respondents.",
+          }}
         />
       </div>
-      <div class="c-9-13 aside" style="align-self:end">
+      <div class="c-9-13 aside editorial-photo-aside">
         <span class="label">Who these are</span>
         The survey's youngest adults, born roughly 1995–2005: the older part of Generation Z by the project's definition (born 1995–2012).
         Most had no children yet. {pct(h.all.wants.est)} of them wanted one.
@@ -101,7 +104,7 @@ const NCHS = "Data Source: National Center for Health Statistics, National Surve
           </details>
         </Figure>
       </div>
-      <aside class="c-10-13" style="padding-top:var(--s-96)">
+      <aside class="c-10-13 editorial-aside">
         <div class="aside">
           <span class="label">Women and men</span>
           In these data, men were more likely than women to say they want a child ({pct(h.male.wants.est)} against {pct(h.female.wants.est)}) and to intend one
@@ -201,7 +204,7 @@ const NCHS = "Data Source: National Center for Health Statistics, National Surve
           <p class="wide cannot"><span class="k">Cannot show</span>That demographics are unrelated to intentions. Only {logit.positives} people in the holdout said no, so the test has limited power; it shows that these characteristics do not usefully identify who says no.</p>
         </Figure>
       </div>
-      <aside class="c-10-13" style="padding-top:var(--s-96)">
+      <aside class="c-10-13 editorial-aside">
         <div class="aside">
           <span class="label">What AUC means</span>
           The chance that a model ranks a randomly chosen person who said no above a randomly chosen person who did not. 0.50 is a coin toss; 1.00 is perfect.

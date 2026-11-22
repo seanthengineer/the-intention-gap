@@ -39,7 +39,7 @@ npm run preview    # serves dist/ locally for a final check
 
 - [Astro](https://astro.build) 7, static output; no server code and no client framework
 - [D3](https://d3js.org) 7 for the charts and map; [GSAP](https://gsap.com) 3 ScrollTrigger for the scroll-driven transitions
-- A canvas particle system for the data-to-crowd, terminal-to-map and map-to-timeline transitions, and runtime Atkinson dithering for the photographs
+- A canvas particle system for the data-to-crowd, terminal-to-map and map-to-timeline transitions, and an optional runtime Atkinson dithering renderer
 - [topojson-client](https://github.com/topojson/topojson-client), [topojson-simplify](https://github.com/topojson/topojson-simplify) and [us-atlas](https://github.com/topojson/us-atlas) for the dot-matrix map
 - Self-hosted fonts through Fontsource: Source Serif 4, IBM Plex Sans and IBM Plex Mono
 
@@ -49,13 +49,15 @@ With reduced motion requested, the transitions switch between fixed states. The 
 
 | Asset | Source | Terms |
 |---|---|---|
+| `public/photos/brossard-washington-square-{640,1024}.jpg` | David Brossard, [July Evening in Washington Square](https://www.flickr.com/photos/string_bass_dave/51729207037/), New York City, 2021 | [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/), resized and recompressed without cropping |
+| `public/photos/highsmith-shepherd-row-houses-{640,1024}.jpg` | Carol M. Highsmith, [Shepherd Street NW row houses](https://www.loc.gov/item/2010641825/), Washington, D.C., 2010. George F. Landegger Collection, Library of Congress, Prints and Photographs Division | No known restrictions on publication |
 | `public/photos/highsmith-asu-palm-walk-2018.jpg` | Carol M. Highsmith, Palm Walk, Arizona State University, 2018. Library of Congress, Prints and Photographs Division, Carol M. Highsmith Archive, item [2018702287](https://www.loc.gov/item/2018702287/) | No known restrictions on publication |
 | `public/photos/highsmith-huntington-homes-2015.jpg` | Carol M. Highsmith, homes in Huntington, West Virginia, 2015. Same archive, item [2015631814](https://www.loc.gov/item/2015631814/) | No known restrictions on publication |
 | `public/favicon.svg` | Original | MIT, as project code |
 | Figures in the Archive section | Copied at build time from `assets/figures/` | As in the [licensing register](../docs/licensing_and_attribution.md) |
 | Map geometry | us-atlas, from U.S. Census Bureau cartographic boundary files | ISC; boundary data public domain |
 
-The photographs are shown dithered. The crowd in the opening transition is generated procedurally and is illustrative; it does not depict survey participants.
+The chapter photographs use responsive, full-color JPEGs. The original photographs and optional dithering renderer remain available. The crowd in the opening transition is generated procedurally and is illustrative; it does not depict survey participants.
 
 ## Licensing and attribution
 
