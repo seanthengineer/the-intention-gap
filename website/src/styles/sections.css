@@ -1,6 +1,6 @@
 /* Overview stage */
 
-.js #stage-overview { height: 340vh; }
+.js #stage-overview.is-pinned { height: 300vh; height: 300svh; }
 .js #stage-ascii { height: 300vh; }
 .js #stage-timeline { height: 260vh; }
 
@@ -8,7 +8,8 @@
   position: relative;
 }
 
-.js .stage-track .stage {
+.js .stage-track:not(#stage-overview) .stage,
+.js #stage-overview.is-pinned .stage {
   position: sticky;
   top: 0;
   height: 100vh;
@@ -26,9 +27,15 @@
   row-gap: var(--s-32);
 }
 
-.js .hero {
-  height: 100%;
+#stage-overview.is-pinned .hero { height: 100%; }
+
+#stage-overview:not(.is-pinned) .hero {
+  padding-top: clamp(2.5rem, 8svh, 6rem);
 }
+
+#stage-overview:not(.is-pinned) .field { display: none; }
+
+.hero-figure { width: min(100%, 46rem); }
 
 .hero-text {
   align-self: center;
@@ -40,7 +47,7 @@
   color: var(--oxblood);
 }
 
-.hero h1 {
+.hero h2 {
   font-size: var(--t-hero);
   line-height: 1.01;
   font-weight: 400;
@@ -124,7 +131,7 @@
 }
 
 @media (max-width: 899px) {
-  .js .hero {
+  .hero {
     align-content: start;
     row-gap: var(--s-16);
   }
@@ -134,17 +141,13 @@
   .js .scroll-cue { display: none; }
 }
 
-@media (max-width: 899px) and (max-height: 1000px) {
-  .js .hero .lede { display: none; }
-}
-
 .crowd-statement {
   position: relative;
   z-index: 2;
   padding-block: var(--s-48);
 }
 
-.js .crowd-statement {
+#stage-overview.is-pinned .crowd-statement {
   position: absolute;
   inset: calc(var(--nav-h) + clamp(16px, 5vh, 56px)) 0 auto 0;
   padding-block: 0;

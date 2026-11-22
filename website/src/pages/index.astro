@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import Cover from "../components/Cover.astro";
 import Nav from "../components/Nav.astro";
 import Overview from "../components/Overview.astro";
 import Expectations from "../components/Expectations.astro";
@@ -17,7 +18,8 @@ import Colophon from "../components/Colophon.astro";
 >
   <div id="top"></div>
   <Nav />
-  <main id="main">
+  <Cover />
+  <main id="main" tabindex="-1">
     <Overview />
     <Expectations />
     <Intentions />

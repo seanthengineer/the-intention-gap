@@ -58,7 +58,7 @@ function runStage(spec: StageSpec) {
     draw();
   };
   rebuild();
-  ScrollTrigger.create({
+  const trigger = ScrollTrigger.create({
     trigger: spec.track,
     start: "top top",
     end: "bottom bottom",
@@ -67,7 +67,7 @@ function runStage(spec: StageSpec) {
   });
   let timer = 0;
   let lastW = window.innerWidth;
-  window.addEventListener("resize", () => {
+  const resize = () => {
     clearTimeout(timer);
     timer = window.setTimeout(() => {
       if (Math.abs(window.innerWidth - lastW) < 2 && field.height > 0) {
@@ -78,7 +78,14 @@ function runStage(spec: StageSpec) {
       rebuild();
       ScrollTrigger.refresh();
     }, 180);
-  });
+  };
+  window.addEventListener("resize", resize);
+  return () => {
+    trigger.kill();
+    window.removeEventListener("resize", resize);
+    clearTimeout(timer);
+    cancelAnimationFrame(frame);
+  };
 }
 
 function relRect(el: Element, stage: Element) {
@@ -139,7 +146,7 @@ function heroScales(width: number) {
   return { x, y, height, m };
 }
 
-function drawHeroChart(el: HTMLElement) {
+function drawHeroChart(el: HTMLElement, staticUnits = false) {
   const width = el.clientWidth;
   const { x, y, height } = heroScales(width);
   select(el).selectAll("svg").remove();
@@ -173,6 +180,23 @@ function drawHeroChart(el: HTMLElement) {
     .call(axisBottom(x).tickValues([1960, 1980, 2000, 2020]).tickSize(0).tickFormat((d) => String(d)))
     .call((s) => s.select(".domain").remove());
   g.append("text").attr("class", "axis-title").attr("x", x.range()[0] - 8).attr("y", y(4) - 14).text("Births per woman");
+  if (staticUnits) {
+    const size = Math.max(0.8, Math.min(x(1954) - x(1953), y(0) - y(0.1)) * 0.34);
+    const units = formation(unitCount);
+    unitColumns(units, 0, x, y, 0, 0, size);
+    g.append("g")
+      .attr("class", "static-units")
+      .attr("aria-hidden", "true")
+      .selectAll("rect")
+      .data(units.x)
+      .join("rect")
+      .attr("fill", (_, i) => units.c[i] === OXBLOOD ? "var(--oxblood)" : "var(--ink)")
+      .attr("opacity", (_, i) => units.a[i])
+      .attr("x", (position) => position - size)
+      .attr("y", (_, i) => units.y[i] - size)
+      .attr("width", size * 2)
+      .attr("height", size * 2);
+  }
   g.append("path")
     .datum(observed)
     .attr("fill", "none")
@@ -199,9 +223,37 @@ export function initOverview() {
   const heroText = document.getElementById("hero-text")!;
   const statement = document.getElementById("crowd-statement")!;
   const n = unitCount + geo.dots.length;
-  runStage({
+  const canvas = stage.querySelector("canvas")!;
+  const cap = chartEl.parentElement!.querySelector<HTMLElement>(".hero-cap")!;
+  const motion = window.matchMedia("(min-width: 950px) and (min-height: 760px) and (prefers-reduced-motion: no-preference)");
+  let stop: (() => void) | undefined;
+  let chartWidth = 0;
+  const staticChart = new ResizeObserver(() => {
+    if (chartWidth === chartEl.clientWidth) return;
+    chartWidth = chartEl.clientWidth;
+    drawHeroChart(chartEl, true);
+  });
+
+  const sync = () => {
+    stop?.();
+    stop = undefined;
+    staticChart.disconnect();
+    track.classList.toggle("is-pinned", motion.matches);
+    if (!motion.matches) {
+      for (const element of [heroText, statement, cap]) element.removeAttribute("style");
+      chartWidth = chartEl.clientWidth;
+      drawHeroChart(chartEl, true);
+      staticChart.observe(chartEl);
+      ScrollTrigger.refresh();
+      return;
+    }
+    stop = animate();
+    ScrollTrigger.refresh();
+  };
+
+  const animate = () => runStage({
     track,
-    canvas: stage.querySelector("canvas")!,
+    canvas,
     n,
     build(field, w, h) {
       drawHeroChart(chartEl);
@@ -238,15 +290,15 @@ export function initOverview() {
       heroText.style.visibility = out > 0.99 ? "hidden" : "visible";
       const svg = chartEl.querySelector("svg");
       if (svg) svg.style.opacity = String(1 - ramp(p, 0.08, 0.2));
-      const cap = chartEl.parentElement?.querySelector<HTMLElement>(".hero-cap");
-      if (cap) cap.style.opacity = String(1 - ramp(p, 0.06, 0.16));
+      cap.style.opacity = String(1 - ramp(p, 0.06, 0.16));
       const s = ramp(p, 0.74, 0.86);
       statement.style.opacity = String(s);
       statement.style.transform = `translateY(${(1 - s) * 18}px)`;
       statement.style.visibility = s < 0.01 ? "hidden" : "visible";
     },
-    discrete: (p) => (p < 0.45 ? 0 : 1),
   });
+  motion.addEventListener("change", sync);
+  sync();
 }
 
 const TERMINAL = [
