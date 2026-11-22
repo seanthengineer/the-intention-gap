@@ -1,32 +1,32 @@
 # Technical walkthrough
 
-Short, evidence-linked answers to the questions a technical reviewer, researcher or interviewer is likely to ask. For depth, follow the links; for the full argument, read the [manuscript](final_synthesis_manuscript.md).
+These are my evidence-linked answers to questions a technical reviewer, researcher or interviewer may ask about my project. For depth, follow the links; for the full argument, read the [manuscript](final_synthesis_manuscript.md).
 
 ## The project
 
-**Why this problem?**
+**Why did I pursue this question?**
 - U.S. fertility has fallen to about 1.6 births per woman (HFD period TFR, 2024).
 - Surveys meanwhile report that most young adults want children.
-- It is tempting to call the difference an "intention gap" and to project it onto Generation Z. The project asks whether the available evidence can actually support that claim, and builds each piece needed to test it.
+- It is tempting to call the difference an "intention gap" and project it onto Generation Z. I wanted to test whether the available evidence could support that claim, rather than assume the answer.
 
-**What is distinctive about it?**
+**What makes my approach distinctive?**
 - **Integration.** Four research designs answer one question: a longitudinal test of stated expectations, a weighted cross-sectional survey, a state panel and a cohort forecast.
 - **Discipline about what the data can say.** The integrated answer is "not establishable from the existing evidence". It is backed by an explicit map of who each data source observes ([evidence map](visual_atlas.md#who-each-chapter-observes)).
 - **Verification infrastructure.** Independent recomputation, a claim-to-evidence matrix and hash-frozen results.
 
 The methods themselves are standard and are not claimed to be new.
 
-**What is original?** The research question and its decomposition; the choice and reconciliation of sources; the outcome rules for the NLSY97 rosters; the locked protocols; the verification design; and the synthesis.
+**What did I contribute?** The research question and its decomposition; the choice and reconciliation of sources; the outcome rules for the NLSY97 rosters; the locked protocols; the verification design; and the synthesis.
 
 ## Data
 
-**Why these datasets?** Each is the authoritative public source for one link in the argument:
+**Why did I choose these datasets?** I selected authoritative public sources for the separate questions in the argument:
 - **NLSY97:** stated expectations followed by observed births in the same people.
 - **NSFG 2022–2023:** the only national survey of Generation Z's wanting and intending.
 - **ACS and CDC WONDER:** state housing burden and birth rates.
 - **Human Fertility Database:** a consistent long series for forecasting, cross-checked against NCHS and Census figures.
 
-**How were the data acquired and validated?**
+**How did I approach data acquisition and validation?**
 - Every raw file is SHA-256-hashed in a `provenance.json` (221 files in 10 records), and the synthesis verifier re-hashes them.
 - Each chapter benchmarks against published statistics:
   - the CDC NSFG benchmark (pill use, women 20–24: 18.9586%, SE 2.0226) is reproduced to the published digits;
@@ -35,27 +35,27 @@ The methods themselves are standard and are not claimed to be new.
 
 Records: [`m10_data_feasibility.md`](m10_data_feasibility.md), [`m11_data_feasibility.md`](m11_data_feasibility.md), [`nsfg_stage3_validation.md`](nsfg_stage3_validation.md).
 
-**How were incompatible sources reconciled?**
+**How did I handle incompatible sources?**
 - CDC WONDER's 2007–2024 database lacked rates after 2020, so a second export (2016–2024 expanded) was reconciled cell by cell before it was used. A permanent test guards the seam ([decision 8](engineering_decisions.md#8-incompatible-cdc-natality-denominators-m10)).
 - NLSY97 rosters disagree across rounds, so explicit reconciliation rules define the outcome ([decision 1](engineering_decisions.md#1-turning-inconsistent-birth-rosters-into-a-five-year-outcome-m01m04)).
 
-**Missing data and survey weights?**
+**How did I handle missing data and survey weights?**
 - **NSFG:** full design-based estimation with weights, strata and clusters, using linearization and Korn–Graubard intervals, with NCHS reliability suppression.
 - **NLSY97:** missing outcomes are bounded, not imputed. Weighted analyses use the baseline weights with a delete-one-PSU jackknife. Outcome results stay unweighted because valid longitudinal weights would require submitting respondent IDs ([decision 4](engineering_decisions.md#4-survey-weights-and-missing-outcomes-without-restricted-weights-m05m071)).
 
 ## Modelling and evaluation
 
-**How were prediction targets defined?**
+**How did I define the prediction targets?**
 - **NLSY97:** at least one biological birth within five years of the 2009–10 interview (`analysis/build_outcomes.py`, [methodology §3](methodology.md#3-five-year-outcome)).
 - **NSFG:** an explicit "no" versus a positive intention, among those who want a child (`analysis/nsfg_models.py`).
 - **M11:** period TFR and cohort cumulative fertility.
 
-**How was feature leakage prevented?**
+**How did I guard against feature leakage?**
 - NLSY97 siblings are kept on one side of the split by a household-grouped split.
 - The NSFG model uses a feature dictionary with a stated reason for every inclusion, enforced in code (`assert_no_leakage`), and an isolated cluster holdout.
 - M11 backtests refit every model using only data up to each origin.
 
-**Why these models, and what were the baselines?** Each model was compared with a simple baseline first:
+**Why did I choose these models and baselines?** I required each model to be compared with a simple baseline first:
 
 | Chapter | Baseline | Models |
 |---|---|---|
@@ -64,20 +64,20 @@ Records: [`m10_data_feasibility.md`](m10_data_feasibility.md), [`m11_data_feasib
 | M10 | — (fixed-effects inference) | State and year fixed effects |
 | M11 | No change | Nine methods, including ARIMA and exponential smoothing, implemented directly with NumPy and SciPy |
 
-**What happened when more complex models failed?** They were reported as failing:
+**What did I do when more complex models failed?** I reported the negative results instead of hiding them:
 - **NSFG classifier:** holdout AUC 0.51 against 0.50 for the dummy.
 - **M11:** no forecasting method met the locked replacement rule, so the no-change baseline was kept.
 - **M10:** the housing association was not robust.
 
 None of these was tuned further after the result was known.
 
-**How were predictions evaluated?**
+**How did I evaluate predictions?**
 - Brier score, ROC AUC, PR-AUC, calibration slope and calibration tables (NLSY97, NSFG).
 - MAE ratios against no change at 5, 10 and 15 years, with Diebold–Mariano tests reported as descriptive only (M11).
 
-**Uncertainty and calibration?** Interval types are matched to designs (Wilson, household-cluster bootstrap, design-based, cluster-robust CR1 with wild bootstrap, historical-error). They are labelled by type everywhere. M11's intervals **failed** their pseudo-real-time calibration check and are not presented as probabilities ([decision 13](engineering_decisions.md#13-uncertainty-intervals-that-failed-calibration-m11)).
+**How did I handle uncertainty and calibration?** Interval types are matched to designs (Wilson, household-cluster bootstrap, design-based, cluster-robust CR1 with wild bootstrap, historical-error). They are labelled by type everywhere. M11's intervals **failed** their pseudo-real-time calibration check and are not presented as probabilities ([decision 13](engineering_decisions.md#13-uncertainty-intervals-that-failed-calibration-m11)).
 
-**Robustness and sensitivity?**
+**What robustness and sensitivity checks did I require?**
 - Outcome-rule scenarios and missing-outcome bounds (NLSY97).
 - Alternative cohort definitions and designs (NSFG).
 - Lags, periods, weights, measures, trends and leave-one-state-out (M10).
@@ -87,28 +87,28 @@ The full list for each chapter is in [`research_pipeline.md`](research_pipeline.
 
 ## Verification and testing
 
-**How was independent verification done?** Each chapter has a verifier in `audit/` that recomputes headline results with **separately written code**. Examples:
+**How did I arrange independent verification?** Each chapter has a verifier in `audit/` that recomputes headline results with **separately written code**. Examples:
 - the NSFG estimates are re-coded with Polars and re-estimated with the `svy` library;
 - M10's fixed effects use alternating projections and a separate CR1 implementation;
 - NLSY97 labels are rebuilt from the codebook.
 
 Checks are labelled INDEPENDENT, RECONCILIATION or REPRODUCIBILITY so that a same-code rerun is never presented as independent evidence. The final synthesis verifier checks all 155 claim-matrix entries against frozen outputs.
 
-**What does the test suite demonstrate?** That the code computes what it claims on controlled inputs:
+**What does my test suite demonstrate?** That the code computes what it claims on controlled inputs:
 - synthetic-data tests of outcome rules, estimators and survey variance;
 - checks of the frozen outputs' internal consistency;
 - freeze-integrity tests over all 221 frozen files;
 - tests of the publication tooling.
 
-**What does it not demonstrate?** That the science is right. Tests confirm implementation behaviour, not that a design is appropriate or a conclusion valid; that is the job of the protocols, the independent verifiers and the limitations register. In a public clone, tests that need restricted data are **skipped**, and the CI summary reports how many.
+**What does my test suite not demonstrate?** That the science is right. Tests confirm implementation behaviour, not that a design is appropriate or a conclusion valid; that is the job of the protocols, the independent verifiers and the limitations register. In a public clone, tests that need restricted data are **skipped**, and the CI summary reports how many.
 
-**Can someone reproduce the work?**
+**Can someone reproduce my work?**
 - **Without restricted data:** anyone can install the hash-locked environment, run the source-only test suite and the freeze checks, and re-derive every figure in the synthesis from the published tables.
 - **Full reproduction:** this needs the source data, obtained by the reader from the providers: free public downloads for NLSY97 (NLS Investigator), NSFG, CDC WONDER, NCHS and Census, and a free HFD account. Steps: [`final_reproducibility_guide.md`](final_reproducibility_guide.md).
 
-**What needs restricted data?** Nothing in the project uses restricted-access data. "Restricted" here means not redistributable: respondent-level survey extracts and the HFD archive, which the HFD asks users not to pass on. These stay local; see [`licensing_and_attribution.md`](licensing_and_attribution.md).
+**Which source data must readers obtain separately?** Nothing in the project uses restricted-access data. "Restricted" here means not redistributable: respondent-level survey extracts and the HFD archive, which the HFD asks users not to pass on. These stay local; see [`licensing_and_attribution.md`](licensing_and_attribution.md).
 
-## Technology actually used
+## Technology I used
 
 Verified against the imports in the code and `requirements-lock.txt`. Publication tooling added in this phase is marked *(publication)*.
 
@@ -132,15 +132,15 @@ Not used: statsmodels, PyTorch, Poetry, Docker. A prototype Streamlit dashboard 
 
 ## Author contribution and AI assistance
 
-**Sean Nathaniel M.** conceived and directed the project, defined the research question and birth-cohort scope, and personally selected the data sources, informed by technical recommendations. He acquired source datasets requiring manual access, evaluated proposed methodologies, set research priorities, reviewed analytical results and limitations, requested corrections, and approved each milestone and scientific freeze.
+**My role.** I conceived and directed The Intention Gap. I set the research question and birth-cohort scope, personally selected data sources after considering technical recommendations, acquired files requiring manual access, evaluated proposed methods, set priorities, reviewed analytical results and limitations, requested corrections and approved the milestones and scientific freezes.
 
-**Development assistance.** Claude Code assisted with Python implementation, substantial and repetitive coding, test and independent-verifier development, figures, and technical documentation, under the author's direction and review. This is an accurate description of AI-assisted implementation, not a claim that every line of code was handwritten by the author or that AI assistance was limited to boilerplate.
+**How I used AI.** I used ChatGPT as a research-planning and technical-exploration aid, and Claude Code as a development assistant. That support included boilerplate, debugging, tests and verification scaffolding, as well as substantial Python and website implementation, figures and technical documentation. I directed the research and design priorities, scrutinized the findings and retain responsibility for the published claims. I do not claim to have handwritten all the code or to have limited AI assistance to isolated snippets.
 
 **Third-party work.** The project uses established methods cited in [bibliography.md](bibliography.md), third-party libraries pinned in `requirements-lock.txt`, and data belonging to their respective providers under their own terms ([licensing and attribution](licensing_and_attribution.md)).
 
 This is independent portfolio research, **not peer-reviewed**, and not endorsed by any data provider.
 
-## What would improve the research
+## How I would extend the research
 
 From the manuscript's [section 9](final_synthesis_manuscript.md#9-future-research-requirements):
 - a numeric desired-family-size item for Generation Z, asked of the same respondents as intentions;
