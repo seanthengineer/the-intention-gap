@@ -5,7 +5,7 @@
 
 # The Intention Gap
 
-**An independent applied machine-learning and demographic research project testing whether the evidence supports the claim that young Americans will fall short of the families they say they want.** Four studies combine predictive calibration, supervised classification, statistical inference and forecasting across seven official data sources to produce one integrated answer. Every material claim is traced to a frozen value, and each chapter's headline results are independently recomputed.
+**I developed The Intention Gap to investigate whether the evidence supports the claim that young Americans will fall short of the families they say they want.** I organized four complementary studies around predictive calibration, supervised classification, statistical inference and forecasting across seven official data sources. I trace material claims to frozen values and use separate verification code to check each chapter's headline results.
 
 [Manuscript](docs/final_synthesis_manuscript.md) · [Visual atlas](docs/visual_atlas.md) · [Interactive website](#interactive-research-website) · [How it was built](docs/engineering_decisions.md) · [Technical walkthrough](docs/technical_walkthrough.md) · [Reproduce](#reproducibility)
 
@@ -22,7 +22,7 @@
 
 ## Why this project exists
 
-U.S. fertility has fallen to about 1.6 births per woman, while surveys show that most young adults want children. That combination invites a confident story: Generation Z wants families it will not have. This project started from that question, defining Generation Z as the cohorts born 1995–2012, and asked what the evidence can actually establish. It went step by step:
+U.S. fertility has fallen to about 1.6 births per woman, while surveys show that most young adults want children. That combination invites a confident story: Generation Z wants families it will not have. I started by questioning that assumption. I defined Generation Z as the cohorts born 1995–2012 and organized the investigation around four questions:
 - how good are people's stated fertility expectations;
 - what the oldest members of Generation Z say they want and intend;
 - whether housing costs track birth rates;
@@ -63,7 +63,7 @@ flowchart LR
 
 Text version: seven hashed data sources feed four chapters. Each chapter is independently verified, the results are combined in a synthesis tied to a claim matrix, and 221 files are frozen.
 
-Each chapter ran from protocol to baseline, model, out-of-sample evaluation, robustness and independent verification, and was closed before the next began. The header and tables round the 2040 forecast differently (1.59 and 1.593); the value is 1.593. The step-by-step pipeline and architecture are in [docs/research_pipeline.md](docs/research_pipeline.md).
+I structured each chapter around its design, baseline, models, evaluation, robustness checks and independent verification. I closed each chapter before moving to the next. The header and tables round the 2040 forecast differently (1.59 and 1.593); the value is 1.593. The step-by-step pipeline and architecture are in [docs/research_pipeline.md](docs/research_pipeline.md).
 
 ## Visual highlights
 
@@ -84,9 +84,9 @@ All 21 figures, with populations, units, uncertainty and limitations: **[visual 
 
 [![The website's opening screen: the research question beside the U.S. total fertility rate, 1953 to 2024, drawn as squares of 0.1 births per woman, peaking at 3.74 in 1957 and falling to 1.59 in 2024.](assets/readme/website-overview.png)](website/)
 
-A single-page website in [`website/`](website/) presents the four studies for a general audience, with 15 interactive charts, scroll-driven transitions and an archive of all 21 figures.
+I present the four studies for a general audience through a single-page website in [`website/`](website/), with the original 15 interactive research charts, scroll-driven transitions and an archive of all 21 figures.
 
-**How it relates to the research.** The website only presents results. When it is built, it reads `data/public/`, `assets/figures/` and the visual atlas, checks every file it reads against the freeze manifests, and stops if a frozen file has changed or a published headline value no longer matches. It computes no new results and shows no suppressed survey estimate.
+**How I keep presentation separate from research.** The website presents frozen findings rather than recomputing the analysis. When it is built, it reads `data/public/`, `assets/figures/` and the visual atlas, checks every file it reads against the freeze manifests, and stops if a frozen file has changed or a published headline value no longer matches. It computes no new results and shows no suppressed survey estimate.
 
 **Run it locally** (Node.js 22.23.4 or later):
 
@@ -134,7 +134,7 @@ python -m unittest                          # tests that need restricted data re
 python audit/verify_final_synthesis.py      # claim matrix; raw-data checks report SKIP
 ```
 
-**Full reproduction** reruns every chapter from the source data. Readers download the data themselves: the NLSY97 extracts from NLS Investigator, the NSFG and natality files from CDC, ACS through the Census API, and the HFD archive with a free account. Steps and expected outputs: [reproducibility guide](docs/final_reproducibility_guide.md). Raw and respondent-level data are never committed.
+**Full reproduction** reruns every chapter from the source data. I provide the steps, but readers obtain the original data themselves: the NLSY97 extracts from NLS Investigator, the NSFG and natality files from CDC, ACS through the Census API, and the HFD archive with a free account. Steps and expected outputs: [reproducibility guide](docs/final_reproducibility_guide.md). Raw and respondent-level data are never committed.
 
 ## Data, licensing and attribution
 
