@@ -1,8 +1,8 @@
 # Engineering decisions: how the project was built
 
-The project ran from 17 to 20 November 2026 as a sequence of numbered assignments (M01–M11), each stopped for review before the next began. This document recovers the decisions that shaped it from the audit log ([`audit/scientific-audit.md`](../audit/scientific-audit.md)) and the chapter records. It includes the mistakes: several of the most useful checks exist because something went wrong first.
+I organized the research from 17 to 20 November 2026 as a sequence of numbered assignments (M01–M11), reviewing each before authorizing the next. Here I document the decisions that shaped the work using the audit log ([`audit/scientific-audit.md`](../audit/scientific-audit.md)) and the chapter records. I include mistakes and corrections because several useful checks emerged from problems discovered during development.
 
-Each entry gives the problem, why it mattered, the options, the choice, how it was verified, and what it still costs.
+For each decision, I record the problem, its importance, the alternatives, the approach adopted, its verification and its remaining limitations.
 
 ---
 
@@ -34,7 +34,7 @@ Each entry gives the problem, why it mattered, the options, the choice, how it w
 
 - **Problem.** Population-level outcome estimates need custom longitudinal weights. The NLS service produces them only if respondent IDs are submitted.
 - **Options.** Request the custom weights; use cross-sectional weights; or report the outcome results as unweighted sample results and bound what weighting and missingness could change.
-- **Choice.** Respondent IDs were not submitted without explicit owner authorization, so outcome figures stay **unweighted and are labelled as sample results**. Design-based standard errors (a delete-one-PSU JKn jackknife over the survey's strata and PSUs) were used where weights were valid: for the baseline answers.
+- **Choice.** I did not submit respondent IDs for custom longitudinal weights, so the outcome figures remain **unweighted and are labelled as sample results**. Design-based standard errors (a delete-one-PSU JKn jackknife over the survey's strata and PSUs) were used where weights were valid: for the baseline answers.
 - **Verification and correction.** Bounding initially filled all missing outcomes uniformly. M07.1 showed that uniform fills are **not** worst-case bounds for differences such as a recalibration gain. They were replaced by exact per-respondent bounds; for the 2009 gain, bounds could not be established and this is stated.
 - **Trade-off.** No outcome figure from this chapter is a population estimate.
 
@@ -54,7 +54,7 @@ Each entry gives the problem, why it mattered, the options, the choice, how it w
 
 - **Problem.** Can demographic and socioeconomic characteristics predict who wants a child but explicitly does not intend one?
 - **Guardrails.**
-  - Machine learning was authorized for this assignment only.
+  - I limited the machine-learning experiment to this research task.
   - Every feature is in a feature dictionary with a reason for inclusion, and `assert_no_leakage` enforces it in code.
   - Evaluation uses an isolated cluster holdout, so no PSU appears in both training and test.
   - A class-prior dummy model is the baseline.
@@ -65,7 +65,7 @@ Each entry gives the problem, why it mattered, the options, the choice, how it w
 
 - **Problem.** The CDC WONDER "Natality, 2007–2024" export gave births for 2021–2024 but **no rates**: its bridged-race population denominators end in 2020.
 - **Options.** Drop 2021–2024; compute rates with another denominator; or re-export from a database with consistent denominators.
-- **Choice.** The owner exported "Natality, 2016–2024 expanded". The series uses 2014–2015 from the original database and 2016–2024 from the expanded one.
+- **Choice.** I exported "Natality, 2016–2024 expanded". The series uses 2014–2015 from the original database and 2016–2024 from the expanded one.
 - **Verification.**
   - The two exports were reconciled on 918 shared keys: births, populations and rates are identical for 2016–2020, and births are identical for 2021–2024. A permanent test with an independent parser fails on any disagreement.
   - State rates for 2024 match NVSR 75-2 Table 6 at published precision (102 of 102).
@@ -108,7 +108,7 @@ Each entry gives the problem, why it mattered, the options, the choice, how it w
 
 - **Problem.** The final audit found that the M11 statement "the fixed-strategy cohort backtest was optimistic by 7–17%" was over-general. The difference was concentrated in six early origins (1976–1981), where few historical errors existed and bootstrap selection was unstable.
 - **Choice.**
-  - A **controlled freeze revision**, authorized by the owner.
+  - A **controlled freeze revision** that I authorized.
   - The original and revised wording, the evidence, the reason and the hashes are recorded in `docs/m11_freeze_revision_F21-1.md`.
   - Only the affected sentences changed; no forecast, interval or accepted number did.
   - The manifest was updated by the documented procedure, and the original archive was kept.
