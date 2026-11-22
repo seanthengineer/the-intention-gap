@@ -19,7 +19,7 @@ export function initNav() {
     const navHeight = masthead.offsetHeight;
     const probe = navHeight + Math.min(120, window.innerHeight * 0.15);
     const onCover = cover.getBoundingClientRect().bottom > probe;
-    masthead.toggleAttribute("data-cover", onCover);
+    masthead.toggleAttribute("data-cover", onCover && !cover.hasAttribute("data-paper-masthead"));
     let active = onCover ? -1 : 0;
 
     entries.forEach(({ section }, i) => {

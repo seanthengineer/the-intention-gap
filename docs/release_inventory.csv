@@ -300,6 +300,7 @@ website/src/scripts/charts/forecast.ts,website,,project code
 website/src/scripts/charts/housing.ts,website,,project code
 website/src/scripts/charts/nlsy.ts,website,,project code
 website/src/scripts/charts/nsfg.ts,website,,project code
+website/src/scripts/cover.ts,website,,project code
 website/src/scripts/dither.ts,website,,project code
 website/src/scripts/lib.ts,website,,project code
 website/src/scripts/main.ts,website,,project code

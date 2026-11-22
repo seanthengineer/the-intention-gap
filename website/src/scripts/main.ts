@@ -4,6 +4,7 @@ import { mountBacktest, mountCohorts, mountCoverage, mountForecast } from "./cha
 import { mountLadder, mountLoso, mountRobustness, mountTrends } from "./charts/housing";
 import { mountBrier, mountCalibration } from "./charts/nlsy";
 import { mountAuc, mountDecomposition, mountSubgroups, mountWantIntend } from "./charts/nsfg";
+import { initCover } from "./cover";
 import { initDither } from "./dither";
 import { initNav } from "./nav";
 import { initAscii, initOverview, initTimeline } from "./stages";
@@ -58,6 +59,7 @@ async function start() {
   try {
     await Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 1500))]);
   } catch {}
+  safely("cover", initCover);
   safely("nav", initNav);
   document.querySelectorAll<HTMLElement>("[data-chart]").forEach((el) => {
     const fn = CHARTS[el.dataset.chart!];

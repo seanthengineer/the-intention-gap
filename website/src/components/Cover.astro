@@ -1,124 +1,565 @@
 ---
+import { scaleLinear } from "d3";
 import data from "../data/site-data.json";
 
-const history = data.m11.observed.filter(([year]) => year >= 1953 && year <= 2024);
-const points = history.map(([year, rate]) =>
-  `${((year - 1953) * 800 / (2024 - 1953)).toFixed(2)},${(180 - rate * 40).toFixed(2)}`
-).join(" ");
+const history = data.m11.observed;
+const firstYear = history[0][0];
+const latest = history[history.length - 1];
+const lastYear = latest[0];
+const peak = history.reduce((highest, observation) => observation[1] > highest[1] ? observation : highest);
+const years = [firstYear, 1970, 1990, 2010, lastYear];
+const rates = [0, 1, 2, 3, 4];
+const x = scaleLinear().domain([firstYear, lastYear]).range([53, 742]);
+const y = scaleLinear().domain([0, 4]).range([440, 88]);
+const baseline = y(0);
+const columnWidth = 5.2;
+const depthX = 10;
+const depthY = -8;
+const marks = history.map(([year, rate]) => {
+  const left = x(year) - columnWidth / 2;
+  const right = left + columnWidth;
+  const top = y(rate);
+  const height = baseline - top;
+  return {
+    year, left, top, height,
+    highlighted: year === peak[0] || year === lastYear,
+    side: `M${right} ${top}l${depthX} ${depthY}v${height}l${-depthX} ${-depthY}Z`,
+    cap: `M${left} ${top}l${depthX} ${depthY}h${columnWidth}l${-depthX} ${-depthY}Z`,
+  };
+});
+const annotations = [peak, latest].map(([year, rate]) => {
+  const isLatest = year === lastYear;
+  const lift = isLatest ? 59 : 18;
+  return {
+    year, rate: rate.toFixed(3),
+    lead: `M${x(year)} ${y(rate) - 2}v${-lift}h${isLatest ? -9 : 9}`,
+    x: x(year) + (isLatest ? -13 : 13),
+    y: y(rate) - lift - 12,
+    align: isLatest ? "end" : "start",
+  } as const;
+});
 ---
+
 <section class="cover" aria-labelledby="cover-title">
-  <div class="cover-inner wrap">
-    <div class="cover-heading">
-      <h1 id="cover-title">The Intention Gap</h1>
-      <p>Will Generation Z have the families they say they want?</p>
+  <div class="cover-scene">
+    <div class="cover-layout wrap">
+      <div class="cover-spread">
+        <div class="cover-opening">
+          <h1 id="cover-title"><span>The</span> <span>Intention</span> <span>Gap</span></h1>
+          <p>Will Generation&nbsp;Z have the families they say they want?</p>
+        </div>
+        <figure class="cover-figure" aria-labelledby="cover-figure-title" aria-describedby="cover-caption">
+          <figcaption class="cover-figure-title" id="cover-figure-title">
+            <span>U.S. period total fertility rate</span>
+            <span>{firstYear}–{lastYear}</span>
+          </figcaption>
+          <svg class="cover-chart" viewBox="0 0 800 505" role="img" aria-labelledby="cover-chart-title cover-chart-desc">
+            <title id="cover-chart-title">U.S. total fertility rate by year, {firstYear} to {lastYear}</title>
+            <desc id="cover-chart-desc">
+              Each column shows one observed year. Height from zero gives the number of births per woman if that
+              year's age-specific rates applied throughout her reproductive life. Column depth is uniform.
+              The series peaked at {peak[1].toFixed(3)} in {peak[0]}. The {lastYear} rate was {latest[1].toFixed(3)}.
+            </desc>
+            <g class="cover-projection">
+              <g id="cover-plot">
+                <g class="cover-scale">
+                  <text class="cover-axis" x="53" y="51">Births per woman</text>
+                  {rates.map((rate) => (
+                    <g>
+                      <path class="cover-guide" d={`M45 ${y(rate)}H750`} />
+                      <text class="cover-axis" x="33" y={y(rate) + 5} text-anchor="end">{rate}</text>
+                    </g>
+                  ))}
+                </g>
+                <path class="cover-depth-rule cover-facet" d="M43 440l10 -8h709l-10 8" />
+                {marks.map((mark) => (
+                  <g class:list={["cover-mark", { "cover-mark-key": mark.highlighted }]} data-year={mark.year}>
+                    <path class="cover-facet cover-side" d={mark.side} />
+                    <path class="cover-facet cover-cap" d={mark.cap} />
+                    <rect x={mark.left} y={mark.top} width={columnWidth} height={mark.height} />
+                  </g>
+                ))}
+                <path class="cover-rule" d="M43 440H754" />
+                {years.map((year) => (
+                  <g>
+                    <path class="cover-rule" d={`M${x(year)} 440v8`} />
+                    <text class="cover-axis" x={x(year)} y="470" text-anchor="middle">{year}</text>
+                  </g>
+                ))}
+                {annotations.map((note) => (
+                  <g>
+                    <path class="cover-leader" d={note.lead} />
+                    <text class="cover-value" x={note.x} y={note.y} text-anchor={note.align}>
+                      {note.year} · {note.rate}
+                    </text>
+                  </g>
+                ))}
+              </g>
+            </g>
+          </svg>
+          <div class="cover-caption" id="cover-caption">
+            <span>Height · births per woman <span class="cover-depth-note">/ depth is uniform</span></span>
+            <span>Human Fertility Database · CC BY 4.0</span>
+          </div>
+        </figure>
+        <div class="cover-reading">
+          <h2>{history.length} years.</h2>
+          <p>Read each column from zero. Its height is the U.S. period fertility rate for that year. <span class="cover-static-note">A national rate describes a period. This research asks what people eventually do.</span></p>
+        </div>
+      </div>
+      <div class="cover-footer">
+        <a class="cover-entry" href="#overview">Scroll into the research</a>
+        <span class="cover-status" aria-hidden="true">Annual observations</span>
+      </div>
     </div>
-    <figure class="cover-history">
-      <svg viewBox="0 0 800 180" aria-hidden="true" focusable="false">
-        <path d="M0 179.5H800" class="baseline" />
-        <polyline points={points} />
-      </svg>
-      <figcaption>
-        <span>U.S. period total fertility rate, 1953–2024</span>
-        <span>Human Fertility Database · CC BY 4.0</span>
-      </figcaption>
-    </figure>
-    <a class="cover-entry" href="#overview">Scroll to the introduction</a>
+    <div class="cover-paper">
+      <div class="cover-paper-spread wrap">
+        <div>
+          <span class="label">From rates to intentions</span>
+          <p>What does a national rate tell us about the families people plan?</p>
+        </div>
+        <svg class="cover-chart cover-echo" viewBox="0 0 800 505" aria-hidden="true" focusable="false">
+          <use href="#cover-plot" />
+        </svg>
+      </div>
+    </div>
   </div>
 </section>
 
 <style>
   .cover {
-    background: #212221;
-    color: #f1ede5;
+    --cover-dark: #20201f;
+    --cover-sand: #d2bc9e;
+    --cover-divider: #776959;
+    background: var(--cover-dark);
+    color: var(--paper-light);
   }
 
-  .cover::after {
+  .cover-scene {
+    --cover-flat: 1;
+    --cover-tilt: 0;
+    --cover-offset: 0;
+    position: relative;
+    isolation: isolate;
+  }
+
+  .cover-scene::before {
     content: "";
-    display: block;
-    height: clamp(2rem, 7svh, 5rem);
-    background: linear-gradient(#212221, var(--paper));
+    position: absolute;
+    z-index: -1;
+    inset: 0 0 0 53%;
+    border-left: 1px solid #373630;
+    background: var(--ink);
   }
 
-  .cover-inner {
+  .cover .wrap {
+    max-width: 92rem;
+    padding-inline: clamp(1rem, 4vw, 4.5rem);
+  }
+
+  .cover-layout {
     min-height: 100vh;
     min-height: 100svh;
     display: grid;
-    align-content: center;
-    justify-items: start;
-    gap: clamp(1.65rem, 5.5svh, 4.75rem);
-    padding-block: calc(var(--nav-h) + 2rem) 2rem;
+    grid-template-rows: 1fr auto;
+    padding-top: calc(var(--nav-h) + 1.25rem);
   }
 
-  h1 {
-    max-width: 14ch;
-    font-size: clamp(2.6rem, 1.4rem + 7.7vw, 9.5rem);
-    font-weight: 390;
-    line-height: 0.96;
-    letter-spacing: -0.055em;
-    text-wrap: balance;
+  .cover-spread,
+  .cover-paper-spread {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    align-items: center;
+    gap: clamp(.9rem, 2vw, 2.2rem);
   }
 
-  .cover-heading p {
-    margin: clamp(1rem, 3vh, 2rem) 0 0;
-    font: 400 clamp(1.15rem, 0.9rem + 1vw, 1.8rem)/1.3 var(--serif);
-    max-width: 38ch;
-    color: #ddd3c5;
-    text-wrap: balance;
+  .cover-spread {
+    padding-block: clamp(1rem, 3vh, 2.25rem);
   }
 
-  .cover-history {
-    width: min(100%, 48rem);
+  .cover-opening h1 {
+    font: 390 clamp(4.2rem, 6.75vw, 7.8rem)/.85 var(--serif);
+    font-variation-settings: "opsz" 60;
+    letter-spacing: -.067em;
+  }
+
+  .cover-opening h1 span {
+    display: block;
+  }
+
+  .cover-opening h1 span:first-child {
+    font-size: .83em;
+  }
+
+  .cover-opening p {
+    max-width: 19ch;
+    margin: 1.75rem 0 0;
+    color: var(--paper);
+    font: 400 clamp(1.25rem, 1.65vw, 1.75rem)/1.26 var(--serif);
+  }
+
+  .cover-figure {
+    min-width: 0;
     margin: 0;
   }
 
-  .cover-history svg {
-    width: 100%;
-    overflow: visible;
-  }
-
-  .cover-history path,
-  .cover-history polyline {
-    fill: none;
-    stroke: #c8a88b;
-    stroke-width: 1.25;
-    vector-effect: non-scaling-stroke;
-  }
-
-  .cover-history .baseline {
-    stroke: #635f57;
-    stroke-width: 1;
-  }
-
-  figcaption {
+  .cover-figure-title,
+  .cover-caption {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: 0.25rem 1.5rem;
-    margin-top: 0.75rem;
-    color: #cfc2b3;
-    font: 400 0.8125rem/1.5 var(--mono);
+    gap: .25rem 1rem;
+    margin: 0;
+    padding-inline: .3rem;
+    color: #e0d5c5;
+    font: 400 .76rem/1.5 var(--mono);
+  }
+
+  .cover-figure-title {
+    border-top: 1px solid var(--cover-divider);
+    padding-block: .75rem .2rem;
+    letter-spacing: .045em;
+    text-transform: uppercase;
+  }
+
+  .cover-figure-title span:last-child {
+    color: var(--cover-sand);
+  }
+
+  .cover-caption {
+    border-bottom: 1px solid var(--cover-divider);
+    padding-block: .45rem .75rem;
+  }
+
+  .cover-chart {
+    width: 100%;
+    max-height: 60svh;
+    overflow: visible;
+  }
+
+  .cover-projection {
+    transform: matrix(1, var(--cover-tilt), 0, 1, 0, var(--cover-offset));
+  }
+
+  .cover-axis {
+    fill: var(--axis-color, #e0d5c5);
+    font: 400 15px var(--mono);
+  }
+
+  .cover-rule,
+  .cover-depth-rule,
+  .cover-guide,
+  .cover-leader {
+    fill: none;
+    stroke: var(--guide-color, #897961);
+    stroke-width: 1;
+  }
+
+  .cover-guide {
+    stroke-width: .7;
+  }
+
+  .cover-rule,
+  .cover-depth-rule {
+    stroke: var(--rule-color, #897961);
+  }
+
+  .cover-leader {
+    stroke: var(--annotation, var(--paper-light));
+  }
+
+  .cover-mark rect {
+    fill: var(--column-color, #d0bca0);
+  }
+
+  .cover-side {
+    fill: #7f493e;
+  }
+
+  .cover-cap {
+    fill: #e7ceae;
+  }
+
+  .cover-mark-key :is(rect, .cover-cap) {
+    fill: var(--column-key, var(--paper-light));
+  }
+
+  .cover-mark-key .cover-side {
+    fill: var(--oxblood);
+  }
+
+  .cover-facet {
+    opacity: calc(1 - var(--cover-flat));
+  }
+
+  .cover-scale {
+    opacity: var(--cover-flat);
+  }
+
+  .cover-value {
+    fill: var(--annotation, var(--paper-light));
+    font: 400 24px var(--mono);
+    letter-spacing: -.06em;
+  }
+
+  .cover-reading {
+    grid-column: 1 / -1;
+    color: var(--paper);
+  }
+
+  .cover-reading h2,
+  .cover-depth-note,
+  .cover-status,
+  .cover-paper {
+    display: none;
+  }
+
+  .cover-reading p {
+    max-width: 39ch;
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .cover-footer {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    border-top: 1px solid #514b43;
+    color: var(--paper);
+    padding-block: .5rem .85rem;
   }
 
   .cover-entry {
     display: inline-flex;
     align-items: center;
+    gap: .65rem;
     min-height: 44px;
-    gap: 0.75rem;
-    font-size: 0.9375rem;
-    text-decoration-color: #9b8a79;
+    font-size: .875rem;
+    text-decoration-color: currentColor;
   }
 
   .cover-entry::before {
     content: "";
-    width: 1px;
-    height: 1.75rem;
-    background: linear-gradient(#d5b699, transparent);
+    width: 18px;
+    border-bottom: 1px solid currentColor;
   }
 
-  .cover-entry:hover { text-decoration-color: currentColor; }
-  .cover-entry:focus-visible { outline-color: #d5b699; }
+  .cover-entry:focus-visible {
+    outline-color: currentColor;
+  }
+
+  @media (min-width: 940px) {
+    .cover-spread {
+      grid-template-rows: auto auto;
+      align-content: center;
+    }
+
+    .cover-opening {
+      grid-area: 1 / 1;
+      align-self: end;
+    }
+
+    .cover-reading {
+      grid-area: 2 / 1;
+      align-self: start;
+    }
+
+    .cover-figure {
+      grid-area: 1 / 2 / 3 / 3;
+    }
+  }
+
+  @media (min-width: 940px) and (min-height: 700px) and (prefers-reduced-motion: no-preference) {
+    :global(.js) .cover {
+      height: 244vh;
+      height: 244svh;
+    }
+
+    :global(.js) .cover-scene {
+      --cover-flat: 0;
+      --cover-tilt: -.09;
+      --cover-offset: 33;
+      --cover-title-exit: 0;
+      --cover-reading-in: 0;
+      --cover-paper-cut: 100%;
+      --cover-paper-copy: 0;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      height: 100svh;
+      overflow: clip;
+    }
+
+    :global(.js) .cover-spread {
+      grid-template-rows: minmax(0, 1fr);
+      align-content: normal;
+    }
+
+    :global(.js) .cover-opening {
+      grid-area: 1 / 1;
+      align-self: center;
+      opacity: calc(1 - var(--cover-title-exit));
+      transform: translateY(calc(-35px * var(--cover-title-exit)));
+    }
+
+    :global(.js) .cover-figure {
+      grid-area: 1 / 2;
+    }
+
+    :global(.js) .cover-reading {
+      grid-area: 1 / 1;
+      align-self: center;
+      opacity: var(--cover-reading-in);
+      transform: translateY(calc(22px * (1 - var(--cover-reading-in))));
+    }
+
+    :global(.js) .cover-reading h2 {
+      display: block;
+      margin-bottom: 1.3rem;
+      font: 400 clamp(2.8rem, 5.2vw, 5.2rem)/.93 var(--serif);
+      letter-spacing: -.055em;
+    }
+
+    :global(.js) .cover-reading p {
+      max-width: 30ch;
+    }
+
+    :global(.js) .cover-static-note {
+      display: none;
+    }
+
+    :global(.js) :is(.cover-depth-note, .cover-status) {
+      display: inline;
+    }
+
+    .cover-status {
+      color: inherit;
+      text-align: right;
+      font: 400 .75rem/1.4 var(--mono);
+    }
+
+    :global(.js) .cover-paper {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: grid;
+      align-items: center;
+      padding-block: calc(var(--nav-h) + 1.25rem) calc(45px + 1.35rem);
+      color: var(--ink);
+      background: var(--paper);
+      clip-path: inset(var(--cover-paper-cut) 0 0);
+      pointer-events: none;
+    }
+
+    .cover-paper-spread > div {
+      opacity: var(--cover-paper-copy);
+      transform: translateY(calc(16px * (1 - var(--cover-paper-copy))));
+    }
+
+    .cover-paper-spread .label {
+      display: block;
+      margin-bottom: .75rem;
+      color: var(--oxblood);
+    }
+
+    .cover-paper-spread p {
+      max-width: 13ch;
+      margin: 0;
+      font: 400 clamp(2.35rem, 3.9vw, 4rem)/1.01 var(--serif);
+      letter-spacing: -.048em;
+    }
+
+    .cover-echo {
+      --cover-flat: 1;
+      --column-color: #bfae9f;
+      --column-key: var(--oxblood);
+      --axis-color: #4b423b;
+      --rule-color: #998d7e;
+      --guide-color: #d2c8ba;
+      --annotation: var(--oxblood);
+    }
+
+    .cover[data-paper-footer] .cover-footer {
+      background: var(--paper);
+      border-color: var(--rule);
+      color: var(--ink);
+    }
+  }
+
+  @media (max-width: 939px) {
+    .cover-scene::before {
+      inset: 52% 0 0;
+      border-left: 0;
+    }
+
+    .cover .wrap {
+      max-width: 42rem;
+    }
+
+    .cover-layout {
+      padding-top: calc(var(--nav-h) + .75rem);
+    }
+
+    .cover-spread {
+      grid-template-columns: minmax(0, 1fr);
+      align-content: center;
+      gap: 1.2rem;
+      padding-block: clamp(1rem, 3svh, 2.5rem) 1.4rem;
+    }
+
+    .cover-opening h1 {
+      font-size: clamp(3rem, 11.3vw, 6rem);
+      line-height: .91;
+    }
+
+    .cover-opening h1 span,
+    .cover-opening h1 span:first-child {
+      display: inline;
+      font-size: 1em;
+    }
+
+    .cover-opening h1 span:last-child {
+      display: block;
+    }
+
+    .cover-opening p {
+      max-width: 26ch;
+      margin-top: .9rem;
+    }
+
+    .cover-chart {
+      max-height: none;
+    }
+
+    .cover-figure-title,
+    .cover-caption {
+      font-size: .69rem;
+      letter-spacing: 0;
+    }
+
+    .cover-axis {
+      font-size: 23px;
+    }
+
+    .cover-value {
+      font-size: 31px;
+    }
+
+    .cover-reading p {
+      font-size: .9375rem;
+    }
+
+    .cover-footer {
+      padding-block: .25rem .5rem;
+    }
+  }
 
   @media print {
-    .cover { display: none; }
+    .cover {
+      display: none;
+    }
   }
 </style>
