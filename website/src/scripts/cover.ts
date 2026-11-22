@@ -9,7 +9,8 @@ export function initCover() {
   const easing = gsap.parseEase("power2.inOut");
   const media = gsap.matchMedia();
 
-  media.add("(min-width: 940px) and (min-height: 700px) and (prefers-reduced-motion: no-preference)", () => {
+  // Keep the motion threshold aligned with the cover's text-relative CSS breakpoint.
+  media.add("(min-width: 58.75em) and (min-height: 43.75em) and (prefers-reduced-motion: no-preference)", () => {
     let previous = -1;
     const render = ({ progress }: ScrollTrigger) => {
       if (progress === previous) return;

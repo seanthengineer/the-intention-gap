@@ -351,7 +351,7 @@ const annotations = [peak, latest].map(([year, rate]) => {
     outline-color: currentColor;
   }
 
-  @media (min-width: 940px) {
+  @media (min-width: 58.75em) {
     .cover-spread {
       grid-template-rows: auto auto;
       align-content: center;
@@ -372,7 +372,7 @@ const annotations = [peak, latest].map(([year, rate]) => {
     }
   }
 
-  @media (min-width: 940px) and (min-height: 700px) and (prefers-reduced-motion: no-preference) {
+  @media (min-width: 58.75em) and (min-height: 43.75em) and (prefers-reduced-motion: no-preference) {
     :global(.js) .cover {
       height: 244vh;
       height: 244svh;
@@ -489,7 +489,7 @@ const annotations = [peak, latest].map(([year, rate]) => {
     }
   }
 
-  @media (max-width: 939px) {
+  @media (width < 58.75em) {
     .cover-scene::before {
       inset: 52% 0 0;
       border-left: 0;
@@ -513,6 +513,7 @@ const annotations = [peak, latest].map(([year, rate]) => {
     .cover-opening h1 {
       font-size: clamp(3rem, 11.3vw, 6rem);
       line-height: .91;
+      overflow-wrap: anywhere;
     }
 
     .cover-opening h1 span,
