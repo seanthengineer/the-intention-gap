@@ -108,7 +108,7 @@ Production builds, technology, assets and attribution: [website/README.md](websi
 - **Forecasting.** ARIMA, exponential smoothing and benchmark methods written directly in NumPy/SciPy; 72 pseudo-real-time backtest origins; cohort projection on Lexis triangles; interval calibration tested, and failing.
 - **Verification engineering.** Independent recomputation for each chapter, a 155-check claim-to-evidence matrix, SHA-256 freeze manifests, Git rules that keep frozen bytes identical, hash-locked dependencies, and a release scanner for credentials and disclosure risks.
 
-What each tool is used for: [technical walkthrough](docs/technical_walkthrough.md#technology-actually-used).
+What each tool is used for: [technical walkthrough](docs/technical_walkthrough.md#technology-i-used).
 
 ## Explore the project
 
