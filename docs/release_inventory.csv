@@ -281,6 +281,7 @@ website/scripts/prepare-data.mjs,website,,project code
 website/src/components/Archive.astro,website,,project code
 website/src/components/Colophon.astro,website,,project code
 website/src/components/Conclusion.astro,website,,project code
+website/src/components/Cover.astro,website,,project code
 website/src/components/Expectations.astro,website,,project code
 website/src/components/Figure.astro,website,,project code
 website/src/components/Forecast.astro,website,,project code
