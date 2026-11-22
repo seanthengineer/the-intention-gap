@@ -1,6 +1,6 @@
 # Research pipeline and architecture
 
-How the project was built, from question to frozen release, and how its parts fit together. For the decisions behind each step, see [`engineering_decisions.md`](engineering_decisions.md); for the results, see the [manuscript](final_synthesis_manuscript.md).
+This is how I organized the project from its research question through the frozen release, and how its components fit together. For the decisions behind each step, see [`engineering_decisions.md`](engineering_decisions.md); for the results, see the [manuscript](final_synthesis_manuscript.md).
 
 ## 1. The development sequence
 
@@ -41,7 +41,7 @@ Text version of the sequence:
 
 Each chapter went through these stages and was closed before the next began; all four were later frozen by SHA-256 manifests, and the synthesis came last.
 
-The order matters more than the box count: **baselines came before models, evaluation designs and protocols were fixed before results were seen where the design allowed it, and every chapter was independently verified and closed before the next began, then frozen by hash.**
+The order matters more than the box count: **I required baselines before models, fixed evaluation designs and protocols before results were seen where the design allowed it, and required independent verification before I closed each chapter and froze its files by hash.**
 
 ## 2. Which steps apply to which chapter
 
