@@ -1,0 +1,122 @@
+---
+import data from "../data/site-data.json";
+import prov from "../data/provenance.json";
+import { gh, int, md, REPO } from "./format";
+
+const base = import.meta.env.BASE_URL;
+const docs: [string, string, string, string][] = [
+  ["D01", "Integrated manuscript", "The full argument, each claim tied to the evidence matrix", "docs/final_synthesis_manuscript.md"],
+  ["D02", "Executive summary", "The answer, five findings and what must not be inferred", "docs/final_executive_summary.md"],
+  ["D03", "Chapter 1: Expectations", "NLSY97 methodology and results", "docs/methodology.md"],
+  ["D04", "Chapter 2: Intentions", "NSFG 2022–2023 desires, intentions and models", "docs/nsfg_m09.md"],
+  ["D05", "Chapter 3: Housing", "Rent burden and state birth rates", "docs/m10_housing_fertility.md"],
+  ["D06", "Chapter 4: Forecasts", "TFR forecasts and Generation Z cohorts to 2040", "docs/m11_fertility_forecasts.md"],
+  ["D07", "Visual research atlas", "All 21 figures with populations, units and limits", "docs/visual_atlas.md"],
+  ["D08", "Limitations register", "Every limitation, its severity and consequence", "docs/final_limitations_register.md"],
+  ["D09", "Claim-to-evidence matrix", "50 claims, 155 checks against frozen values", "docs/final_claim_evidence_matrix.csv"],
+  ["D10", "Data sources and licensing", "Providers, terms, attribution and disclosure rules", "docs/licensing_and_attribution.md"],
+  ["D11", "Sources and bibliography", "Data releases and literature cited", "docs/final_sources.md"],
+  ["D12", "Reproducibility guide", "Source-only checks and full reproduction", "docs/final_reproducibility_guide.md"],
+  ["D13", "Research pipeline", "Step-by-step pipeline and architecture", "docs/research_pipeline.md"],
+  ["D14", "Engineering decisions", "How and why the system was built this way", "docs/engineering_decisions.md"],
+  ["D15", "Technical walkthrough", "Tools, code structure and author contribution", "docs/technical_walkthrough.md"],
+  ["D16", "Scientific audit log", "The running record of checks and decisions", "audit/scientific-audit.md"],
+  ["D17", "Readiness assessment", "Final scientific approval record", "docs/final_readiness_assessment.md"],
+  ["D18", "Errata", "Corrections, with what changed and why", "docs/publication_errata.md"],
+];
+const counter: Record<string, number> = {};
+const figs = data.figures.map((f) => {
+  const ch = f.chapter.startsWith("Chapter") ? f.chapter.match(/Chapter (\d)/)![1] : "0";
+  counter[ch] = (counter[ch] ?? 0) + 1;
+  return { ...f, rid: `R${ch}.${counter[ch]}` };
+});
+const groups = [...new Set(figs.map((f) => f.chapter))];
+const FIELDS: [string, string][] = [
+  ["shows", "Shows"],
+  ["why it matters", "Why it matters"],
+  ["units", "Units"],
+  ["uncertainty", "Uncertainty"],
+  ["limitation", "Limitation"],
+  ["source", "Source"],
+];
+---
+<section class="section" id="archive" aria-labelledby="ch7">
+  <div class="wrap">
+    <header class="grid chapter-head">
+      <div class="ch-meta c-1-4"><span class="ch-num">Archive</span><span class="ch-code">The public record</span></div>
+      <div class="c-4-13">
+        <h2 class="ch-title" id="ch7">Read and verify the complete research</h2>
+        <p class="standfirst">
+          Everything on this page comes from the project's repository: the documents, the original research figures, and the public data tables. Every
+          number here was read from those tables when this page was built.
+        </p>
+      </div>
+    </header>
+
+    <span class="label">Documents</span>
+    <ul class="doc-rows">
+      {docs.map(([id, t, d, p]) => (
+        <li><a href={gh(p)}><span class="id">{id}</span><span class="t">{t}</span><span class="d">{d}</span><span class="path">{p}</span></a></li>
+      ))}
+      <li><a href={REPO}><span class="id">D19</span><span class="t">Code repository</span><span class="d">Analysis code, tests, verifiers and frozen manifests</span><span class="path">github.com/seanthengineer/the-intention-gap</span></a></li>
+    </ul>
+
+    <div id="archive-figures" class="fig-archive">
+      <span class="label" style="display:block;margin-top:var(--s-48)">Original research figures, unchanged · captions from the visual atlas</span>
+      {groups.map((g) => (
+        <>
+          <h3>{g.replace(/\s*\(.*\)$/, "")}</h3>
+          {figs.filter((f) => f.chapter === g).map((f) => (
+            <details class="fig-item">
+              <summary><span class="fid">{f.rid}</span><span class="ft">{f.title}</span></summary>
+              <div class="body">
+                <a href={`${base}figures/${f.file}`} data-lightbox data-title={`${f.rid} ${f.title}`} data-alt={f.alt}>
+                  <img class="thumb" src={`${base}figures/${f.file}`} alt={f.alt} loading="lazy" decoding="async" />
+                </a>
+                <dl>
+                  {FIELDS.filter(([k]) => f.fields[k as keyof typeof f.fields]).map(([k, label]) => (
+                    <div><dt>{label}</dt><dd set:html={md(((v) => v.charAt(0).toUpperCase() + v.slice(1))(f.fields[k as keyof typeof f.fields] as string))} /></div>
+                  ))}
+                  <div><dt>File</dt><dd><a href={gh(`assets/figures/${f.file}`)}><code>assets/figures/{f.file}</code></a></dd></div>
+                </dl>
+              </div>
+            </details>
+          ))}
+        </>
+      ))}
+    </div>
+
+    <div class="grid" style="margin-top:var(--s-64)">
+      <div class="c-1-7">
+        <span class="label">Data provenance</span>
+        <p class="aside" style="margin-top:var(--s-8)">
+          This page was built from {prov.files.length} repository files{prov.commit ? <> at commit <code>{prov.commit.slice(0, 7)}</code></> : null}.{" "}
+          {prov.files.filter((f) => f.frozenIn).length} of them are listed in a freeze manifest, and each was checked against its frozen SHA-256 before use.
+        </p>
+        <details class="data-table">
+          <summary>All source files and hashes</summary>
+          <div class="table-scroll">
+            <table class="data provenance">
+              <thead><tr><th>File</th><th>SHA-256</th><th>Manifest</th></tr></thead>
+              <tbody>
+                {prov.files.map((f) => <tr><td><a href={gh(f.path)}>{f.path}</a></td><td title={f.sha256}>{f.sha256.slice(0, 16)}</td><td>{f.frozenIn ?? "not frozen"}</td></tr>)}
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </div>
+      <div class="c-8-13">
+        <span class="label">Cite this project</span>
+        <p class="aside" style="margin-top:var(--s-8)">
+          Sean Nathaniel M. <em>The Intention Gap: Will Generation Z have the families they say they want?</em> Version 1.0.0-rc1. Independent research
+          project, not peer-reviewed. {REPO}. Please also cite the original data sources.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <dialog class="lightbox" id="lightbox" aria-label="Figure">
+    <div class="bar"><span data-cap></span><button type="button" data-close>Close</button></div>
+    <img alt="" />
+  </dialog>
+</section>

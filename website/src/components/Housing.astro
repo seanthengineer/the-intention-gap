@@ -1,0 +1,242 @@
+---
+import data from "../data/site-data.json";
+import Figure from "./Figure.astro";
+import Photo from "./Photo.astro";
+import { gh, ghTree, int, num } from "./format";
+
+const m = data.m10;
+const prim = m.primary.find((p) => p.role === "primary")!;
+const sec = m.primary.find((p) => p.age === "25-29")!;
+const pooled = m.models.find((r) => r.age === "20-24" && r.model === "A pooled")!;
+const stateFe = m.models.find((r) => r.age === "20-24" && r.model === "B state FE")!;
+const loso = m.loso.filter((r) => r.age === "20-24");
+const losoLo = loso.reduce((a, b) => (b.est < a.est ? b : a));
+const losoHi = loso.reduce((a, b) => (b.est > a.est ? b : a));
+const terminal = [
+  "> study     M10 housing and fertility",
+  "> unit      state-year, 50 states + DC",
+  "> period    2014-2019, 2021-2024",
+  "> outcome   births per 1,000 women",
+  "> ages      20-24 and 25-29",
+  "> exposure  renters paying 30%+ on rent",
+  "> method    two-way fixed effects",
+  "> reading   association, not cause",
+];
+---
+<section id="housing" aria-labelledby="ch3">
+  <div class="stage-track" id="stage-ascii">
+    <div class="stage blueprint">
+      <canvas class="field" aria-hidden="true"></canvas>
+      <pre class="terminal-static" aria-label="Study coordinates for chapter 3">{terminal.join("\n")}</pre>
+      <p class="visually-hidden">Transition: the study description dissolves into a dot map of the United States.</p>
+      <p class="stage-cap" id="ascii-caption">From individuals to places · 50 states and the District of Columbia</p>
+    </div>
+  </div>
+
+  <div class="section" style="border-top:1px solid var(--rule)">
+    <div class="wrap">
+      <header class="grid chapter-head">
+        <div class="ch-meta c-1-4"><span class="ch-num">Chapter 3</span><span class="ch-code">M10 · ACS + CDC WONDER</span></div>
+        <div class="c-4-13">
+          <h2 class="ch-title" id="ch3">Does rent burden track state birth rates?</h2>
+          <p class="standfirst">
+            Housing costs are often blamed for falling birth rates. This chapter asked a narrower question that the data can actually test: within the
+            same state, were years with a larger share of rent-burdened households also years with lower birth rates among young women?
+          </p>
+        </div>
+      </header>
+      <dl class="strip">
+        <div><dt>Unit</dt><dd>State-year, 50 states and DC</dd></div>
+        <div><dt>Period</dt><dd>2014–2019 and 2021–2024 (no 2020 ACS release)</dd></div>
+        <div><dt>Ages</dt><dd>Women 20–24 and 25–29</dd></div>
+        <div><dt>Design</dt><dd>Two-way fixed effects; protocol locked before fitting</dd></div>
+        <div class="not"><dt>Reading</dt><dd>Association between places, not a cause, not individuals</dd></div>
+      </dl>
+
+      <div class="grid" style="row-gap:var(--s-24);margin-bottom:var(--s-48)">
+        <div class="c-1-13">
+          <Photo
+            src="highsmith-huntington-homes-2015.jpg"
+            alt="Dithered photograph of a row of detached houses with porches on a brick street in Huntington, West Virginia, with two parked cars."
+            ratio="21 / 8"
+            focusY={0.48}
+            contrast={1.2}
+            lift={0.03}
+            credit="Homes on a brick street, Huntington, West Virginia, 2015. Carol M. Highsmith, Library of Congress (public domain). Illustrative."
+          />
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="c-1-13">
+          <Figure
+            num="3.1"
+            anchor="fig-trends"
+            title="Birth rates fell; rent burden barely moved"
+            sub="National birth rates and state rent-burden shares, 2014–2024. Bands show the middle half of the 51 jurisdictions."
+            chart="trends"
+            fallback="m10_trends.png"
+            fallbackAlt="National birth rates by age group falling from 2014 to 2024, and the state median rent-burden share."
+            minH={300}
+          >
+            <p><span class="k">Uncertainty</span>The bands are spread across states, not confidence intervals.</p>
+            <p><span class="k">Source</span>CDC WONDER natality (mother's residence); ACS 1-year B25070 and B25072. <a href={gh("data/public/m10/m10_desc_by_year.csv")}>m10_desc_by_year.csv</a>.</p>
+            <p class="wide cannot"><span class="k">Cannot show</span>Whether one drove the other. Both series move for many reasons, including a national decline in births shared across states.</p>
+            <details class="data-table">
+              <summary>Data table</summary>
+              <div class="table-scroll">
+                <table class="data">
+                  <thead><tr><th>Year</th><th class="n">Rate 20–24</th><th class="n">Rate 25–29</th><th class="n">Burden, all renters (median)</th><th class="n">Burden, householders 15–24</th></tr></thead>
+                  <tbody>
+                    {[2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024].map((y) => {
+                      const g = (v: string) => m.byYear.find((r) => r.year === y && r.v === v);
+                      return <tr><td>{y}</td><td class="n">{num(g("rate_20-24")?.national)}</td><td class="n">{num(g("rate_25-29")?.national)}</td><td class="n">{g("burden30_pct") ? `${num(g("burden30_pct")!.median)}%` : "no release"}</td><td class="n">{g("young15_24_burden30_pct") ? `${num(g("young15_24_burden30_pct")!.median)}%` : "no release"}</td></tr>;
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </details>
+          </Figure>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="c-1-9">
+          <Figure
+            num="3.2"
+            anchor="fig-ladder"
+            title="Once the national decline is removed, most of the association disappears"
+            sub="Change in births per 1,000 women for a 10-percentage-point higher share of rent-burdened renters, under five specifications."
+            chart="ladder"
+            fallback="m10_coefficients.png"
+            fallbackAlt="Coefficient plot of births per 1,000 women per 10-point higher rent burden under protocol models and robustness checks."
+            minH={300}
+          >
+            <Fragment slot="controls">
+              <div class="control">
+                <span class="label">Specification</span>
+                <div class="steps">
+                  {["A pooled", "B state FE", "C state + year FE (primary)", "D + unemployment", "E one-year lag"].map((k) => (
+                    <button type="button" data-step={k} aria-pressed="false" aria-label={`Specification ${k}`}>{k.charAt(0)}</button>
+                  ))}
+                </div>
+              </div>
+              <div class="control">
+                <span class="label">Age group</span>
+                <div class="seg" data-seg="age">
+                  <button type="button" data-value="20-24" aria-pressed="true">20–24</button>
+                  <button type="button" data-value="25-29" aria-pressed="false">25–29</button>
+                </div>
+              </div>
+            </Fragment>
+            <p slot="after" class="explain" data-explain aria-live="polite"></p>
+            <p><span class="k">Uncertainty</span>95% intervals clustered by state (51 clusters). Filled squares: the primary model.</p>
+            <p><span class="k">Source</span><a href={gh("data/public/m10/m10_models.csv")}>m10_models.csv</a>; protocol <a href={gh("docs/m10_analysis_protocol.md")}>m10_analysis_protocol.md</a>.</p>
+            <details class="data-table">
+              <summary>Data table</summary>
+              <div class="table-scroll">
+                <table class="data">
+                  <thead><tr><th>Ages</th><th>Specification</th><th class="n">Estimate</th><th class="n">95% interval</th><th class="n">p</th></tr></thead>
+                  <tbody>
+                    {m.models.map((r) => (
+                      <tr><td>{r.age}</td><td>{r.model}</td><td class="n">{num(r.est, 2)}</td><td class="n">{num(r.lo, 2)} to {num(r.hi, 2)}</td><td class="n">{r.p.toFixed(3)}</td></tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </details>
+          </Figure>
+        </div>
+        <aside class="c-10-13" style="padding-top:var(--s-96)">
+          <div class="aside">
+            <span class="label">Between or within</span>
+            Comparing states with each other suggests a large association ({num(pooled.est, 1)} pooled; {num(stateFe.est, 1)} within states). But births fell
+            nationally over these years, and cross-state comparisons pick up that shared trend. Removing it leaves {num(prim.est, 2)}, with an interval that includes zero.
+          </div>
+        </aside>
+      </div>
+
+      <div class="result">
+        <span class="label">Primary result, fixed before fitting</span>
+        <p>Ages 20–24: {num(prim.est, 2)} births per 1,000 women for a 10-point higher rent-burden share (95% interval {num(prim.lo, 2)} to {num(prim.hi, 2)}). The interval includes zero, and the result did not meet the protocol's robustness rule.</p>
+        <p>Wild cluster bootstrap p = {prim.wildP.toFixed(3)}. Ages 25–29: {num(sec.est, 2)} ({num(sec.lo, 2)} to {num(sec.hi, 2)}), no association. These are ecological associations between state-years, not causal effects, and they say nothing about any individual's choices.</p>
+      </div>
+
+      <div class="grid">
+        <div class="c-1-7">
+          <Figure
+            num="3.3"
+            anchor="fig-robustness"
+            title="Robustness checks pull in different directions"
+            sub="The primary estimate and ten exploratory alternatives in the same units."
+            chart="robustness"
+            minH={360}
+          >
+            <Fragment slot="controls">
+              <div class="control">
+                <span class="label">Age group</span>
+                <div class="seg" data-seg="age">
+                  <button type="button" data-value="20-24" aria-pressed="true">20–24</button>
+                  <button type="button" data-value="25-29" aria-pressed="false">25–29</button>
+                </div>
+              </div>
+            </Fragment>
+            <p><span class="k">Uncertainty</span>State-clustered 95% intervals; intervals are cut at the edge of the axis.</p>
+            <p><span class="k">Source</span><a href={gh("data/public/m10/m10_robustness.csv")}>m10_robustness.csv</a>. Exploratory: not protocol tests.</p>
+            <p class="wide"><span class="k">Not drawn</span>A log-rate variant ({num(m.robustness.find((r) => r.age === "20-24" && r.analysis === "outcome")!.est, 2)} at ages 20–24, about a percent change per 10 points) is in different units, so it is listed in the source table rather than plotted on this axis.</p>
+          </Figure>
+        </div>
+        <div class="c-8-13">
+          <Figure
+            num="3.4"
+            anchor="fig-loso"
+            title="How far one state can move the estimate"
+            sub="The primary model refitted 51 times, leaving out one jurisdiction each time. Colour: how far the estimate moves."
+            chart="loso"
+            minH={240}
+          >
+            <Fragment slot="controls">
+              <div class="control">
+                <span class="label">Age group</span>
+                <div class="seg" data-seg="age">
+                  <button type="button" data-value="20-24" aria-pressed="true">20–24</button>
+                  <button type="button" data-value="25-29" aria-pressed="false">25–29</button>
+                </div>
+              </div>
+            </Fragment>
+            <p class="wide" data-summary aria-live="polite">Leaving out any one jurisdiction moves the ages 20–24 estimate between {num(losoLo.est, 2)} and {num(losoHi.est, 2)}.</p>
+            <p class="wide cannot"><span class="k">Cannot show</span>State-level effects. The colours describe the model's sensitivity, not housing or fertility in that state.</p>
+            <p class="wide"><span class="k">Source</span><a href={gh("data/public/m10/m10_loso.csv")}>m10_loso.csv</a>.</p>
+            <details class="data-table">
+              <summary>Data table</summary>
+              <div class="table-scroll">
+                <table class="data">
+                  <thead><tr><th>Left out</th><th class="n">Estimate (20–24)</th><th class="n">Change</th><th class="n">p</th></tr></thead>
+                  <tbody>
+                    {loso.map((r) => <tr><td>{r.state}</td><td class="n">{num(r.est, 2)}</td><td class="n">{num(r.change, 2)}</td><td class="n">{r.p.toFixed(3)}</td></tr>)}
+                  </tbody>
+                </table>
+              </div>
+            </details>
+          </Figure>
+        </div>
+      </div>
+
+      <div class="limits">
+        <span class="label">Limits of this chapter</span>
+        <ul>
+          <li>Ecological: state-years, not people. Nothing here describes an individual's intentions or decisions.</li>
+          <li>The burden measure is noisy. Only {Math.round(m.withinShare.burden30_pct * 100)}% of its variance is within states, and about 47% of that within-state variation is expected ACS sampling noise (an estimate that depends on stated assumptions), so precision is limited.</li>
+          <li>Not a study of Generation Z as a cohort: each year's 20–24 group is a different set of people.</li>
+          <li>Observational. Even a robust association would not show that rent burden causes lower birth rates.</li>
+        </ul>
+      </div>
+      <div class="further">
+        <a href={gh("docs/m10_housing_fertility.md")}>Chapter report</a>
+        <a href={gh("docs/m10_analysis_protocol.md")}>Locked protocol</a>
+        <a href="#archive-figures">Original figures R3.1–R3.3</a>
+        <a href={ghTree("data/public/m10")}>Public tables</a>
+      </div>
+    </div>
+  </div>
+</section>

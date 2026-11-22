@@ -1,0 +1,34 @@
+---
+import { gh, REPO } from "./format";
+---
+<footer class="colophon">
+  <div class="wrap grid">
+    <div class="c-a">
+      <p class="sign">The Intention Gap</p>
+      <p>
+        An independent research project by Sean Nathaniel M., who developed the research question, selected the data sources, directed the
+        methodological decisions, and reviewed and approved the scientific results. Claude Code supported implementation, including Python code,
+        tests, verifiers and documentation, and built this website from the frozen results. <a href={gh("docs/technical_walkthrough.md")}>How the work was divided</a>.
+      </p>
+      <p>Not peer-reviewed. Research frozen in November 2026.</p>
+    </div>
+    <div class="c-b">
+      <span class="label">Data notices</span>
+      <ul>
+        <li>Human Fertility Database, Max Planck Institute for Demographic Research and Vienna Institute of Demography (www.humanfertility.org; USA release 2 July 2026, downloaded 20 November 2026). Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>; changed by this project. The HFD does not endorse this project.</li>
+        <li>Data Source: National Center for Health Statistics, National Survey of Family Growth, 2022-2023; natality data from CDC/NCHS. Analyses and conclusions are the author's; NCHS is responsible only for the initial data release.</li>
+        <li>This product uses the Census Bureau Data API but is not endorsed or certified by the Census Bureau.</li>
+        <li>NLSY97 public-use data, Bureau of Labor Statistics. The project is not affiliated with or endorsed by the BLS.</li>
+      </ul>
+    </div>
+    <div class="c-c">
+      <span class="label">Licences and credits</span>
+      <ul>
+        <li>Project code: <a href={gh("LICENSE")}>MIT License</a>. Research writing and presentation: <a href={gh("LICENSE-docs.md")}>CC BY 4.0</a>. Third-party data keep their own terms.</li>
+        <li>Photographs: Carol M. Highsmith, Carol M. Highsmith Archive, Library of Congress, Prints and Photographs Division (no known restrictions on publication), shown dithered.</li>
+        <li>Map: U.S. Census Bureau cartographic boundaries via us-atlas. Type: Source Serif 4 and IBM Plex (SIL Open Font License). Built with Astro, D3 and GSAP.</li>
+        <li><a href={REPO}>Repository</a> · <a href={gh("docs/licensing_and_attribution.md")}>Full licensing and attribution</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>

@@ -4,6 +4,7 @@ path,category,frozen_manifest,licence_class
 .github/workflows/ci.yml,continuous integration,,project code
 .github/workflows/integrity.yml,continuous integration,,project code
 .github/workflows/maintenance.yml,continuous integration,,project code
+.github/workflows/website.yml,continuous integration,,project code
 .gitignore,configuration,,project code
 .python-version,configuration,,project code
 CITATION.cff,documentation,,project documentation
@@ -69,6 +70,7 @@ assets/figures/stated_expectation_calibration.png,figure,m01_m08_freeze.sha256,p
 assets/figures/stated_expectation_distribution.png,figure,m01_m08_freeze.sha256,project figure
 assets/readme/header-dark.svg,figure,,project figure with HFD-derived values (CC BY 4.0 attribution)
 assets/readme/header-light.svg,figure,,project figure with HFD-derived values (CC BY 4.0 attribution)
+assets/readme/website-overview.png,figure,,project figure with HFD-derived values (CC BY 4.0 attribution)
 audit/__init__.py,code,m01_m08_freeze.sha256,project code
 audit/nsfg_stage3_checks.py,code,nsfg_m09_freeze.sha256,project code
 audit/scientific-audit.md,code,,project code
@@ -265,3 +267,45 @@ tools/pyright_baseline.json,code,,project code
 tools/pyright_baseline.py,code,,project code
 tools/readme_header.py,code,,project code
 tools/release.py,code,,project code
+website/.gitignore,website,,project code
+website/README.md,website,,project documentation
+website/astro.config.mjs,website,,project code
+website/package-lock.json,website,,project code
+website/package.json,website,,project code
+website/public/favicon.svg,website,,project code
+website/public/photos/highsmith-asu-palm-walk-2018.jpg,website,,"public-domain photograph (Library of Congress, no known restrictions)"
+website/public/photos/highsmith-huntington-homes-2015.jpg,website,,"public-domain photograph (Library of Congress, no known restrictions)"
+website/scripts/check-data.mjs,website,,project code
+website/scripts/check-text.mjs,website,,project code
+website/scripts/prepare-data.mjs,website,,project code
+website/src/components/Archive.astro,website,,project code
+website/src/components/Colophon.astro,website,,project code
+website/src/components/Conclusion.astro,website,,project code
+website/src/components/Expectations.astro,website,,project code
+website/src/components/Figure.astro,website,,project code
+website/src/components/Forecast.astro,website,,project code
+website/src/components/Housing.astro,website,,project code
+website/src/components/Intentions.astro,website,,project code
+website/src/components/Methods.astro,website,,project code
+website/src/components/Nav.astro,website,,project code
+website/src/components/Overview.astro,website,,project code
+website/src/components/Photo.astro,website,,project code
+website/src/components/format.ts,website,,project code
+website/src/layouts/Base.astro,website,,project code
+website/src/pages/index.astro,website,,project code
+website/src/scripts/charts/common.ts,website,,project code
+website/src/scripts/charts/evidence.ts,website,,project code
+website/src/scripts/charts/forecast.ts,website,,project code
+website/src/scripts/charts/housing.ts,website,,project code
+website/src/scripts/charts/nlsy.ts,website,,project code
+website/src/scripts/charts/nsfg.ts,website,,project code
+website/src/scripts/dither.ts,website,,project code
+website/src/scripts/lib.ts,website,,project code
+website/src/scripts/main.ts,website,,project code
+website/src/scripts/nav.ts,website,,project code
+website/src/scripts/particles.ts,website,,project code
+website/src/scripts/people.ts,website,,project code
+website/src/scripts/stages.ts,website,,project code
+website/src/styles/global.css,website,,project code
+website/src/styles/sections.css,website,,project code
+website/tsconfig.json,website,,project code

@@ -1,0 +1,139 @@
+---
+import data from "../data/site-data.json";
+import Figure from "./Figure.astro";
+import { gh, int, num } from "./format";
+
+const n = data.nlsy;
+const cal = Object.fromEntries(n.calibration.map((c) => [c.range_pct, c]));
+const models = Object.fromEntries(n.heldOut.models.map((m) => [m.id, m]));
+---
+<section class="section" id="expectations" aria-labelledby="ch1">
+  <div class="wrap">
+    <header class="grid chapter-head">
+      <div class="ch-meta c-1-4"><span class="ch-num">Chapter 1</span><span class="ch-code">M01–M08 · NLSY97</span></div>
+      <div class="c-4-13">
+        <h2 class="ch-title" id="ch1">Stated expectations, and the births that followed</h2>
+        <p class="standfirst">
+          Before asking what Generation Z intends, the project asked how much stated plans are worth. In 2009–10, {int(n.sample.labelled)} women in
+          their late twenties answered a direct question: what is the percent chance that you will have a child in the next five years? Their later
+          birth histories show what happened.
+        </p>
+      </div>
+    </header>
+    <dl class="strip">
+      <div><dt>Population</dt><dd>Women born 1980–84, NLSY97 cohort</dd></div>
+      <div><dt>Baseline</dt><dd>Interview in 2009–10, ages {n.sample.age.min}–{n.sample.age.max}</dd></div>
+      <div><dt>Outcome</dt><dd>At least one birth in the next five years</dd></div>
+      <div><dt>Weighting</dt><dd>Unweighted sample, {int(n.sample.labelled)} women</dd></div>
+      <div class="not"><dt>Not</dt><dd>Generation Z, and not a population estimate</dd></div>
+    </dl>
+
+    <div class="grid">
+      <div class="c-1-9">
+        <Figure
+          num="1.1"
+          anchor="fig-calibration"
+          title="Stated chances were informative, but far too extreme"
+          sub="Share of women who had a birth within five years, by the chance they stated at baseline. 3,404 women with a known outcome."
+          chart="calibration"
+          fallback="stated_expectation_calibration.png"
+          fallbackAlt="Calibration plot: observed birth rates sit above the diagonal for low stated chances and well below it for high stated chances."
+          minH={420}
+        >
+          <Fragment slot="controls">
+            <button class="toggle" type="button" data-toggle="dist" aria-pressed="false">How women answered</button>
+            <button class="toggle" type="button" data-toggle="recal" aria-pressed="false">Fitted correction</button>
+          </Fragment>
+          <p><span class="k">Uncertainty</span>95% Wilson intervals for each range. Hollow circles: fewer than 50 women.</p>
+          <p><span class="k">Source</span>NLSY97 public-use data (BLS); <a href={gh("data/public/dashboard_summary.json")}>dashboard_summary.json</a>.</p>
+          <p class="wide cannot"><span class="k">Cannot show</span>How Generation Z's answers would behave. This is one earlier cohort, unweighted; about 5% of the women were already pregnant when they answered.</p>
+          <details class="data-table">
+            <summary>Data table</summary>
+            <div class="table-scroll">
+              <table class="data">
+                <thead><tr><th>Stated range</th><th class="n">Women</th><th class="n">Births</th><th class="n">Mean stated</th><th class="n">Observed</th><th class="n">95% interval</th></tr></thead>
+                <tbody>
+                  {n.calibration.map((c) => (
+                    <tr><td>{c.range_pct}%</td><td class="n">{int(c.n)}</td><td class="n">{int(c.births)}</td><td class="n">{num(c.mean_stated_pct)}%</td><td class="n">{num(c.observed_pct)}%</td><td class="n">{num(c.ci_low_pct)}–{num(c.ci_high_pct)}%</td></tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </details>
+        </Figure>
+      </div>
+      <aside class="c-10-13" style="padding-top:var(--s-96)">
+        <div class="aside">
+          <span class="label">Reading the chart</span>
+          If stated chances were perfectly calibrated, every circle would sit on the diagonal: of women who said 30%, about 30% would have had a birth.
+          Circles above the line mean more births than people expected; below the line, fewer.
+        </div>
+        <div class="aside">
+          <span class="label">Calibration slope</span>
+          A single number for how stretched the answers were: {num(n.slope.value, 2)} (95% interval {num(n.slope.ci[0], 2)}–{num(n.slope.ci[1], 2)}), where 1 would be perfect.
+          Below 1 means the answers were more extreme than the outcomes.
+        </div>
+        <div class="aside">
+          <span class="label">Ranking</span>
+          The answers still ranked women well: a woman who had a birth usually gave a higher number than one who did not (AUC {num(n.forecast.auc, 3)}).
+        </div>
+      </aside>
+    </div>
+
+    <div class="grid">
+      <div class="prose c-1-8">
+        <p>
+          Women who said there was no chance of a birth were not right about that: <strong>{num(cal["0"].observed_pct)}%</strong> of them had one within five years
+          ({int(cal["0"].n)} women; 95% interval {num(cal["0"].ci_low_pct)}–{num(cal["0"].ci_high_pct)}%). Women who said they were certain were not right either:
+          <strong>{num(cal["100"].observed_pct)}%</strong> had a birth ({int(cal["100"].n)} women; {num(cal["100"].ci_low_pct)}–{num(cal["100"].ci_high_pct)}%).
+        </p>
+        <p>
+          The answers also cluster: {num(n.distribution.share_pct.at_0_50_or_100)}% of women gave exactly 0, 50 or 100. They behave partly like categories
+          (no, maybe, yes) rather than finely graded probabilities. The finding held under every alternative outcome rule and every bound for the
+          {int(n.sample.unknown)} women whose outcome is unknown.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="c-1-9">
+        <Figure
+          num="1.2"
+          anchor="fig-brier"
+          title="Correcting the stated answers made better forecasts"
+          sub={`Forecast error for four approaches on ${int(n.heldOut.n)} women from households that were not used to fit them (${int(n.heldOut.births)} births).`}
+          chart="brier"
+          fallback="baseline_comparison.png"
+          fallbackAlt="Dot plots of Brier score and ROC AUC for four approaches on held-out households."
+          minH={260}
+        >
+          <p><span class="k">Uncertainty</span>95% household-cluster bootstrap intervals, 2,000 replicates.</p>
+          <p><span class="k">Reading it</span>The Brier score is the average squared gap between forecast and outcome: 0 is perfect, and a constant rate scores {num(models.A.brier, 3)} here.</p>
+          <p class="wide cannot"><span class="k">Cannot show</span>Whether the same correction would work for another cohort. A single held-out split; repeated cross-validation found the gain from background characteristics consistent but modest.</p>
+        </Figure>
+      </div>
+      <aside class="c-10-13" style="padding-top:var(--s-96)">
+        <div class="aside">
+          <span class="label">What changed</span>
+          Used as given, the stated chance forecast worse than a constant rate ({num(models.B.brier, 3)} against {num(models.A.brier, 3)}), because the answers were too extreme.
+          A simple logistic correction kept their ranking and fixed their scale ({num(models.C.brier, 3)}). Adding background characteristics helped a little more ({num(models.D.brier, 3)}).
+        </div>
+      </aside>
+    </div>
+
+    <div class="limits">
+      <span class="label">Limits of this chapter</span>
+      <ul>
+        <li>An earlier cohort, born 1980–84. Whether Generation Z's stated expectations behave the same way is untested.</li>
+        <li>Five-year expectations, not lifetime desires or completed family size.</li>
+        <li>Unweighted sample results, not estimates for the U.S. population.</li>
+        <li>{int(n.sample.unknown)} women with unknown outcomes are excluded; bounds for them do not change the finding.</li>
+      </ul>
+    </div>
+    <div class="further">
+      <a href={gh("docs/methodology.md")}>Chapter methodology</a>
+      <a href="#archive-figures">Original figures R1.1–R1.3</a>
+      <a href={gh("data/public/dashboard_summary.json")}>Public data</a>
+    </div>
+  </div>
+</section>

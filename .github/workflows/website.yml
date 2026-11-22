@@ -1,0 +1,70 @@
+# Research website build check on changes to the website or to the research files it reads.
+# The build hashes every source file against the freeze manifests, asserts the published headline
+# values and scans the built text; the last step confirms the output is self-contained.
+# Build only: nothing is deployed and hosting is not enabled.
+name: Website
+
+on:
+  push:
+    paths:
+      - "website/**"
+      - "data/public/**"
+      - "assets/figures/**"
+      - "docs/visual_atlas.md"
+      - "docs/*_freeze.sha256"
+      - ".github/workflows/website.yml"
+  pull_request:
+    paths:
+      - "website/**"
+      - "data/public/**"
+      - "assets/figures/**"
+      - "docs/visual_atlas.md"
+      - "docs/*_freeze.sha256"
+      - ".github/workflows/website.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: website-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Install and build the website
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+        working-directory: website
+    steps:
+      - name: Check out (byte-exact; see .gitattributes)
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1  # v7.1.0
+        with:
+          node-version: "26"
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+
+      - name: Clean install from the lock file
+        run: npm ci
+
+      - name: Build (frozen-source hashes, headline values, static site, text checks)
+        run: npm run build
+
+      - name: Built site is self-contained (no external scripts or styles, no local paths)
+        run: |
+          test -f dist/index.html
+          if grep -rEl '<(script|link)[^>]+(src|href)="(https?:)?//' dist; then
+            echo "external script or stylesheet in the built site"; exit 1
+          fi
+          if grep -rEl 'file:///|[A-Za-z]:[\\/]+Users|/home/[a-z]' dist; then
+            echo "local filesystem path in the built site"; exit 1
+          fi
+          echo "dist: $(find dist -type f | wc -l) files, $(du -sh dist | cut -f1)"

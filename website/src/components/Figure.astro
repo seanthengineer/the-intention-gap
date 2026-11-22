@@ -1,0 +1,33 @@
+---
+interface Props {
+  num: string;
+  anchor: string;
+  title: string;
+  sub?: string;
+  chart: string;
+  fallback?: string;
+  fallbackAlt?: string;
+  minH?: number;
+}
+const { num, anchor, title, sub, chart, fallback, fallbackAlt = "", minH = 300 } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+<figure class="fig" id={anchor} aria-labelledby={`${anchor}-t`}>
+  <figcaption class="fig-head">
+    <span class="fig-id">Fig. {num}</span>
+    <h3 class="fig-title" id={`${anchor}-t`}>{title}</h3>
+    {sub && <p class="fig-sub">{sub}</p>}
+  </figcaption>
+  {Astro.slots.has("controls") && <div class="fig-controls"><slot name="controls" /></div>}
+  <div class="chart" data-chart={chart} style={`min-height:${minH}px`}>
+    {fallback && (
+      <noscript>
+        <img class="fallback-img" src={`${base}figures/${fallback}`} alt={fallbackAlt} loading="lazy" />
+      </noscript>
+    )}
+  </div>
+  <slot name="after" />
+  <div class="fig-foot">
+    <slot />
+  </div>
+</figure>

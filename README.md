@@ -7,7 +7,7 @@
 
 **An independent applied machine-learning and demographic research project testing whether the evidence supports the claim that young Americans will fall short of the families they say they want.** Four studies combine predictive calibration, supervised classification, statistical inference and forecasting across seven official data sources to produce one integrated answer. Every material claim is traced to a frozen value, and each chapter's headline results are independently recomputed.
 
-[Manuscript](docs/final_synthesis_manuscript.md) · [Visual atlas](docs/visual_atlas.md) · [How it was built](docs/engineering_decisions.md) · [Technical walkthrough](docs/technical_walkthrough.md) · [Reproduce](#reproducibility)
+[Manuscript](docs/final_synthesis_manuscript.md) · [Visual atlas](docs/visual_atlas.md) · [Interactive website](#interactive-research-website) · [How it was built](docs/engineering_decisions.md) · [Technical walkthrough](docs/technical_walkthrough.md) · [Reproduce](#reproducibility)
 
 ## Research at a glance
 
@@ -80,6 +80,26 @@ Each chapter ran from protocol to baseline, model, out-of-sample evaluation, rob
 
 All 21 figures, with populations, units, uncertainty and limitations: **[visual atlas](docs/visual_atlas.md)**.
 
+## Interactive research website
+
+[![The website's opening screen: the research question beside the U.S. total fertility rate, 1953 to 2024, drawn as squares of 0.1 births per woman, peaking at 3.74 in 1957 and falling to 1.59 in 2024.](assets/readme/website-overview.png)](website/)
+
+A single-page website in [`website/`](website/) presents the four studies for a general audience, with 15 interactive charts, scroll-driven transitions and an archive of all 21 figures.
+
+**How it relates to the research.** The website only presents results. When it is built, it reads `data/public/`, `assets/figures/` and the visual atlas, checks every file it reads against the freeze manifests, and stops if a frozen file has changed or a published headline value no longer matches. It computes no new results and shows no suppressed survey estimate.
+
+**Run it locally** (Node.js 22.23.4 or later):
+
+```
+cd website
+npm ci
+npm run dev        # http://localhost:4321
+```
+
+Production builds, technology, assets and attribution: [website/README.md](website/README.md).
+
+**Public link:** not yet deployed. The address will be added here when the site is published.
+
 ## Technical implementation
 
 - **Survey statistics.** Design-based estimation with weights, strata and clusters, Korn–Graubard intervals and NCHS reliability suppression for the NSFG; a JKn jackknife and missing-outcome bounds for the NLSY97. The NSFG estimates are cross-checked against a separate survey library.
@@ -122,5 +142,6 @@ python audit/verify_final_synthesis.py      # claim matrix; raw-data checks repo
 - **NLSY97.** Bureau of Labor Statistics public-use data.
 - **CDC/NCHS.** NSFG and natality data. The analyses and conclusions are the author's; NCHS is responsible only for the initial data release.
 - **Census.** This product uses the Census Bureau Data API but is not endorsed or certified by the Census Bureau.
+- **Website photographs.** Two photographs by Carol M. Highsmith from the Library of Congress, with no known restrictions on publication. Details: [website/README.md](website/README.md#assets).
 
 No provider endorses this project. Original project **code** is under the [MIT License](LICENSE); original **research writing and presentation** are under [CC BY 4.0](LICENSE-docs.md). Third-party datasets and other materials retain their own terms. See [licensing and attribution](docs/licensing_and_attribution.md).

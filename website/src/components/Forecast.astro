@@ -1,0 +1,211 @@
+---
+import data from "../data/site-data.json";
+import Figure from "./Figure.astro";
+import { gh, ghTree, num, pct } from "./format";
+
+const f = data.m11;
+const f2040 = f.forecast[f.forecast.length - 1];
+const ari = f.selection.find((s) => s.method === "ari")!;
+const cov80 = f.coverage.find((c) => c.interval === "historical_error" && c.method === "naive" && c.level === 80)!;
+const ends = f.endpoints;
+const e1995 = ends.find((e) => e.c === 1995)!;
+const e2012 = ends.find((e) => e.c === 2012)!;
+const origins = f.originSens as [number, number][];
+const mw = f.methodWindow.filter((r) => r.training.includes("primary"));
+const mwLo = mw.reduce((a, b) => (b.tfr2040 < a.tfr2040 ? b : a));
+const mwHi = mw.reduce((a, b) => (b.tfr2040 > a.tfr2040 ? b : a));
+const METHOD: Record<string, string> = {
+  naive: "No change (baseline)",
+  mean10: "10-year mean",
+  drift10: "10-year drift",
+  drift10_damped: "Damped drift",
+  converge30: "Converge to 30-year mean",
+  ses: "Exponential smoothing",
+  holt_damped: "Damped trend (Holt)",
+  ar_level: "Autoregressive level",
+  ari: "ARIMA",
+};
+---
+<section id="forecast" aria-labelledby="ch4">
+  <div class="stage-track" id="stage-timeline">
+    <div class="stage">
+      <canvas class="field" aria-hidden="true"></canvas>
+      <div class="wrap timeline-layout">
+        <div id="timeline-chart" class="chart timeline-chart">
+          <noscript><img class="fallback-img" src={`${import.meta.env.BASE_URL}figures/m11_fc_tfr_forecast.png`} alt="U.S. period TFR observed to 2024 and forecast flat at 1.593 to 2040, with historical-error bands." /></noscript>
+        </div>
+      </div>
+      <p class="stage-cap" id="timeline-cap-start">From place to time</p>
+      <p class="stage-cap" id="timeline-cap-end">U.S. total fertility rate, 1953–2040 · each square 0.1 births per woman · shaded: range from past forecast errors</p>
+    </div>
+  </div>
+
+  <div class="section" style="border-top:1px solid var(--rule)">
+    <div class="wrap">
+      <header class="grid chapter-head">
+        <div class="ch-meta c-1-4"><span class="ch-num">Chapter 4</span><span class="ch-code">M11 · Human Fertility Database</span></div>
+        <div class="c-4-13">
+          <h2 class="ch-title" id="ch4">Where fertility is heading, as far as the data can say</h2>
+          <p class="standfirst">
+            Nine forecasting methods were tested against the simplest possible rule: the future will look like the latest year. Under rules locked before
+            any model was fitted, an alternative had to beat that rule by at least 10% on historical forecasts it could not have seen. None did.
+          </p>
+        </div>
+      </header>
+      <dl class="strip">
+        <div><dt>Data</dt><dd>Human Fertility Database, United States, 1933–2024</dd></div>
+        <div><dt>Target</dt><dd>Period total fertility rate, 2025–2040</dd></div>
+        <div><dt>Design</dt><dd>9 methods, 72 pseudo-real-time forecast origins</dd></div>
+        <div><dt>Intervals</dt><dd>Ranges built from past forecast errors</dd></div>
+        <div class="not"><dt>Not</dt><dd>Probability intervals; they failed calibration</dd></div>
+      </dl>
+
+      <div class="grid">
+        <div class="c-1-13">
+          <Figure
+            num="4.1"
+            anchor="fig-forecast"
+            title={`The 2040 forecast is the 2024 level: ${num(f2040.f, 3)} births per woman`}
+            sub="U.S. period total fertility rate: the average number of births a woman would have if she experienced one year's age-specific birth rates for her whole life."
+            chart="forecast"
+            fallback="m11_fc_tfr_forecast.png"
+            fallbackAlt="U.S. period TFR observed to 2024 and forecast flat at 1.593 to 2040 with nominal 80% and 95% historical-error bands."
+            minH={360}
+          >
+            <Fragment slot="controls">
+              <button class="toggle" type="button" data-toggle="methods" aria-pressed="false">Other methods</button>
+              <button class="toggle" type="button" data-toggle="origins" aria-pressed="false">Earlier jump-off years</button>
+              <button class="toggle" type="button" data-toggle="since1977" aria-pressed="false">Range from post-1977 errors</button>
+            </Fragment>
+            <p class="wide"><span class="k">About the shaded ranges</span>
+              They are built from the errors of past no-change forecasts, at nominal 80% and 95% levels. In pseudo-real-time tests the 80% range contained{" "}
+              {pct(cov80.coverage, 0)} of later outcomes at 5, 10 and 15 years ahead, not 80%; a version built only from errors since 1977 contained far too few at
+              long horizons. They <strong>failed the calibration check</strong> and are labelled ranges, not probabilities.
+            </p>
+            <p><span class="k">Source</span>Human Fertility Database (CC BY 4.0), changed by this project. <a href={gh("data/public/m11/forecast/m11_fc_tfr_forecast.csv")}>m11_fc_tfr_forecast.csv</a>.</p>
+            <p class="cannot"><span class="k">Cannot show</span>The most likely 2040 value. &ldquo;No change&rdquo; was kept because nothing reliably beat it, not because fertility is expected to stay flat.</p>
+            <details class="data-table">
+              <summary>Data table</summary>
+              <div class="table-scroll">
+                <table class="data">
+                  <thead><tr><th>Year</th><th class="n">Forecast</th><th class="n">80% range</th><th class="n">95% range</th></tr></thead>
+                  <tbody>
+                    {f.forecast.map((r) => <tr><td>{r.year}</td><td class="n">{r.f.toFixed(3)}</td><td class="n">{r.l80.toFixed(2)}–{r.u80.toFixed(2)}</td><td class="n">{r.l95.toFixed(2)}–{r.u95.toFixed(2)}</td></tr>)}
+                  </tbody>
+                </table>
+              </div>
+            </details>
+          </Figure>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="prose c-1-8">
+          <p>
+            Reasonable methods disagree. Applied to the same history, they put 2040 anywhere from {num(mwLo.tfr2040, 2)} ({METHOD[mwLo.method].toLowerCase()}) to
+            {" "}{num(mwHi.tfr2040, 2)} ({METHOD[mwHi.method].toLowerCase()}). The jump-off year matters as much: a no-change forecast made in {origins[0][0]} would have said
+            {" "}{num(origins[0][1], 2)}. Turn on the overlays above to see both.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="c-1-7">
+          <Figure
+            num="4.2"
+            anchor="fig-backtest"
+            title="No alternative met the replacement rule"
+            sub="Forecast error relative to no change, at 5, 10 and 15 years ahead, over historical origins 1952–2023."
+            chart="backtest"
+            fallback="m11_fc_backtest_relative_mae.png"
+            fallbackAlt="Relative mean absolute error by method and horizon, with the 0.90 replacement threshold."
+            minH={380}
+          >
+            <p class="wide"><span class="k">The rule</span>Replace no change only if a method&rsquo;s error ratio, averaged over 5, 10 and 15 years ahead, was 0.90 or less; it beat no change at every horizon in both eras (origins 1952–1976 and 1977 on); and a bootstrap check confirmed the gain. The closest, ARIMA, averaged {ari.R.toFixed(3)}.</p>
+            <p class="wide cannot"><span class="k">Caveat</span>&ldquo;Historical&rdquo; means pseudo-real time: every origin uses today's data vintage, not the data forecasters had then. At 15 years ahead there are only four non-overlapping windows.</p>
+          </Figure>
+        </div>
+        <div class="c-8-13">
+          <Figure
+            num="4.3"
+            anchor="fig-coverage-check"
+            title="Why the ranges are not probabilities"
+            sub="Share of later outcomes inside each nominal 80% range, by years ahead."
+            chart="coverage"
+            fallback="m11_fc_interval_calibration.png"
+            fallbackAlt="Empirical coverage by horizon of 80% intervals for three interval methods."
+            minH={300}
+          >
+            <p class="wide"><span class="k">Reading it</span>A calibrated 80% range would stay near the dotted 80% line, and the protocol required 65–95% (shaded). Each version drifts out of it: too wide in one era of errors, too narrow in another.</p>
+            <p class="wide"><span class="k">Source</span><a href={gh("data/public/m11/forecast/m11_fc_interval_calibration.csv")}>m11_fc_interval_calibration.csv</a>; <a href={gh("data/public/m11/forecast/m11_fc_rob_interval_calibration_1977.csv")}>post-1977 variant</a>.</p>
+          </Figure>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="c-1-13">
+          <Figure
+            num="4.4"
+            anchor="fig-cohorts"
+            title="Generation Z cohorts by 2040, if 2024 rates persist"
+            sub="Cumulative births per woman by age: observed to 2024 (solid), projected to the end of 2040 (dashed). A conditional projection, not completed fertility."
+            chart="cohorts"
+            fallback="m11_fc_genz_cohorts.png"
+            fallbackAlt="Projected cumulative births per woman by end-2040 for cohorts 1995 to 2012."
+            minH={340}
+          >
+            <Fragment slot="controls">
+              <div class="control">
+                <span class="label">Birth cohort</span>
+                <div class="range-control">
+                  <input type="range" min="1995" max="2012" step="1" value="1995" aria-label="Birth cohort" />
+                  <output data-cohort-label>1995</output>
+                </div>
+              </div>
+            </Fragment>
+            <div slot="after" class="cohort-grid" style="margin-top:var(--s-24)">
+              <p class="aside" style="margin:0">
+                <span class="label">How to read the projection</span>
+                Each cohort's observed births to 2024 are extended with the 2024 birth rate at each age, held fixed to the end of 2040. Women born in 1995
+                would reach about {e1995.p2040.toFixed(2)} births by then, at age {e1995.age2040}: nearly complete by historical standards, but still not their
+                completed family size. Those born in 2012 would reach about {e2012.p2040.toFixed(2)} by age {e2012.age2040}, with most of their childbearing years
+                still ahead.
+              </p>
+              <dl class="cohort-card" data-cohort-card aria-live="polite"></dl>
+            </div>
+            <p><span class="k">Uncertainty</span>Ranges from past pseudo-cohort errors, nominal 80%. In pseudo-real time they contained {f.cohortCoverage.map((c) => `${pct(c.c80, 0)} at ${c.h}`).join(", ")} years ahead.</p>
+            <p><span class="k">Source</span><a href={gh("data/public/m11/forecast/m11_fc_genz_trajectories.csv")}>m11_fc_genz_trajectories.csv</a>, <a href={gh("data/public/m11/forecast/m11_fc_genz_endpoints_2040.csv")}>endpoints</a>.</p>
+            <p class="wide cannot"><span class="k">Cannot show</span>Whether Generation Z will have the families it wants. This projection is not compared with desired family size: no source measures that, and the cohorts' fertility is not complete.</p>
+            <details class="data-table">
+              <summary>Data table</summary>
+              <div class="table-scroll">
+                <table class="data">
+                  <thead><tr><th>Cohort</th><th class="n">Age in 2024</th><th class="n">Observed by 2024</th><th class="n">Age in 2040</th><th class="n">Projected by end-2040</th><th class="n">80% range</th><th>Status</th></tr></thead>
+                  <tbody>
+                    {ends.map((e) => <tr><td>{e.c}</td><td class="n">{e.age2024}</td><td class="n">{e.obs2024.toFixed(3)}</td><td class="n">{e.age2040}</td><td class="n">{e.p2040.toFixed(3)}</td><td class="n">{e.l80.toFixed(2)}–{e.u80.toFixed(2)}</td><td>{e.completion}</td></tr>)}
+                  </tbody>
+                </table>
+              </div>
+            </details>
+          </Figure>
+        </div>
+      </div>
+
+      <div class="limits">
+        <span class="label">Limits of this chapter</span>
+        <ul>
+          <li>The forecast intervals failed calibration. They are historical-error ranges, not probability statements.</li>
+          <li>Backtests are pseudo-real time: they use the current data vintage, not the data forecasters had then, and long horizons rest on few independent windows.</li>
+          <li>Cohort values are conditional on 2024 rates persisting. They are not predictions of completed fertility.</li>
+          <li>National rates only: nothing here describes any individual, or any subgroup of Generation Z.</li>
+        </ul>
+      </div>
+      <div class="further">
+        <a href={gh("docs/m11_fertility_forecasts.md")}>Chapter report</a>
+        <a href={gh("docs/m11_forecast_protocol.md")}>Locked protocol</a>
+        <a href="#archive-figures">Original figures R4.1–R4.9</a>
+        <a href={ghTree("data/public/m11")}>Public tables</a>
+      </div>
+    </div>
+  </div>
+</section>

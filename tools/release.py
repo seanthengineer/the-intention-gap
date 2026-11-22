@@ -46,6 +46,12 @@ ANY_DEPTH_DIRS = {
     ".mypy_cache": "type-checker cache",
     ".ruff_cache": "linter cache",
     ".ipynb_checkpoints": "notebook cache",
+    "node_modules": "npm packages (installed by npm ci, never committed)",
+}
+WEBSITE_DIRS = {
+    "website/dist/": "website build output",
+    "website/.astro/": "Astro cache and generated types",
+    "website/public/figures/": "website copies of assets/figures, made at build time",
 }
 ROOT_DIRS = {
     ".venv": "local virtual environment",
@@ -95,11 +101,12 @@ RESTRICTED_SUFFIXES = (".dat", ".cdb", ".dct", ".sas", ".sps", ".nlsy97", ".xls"
 DIRECT_PATTERNS = {
     "audit/*.txt": "local audit output",
     "audit/*.csv": "local audit output",
+    "website/src/data/*.json": "website data generated at build time from data/public",
 }
 TEXT_SUFFIXES = (".py", ".md", ".csv", ".json", ".txt", ".toml", ".cfg", ".ini", ".yml", ".yaml", ".cff",
-                 ".sha256", ".svg", ".html")
+                 ".sha256", ".svg", ".html", ".ts", ".mjs", ".astro", ".css")
 TEXT_NAMES = (".gitignore", ".gitattributes", ".python-version", "LICENSE")
-BINARY_SUFFIXES = (".png",)
+BINARY_SUFFIXES = (".png", ".jpg")
 RESPONDENT_COLUMNS = {"respondent_id", "pubid", "caseid", "household_id", "sidcode", "secu", "sest", "hhid"}
 RESPONDENT_PATTERN = re.compile(r"^(pubid|caseid)(_\w+)?$|^respondent_?id$|^[a-z]\d{7}$")
 
@@ -144,6 +151,8 @@ def _directory_reason(rel_dir: str) -> str | None:
         return ANY_DEPTH_DIRS[name]
     if "/" not in rel_dir.rstrip("/") and name in ROOT_DIRS:
         return ROOT_DIRS[name]
+    if rel_dir in WEBSITE_DIRS:
+        return WEBSITE_DIRS[rel_dir]
     if fnmatch.fnmatchcase(name, "*.egg-info"):
         return ANY_DEPTH_NAMES["*.egg-info"]
     if rel_dir.startswith("data/") and rel_dir.count("/") == 2 and rel_dir != "data/public/":
@@ -228,6 +237,8 @@ def category(rel: str) -> str:
         return "code"
     if rel.startswith("tests/"):
         return "tests"
+    if rel.startswith("website/"):
+        return "website"
     if rel.startswith("data/public/"):
         return "public aggregate data"
     if rel.startswith("assets/"):
@@ -253,6 +264,10 @@ def licence_class(rel: str) -> str:
         return "derived data: mixed sources (all of the above)"
     if rel.startswith("docs/source_terms/"):
         return "third-party terms quoted for the record"
+    if rel.startswith("website/public/photos/"):
+        return "public-domain photograph (Library of Congress, no known restrictions)"
+    if rel.startswith("website/"):
+        return "project documentation" if rel.endswith(".md") else "project code"
     if rel.startswith("assets/figures/m11_") or rel.startswith("assets/readme/"):
         return "project figure with HFD-derived values (CC BY 4.0 attribution)"
     if rel.startswith("assets/"):

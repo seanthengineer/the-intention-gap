@@ -36,6 +36,20 @@ class ExclusionRuleTests(unittest.TestCase):
                     "docs/report.pdf", "data/public/x.parquet", "tools/.env.local", ".mypy_cache/x.json"):
             self.assertIsNotNone(release.exclusion_reason(rel), rel)
 
+    def test_website_dependencies_and_build_outputs_are_excluded(self):
+        for rel in ("website/node_modules/d3/package.json", "website/dist/index.html",
+                    "website/.astro/types.d.ts", "website/public/figures/m10_trends.png",
+                    "website/src/data/site-data.json", "website/src/data/provenance.json",
+                    "sub/node_modules/x.js"):
+            self.assertIsNotNone(release.exclusion_reason(rel), rel)
+
+    def test_website_source_is_included(self):
+        for rel in ("website/package.json", "website/package-lock.json", "website/scripts/prepare-data.mjs",
+                    "website/src/pages/index.astro", "website/src/scripts/main.ts",
+                    "website/src/styles/global.css", "website/public/photos/photo.jpg",
+                    "website/public/favicon.svg", "docs/dist/x.md"):
+            self.assertIsNone(release.exclusion_reason(rel), rel)
+
     def test_walk_prunes_excluded_trees_and_rejects_symlinks(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

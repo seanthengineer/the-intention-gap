@@ -1,0 +1,130 @@
+---
+import data from "../data/site-data.json";
+import Figure from "./Figure.astro";
+import { gh, int, num, pct } from "./format";
+
+const base = import.meta.env.BASE_URL;
+const cal = Object.fromEntries(data.nlsy.calibration.map((c) => [c.range_pct, c]));
+const h = data.nsfg.headline.all;
+const prim = data.m10.primary.find((p) => p.role === "primary")!;
+const f2040 = data.m11.forecast[data.m11.forecast.length - 1];
+const obs = data.m11.observed as [number, number][];
+const last = obs[obs.length - 1];
+const rows = data.final.populationMap as Record<string, string>[];
+---
+<section id="overview" aria-labelledby="q">
+  <div class="stage-track" id="stage-overview">
+    <div class="stage">
+      <canvas class="field" aria-hidden="true"></canvas>
+      <div class="wrap grid hero">
+        <div class="hero-text" id="hero-text">
+          <span class="label kicker">An independent demographic inquiry</span>
+          <h1 id="q">Will Generation&nbsp;Z have the families they say they want?</h1>
+          <p class="lede">
+            Most young Americans say they want children, while U.S. fertility has fallen to about {num(last[1], 1)} births per woman.
+            Together, the two facts invite a confident story: a generation that will fall short of its own plans. This project
+            tested whether the evidence can support that story, with four studies built on seven official data sources.
+          </p>
+          <p class="answer"><strong>The short answer: the existing data cannot establish it.</strong> What they do show is narrower, and it is set out below, study by study.</p>
+          <div class="byline">
+            <span class="label">Sean Nathaniel M.</span>
+            <span class="label">Frozen November 2026</span>
+            <span class="label">Not peer-reviewed</span>
+          </div>
+        </div>
+        <div class="hero-figure">
+          <div id="hero-chart" class="chart">
+            <noscript><img class="fallback-img" src={`${base}figures/m11_tfr_sources.png`} alt="U.S. period total fertility rate, 1933 to 2024, from the Human Fertility Database, with NCHS values and the Census assumption." /></noscript>
+          </div>
+          <p class="hero-cap">
+            <b>Fig. 0</b> U.S. period total fertility rate, 1953–2024. Each square is 0.1 births per woman, rounded; the line is exact.
+            Source: Human Fertility Database (CC BY 4.0).
+          </p>
+        </div>
+      </div>
+      <div class="scroll-cue label" aria-hidden="true"><i></i>Scroll</div>
+      <div class="crowd-statement wrap" id="crowd-statement">
+        <p class="statement">Behind every data point is a person, with a different timeline, different circumstances and different choices.</p>
+        <p class="note">
+          Surveys record what people say. Birth records count what happened. National rates summarize millions of lives at once.
+          This project keeps those kinds of evidence apart, because they describe different people at different times.
+        </p>
+        <span class="label metaphor">Visual metaphor. The figures are illustrative; no square stands for a survey participant.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="studies wrap" id="studies">
+    <div class="grid">
+      <div class="c-1-4"><span class="label" style="color:var(--oxblood)">The investigation</span></div>
+      <div class="c-4-13">
+        <h2 class="ch-title" style="max-width:24ch">Four studies, four different kinds of evidence</h2>
+        <p class="standfirst">
+          Each study answers a narrower question that the headline question depends on. They observe different people, at
+          different ages, in different years. Their numbers are therefore never added to or subtracted from one another.
+        </p>
+      </div>
+    </div>
+    <ol class="study-list">
+      <li>
+        <span class="label" style="color:var(--oxblood)">01 Expectations</span>
+        <a class="q" href="#expectations">Do stated chances of having a baby predict births?</a>
+        <span class="who">NLSY97 · women born 1980–84 · followed 2009–2023 · not Generation Z</span>
+        <span class="finding">Informative, but <b>far too extreme</b>: {pct(cal["0"].observed_pct / 100)} of women who said 0% had a birth within five years; {pct(cal["100"].observed_pct / 100)} of those who said 100% did.</span>
+      </li>
+      <li>
+        <span class="label" style="color:var(--oxblood)">02 Intentions</span>
+        <a class="q" href="#intentions">How many young adults want, and intend, to have children?</a>
+        <span class="who">NSFG 2022–23 · U.S. adults aged about 18–27 · one interview</span>
+        <span class="finding"><b>{pct(h.wants.est)}</b> wanted a child and <b>{pct(h.intends.est)}</b> intended one. Demographic models could not identify who wants a child but does not intend one.</span>
+      </li>
+      <li>
+        <span class="label" style="color:var(--oxblood)">03 Housing</span>
+        <a class="q" href="#housing">Do states where rent burden rises see fewer births?</a>
+        <span class="who">ACS and CDC WONDER · 50 states and DC · 2014–2024</span>
+        <span class="finding"><b>Not robustly</b>: {num(prim.est, 2)} births per 1,000 women aged 20–24 per 10 points of burden, interval {num(prim.lo, 2)} to {num(prim.hi, 2)}.</span>
+      </li>
+      <li>
+        <span class="label" style="color:var(--oxblood)">04 Forecast</span>
+        <a class="q" href="#forecast">Where is U.S. fertility heading by 2040?</a>
+        <span class="who">Human Fertility Database · United States · 1933–2024</span>
+        <span class="finding"><b>No method beat &ldquo;no change&rdquo;.</b> The 2040 forecast is {num(f2040.f, 3)}, with a range from past errors that failed its calibration check.</span>
+      </li>
+    </ol>
+
+    <div class="grid">
+      <div class="c-1-13">
+        <Figure
+          num="0.1"
+          anchor="fig-coverage"
+          title="Who each study observes"
+          sub="Birth cohort by calendar year. Solid areas are observed; hatching is projected. Dashed diagonals mark ages 20, 30 and 45."
+          chart="evidence"
+          fallback="final_evidence_map.png"
+          fallbackAlt="Calendar-year by birth-cohort map showing that no chapter follows Generation Z from stated desire to completed fertility."
+          minH={360}
+        >
+          <p class="wide"><span class="k">Why it matters</span>No source follows Generation Z from stated desire to completed family size. A desired-versus-achieved gap would need both, for the same cohorts, so none is computed.</p>
+          <p><span class="k">Source</span><a href={gh("data/public/final/final_population_map.csv")}>final_population_map.csv</a>, from the frozen synthesis.</p>
+          <p class="cannot"><span class="k">Cannot show</span>Sample sizes or data quality. It is a map of coverage only.</p>
+          <details class="data-table">
+            <summary>Data table</summary>
+            <div class="table-scroll">
+              <table class="data">
+                <thead><tr><th>Chapter</th><th>Source</th><th>Years</th><th>Birth cohorts</th><th>Generation Z overlap</th><th>Inference</th></tr></thead>
+                <tbody>
+                  {rows.map((r) => (
+                    <tr><td>{r.chapter}</td><td>{r.data_source}</td><td>{r.observation_years}</td><td>{r.birth_cohorts}</td><td>{r.genz_overlap}</td><td>{r.inference}</td></tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </details>
+        </Figure>
+        <p class="statement" style="max-width:34ch;margin-top:var(--s-64)">
+          That is why the project reports no &ldquo;intention gap&rdquo; as a number. <span class="hl">The name describes the question, not a measurement.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

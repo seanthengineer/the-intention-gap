@@ -1,0 +1,117 @@
+---
+import data from "../data/site-data.json";
+import { gh, int, num } from "./format";
+
+const ho = Object.fromEntries(data.nlsy.heldOut.models.map((m) => [m.id, m]));
+const nsfgH = Object.fromEntries(data.nsfg.model.holdout.map((m) => [m.model, m]));
+const prim = data.m10.primary.find((p) => p.role === "primary")!;
+const ari = data.m11.selection.find((s) => s.method === "ari")!;
+---
+<section class="section blueprint-strong" id="methods" aria-labelledby="ch6">
+  <div class="wrap">
+    <header class="grid chapter-head">
+      <div class="ch-meta c-1-4"><span class="ch-num">Methods</span><span class="ch-code">Pipeline · models · verification</span></div>
+      <div class="c-4-13">
+        <h2 class="ch-title" id="ch6">How the research was done, and how to check it</h2>
+        <p class="standfirst">
+          Each chapter followed the same sequence and was closed before the next began. Questions, outcomes and decision rules were written down before
+          analysis; for the housing and forecasting chapters they were locked with a cryptographic hash before any model was fitted. Results were then
+          recomputed with separate code and frozen.
+        </p>
+      </div>
+    </header>
+
+    <div class="pipeline" role="list" aria-label="Research pipeline">
+      <div role="listitem"><span class="step-n">01</span><h4>Official data</h4><p>Seven public sources, downloaded and hashed. Raw and respondent-level files never leave the author's machine.</p><span class="mono-line">NLSY97 · NSFG · ACS · CDC WONDER · NCHS · Census · HFD</span></div>
+      <div role="listitem"><span class="step-n">02</span><h4>Protocol</h4><p>Questions, outcomes, models and decision rules fixed in writing before analysis.</p><span class="mono-line">M10, M11 locked by SHA-256</span></div>
+      <div role="listitem"><span class="step-n">03</span><h4>Baseline</h4><p>Every model faces the simplest honest benchmark: a constant rate, a class prior, no change.</p><span class="mono-line">benchmark first</span></div>
+      <div role="listitem"><span class="step-n">04</span><h4>Out-of-sample test</h4><p>Held-out households, isolated survey clusters, and 72 forecast origins that only use the past.</p><span class="mono-line">no peeking at test data</span></div>
+      <div role="listitem"><span class="step-n">05</span><h4>Independent check</h4><p>Every chapter's headline results recomputed with separate code; every material claim traced to a frozen value.</p><span class="mono-line">50 claims · 155 checks</span></div>
+      <div role="listitem"><span class="step-n">06</span><h4>Freeze</h4><p>Results and code hashed into manifests, so nothing can change without detection.</p><span class="mono-line">221 files · 5 manifests</span></div>
+    </div>
+
+    <div class="grid">
+      <div class="c-1-13">
+        <h3 class="fig-title" style="margin-bottom:var(--s-16)">Every model, its benchmark and its result</h3>
+        <div class="table-scroll">
+          <table class="data methods-table">
+            <thead><tr><th>Chapter</th><th>Task</th><th>Benchmark</th><th>Models</th><th>Out-of-sample test</th><th>Result</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>1 NLSY97</td><td>Forecast a birth within five years</td><td>Constant rate (Brier {num(ho.A.brier, 3)})</td>
+                <td>Stated chance as given; logistic correction; correction plus background characteristics</td>
+                <td>{int(data.nlsy.heldOut.n)} women in held-out households</td>
+                <td><span class="verdict">Correction helped:</span> Brier {num(ho.C.brier, 3)}; with background {num(ho.D.brier, 3)} (AUC {num(ho.D.auc, 3)})</td>
+              </tr>
+              <tr>
+                <td>2 NSFG</td><td>Identify an explicit &ldquo;no&rdquo; among those who want a child</td><td>Class prior (AUC 0.50)</td>
+                <td>Regularized logistic regression; gradient boosting</td>
+                <td>{nsfgH.logistic.n} respondents in survey clusters held back from fitting</td>
+                <td><span class="verdict neg">Negative:</span> AUC {num(nsfgH.logistic.auc, 2)} and {num(nsfgH.boosting.auc, 2)}</td>
+              </tr>
+              <tr>
+                <td>3 State panel</td><td>Within-state association of rent burden with birth rates</td><td>No association</td>
+                <td>Two-way fixed effects; five protocol specifications; eleven exploratory checks</td>
+                <td>Wild cluster bootstrap; leaving out each state in turn</td>
+                <td><span class="verdict neg">Not robust:</span> {num(prim.est, 2)} ({num(prim.lo, 2)} to {num(prim.hi, 2)})</td>
+              </tr>
+              <tr>
+                <td>4 HFD</td><td>Forecast the U.S. total fertility rate to 2040</td><td>No change</td>
+                <td>Eight alternatives, from moving averages and drift to exponential smoothing and ARIMA</td>
+                <td>72 pseudo-real-time origins, 1952–2023</td>
+                <td><span class="verdict neg">Baseline kept:</span> best average ratio {num(ari.R, 3)}, needed 0.90; ranges failed calibration</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top:var(--s-64)">
+      <div class="c-1-4"><span class="label" style="color:var(--oxblood)">How results were judged</span></div>
+      <dl class="glossary c-4-13">
+        <div><dt>Discrimination <span class="label">Ch. 1, 2</span></dt><dd>Does the model rank cases correctly? Measured by ROC AUC: the chance that a random positive case scores above a random negative one. 0.5 is guessing.</dd></div>
+        <div><dt>Calibration <span class="label">Ch. 1, 4</span></dt><dd>Do stated or predicted chances match how often things happen? A forecast of 30% should come true about 30% of the time; an 80% range should contain about 80% of outcomes.</dd></div>
+        <div><dt>Error <span class="label">Ch. 1, 4</span></dt><dd>The Brier score averages the squared gap between a probability and what happened. Mean absolute error averages the size of forecast misses.</dd></div>
+        <div><dt>Out-of-sample testing <span class="label">All</span></dt><dd>Models are judged only on data they never saw while being built, so a good score cannot come from memorizing the training data.</dd></div>
+        <div><dt>Survey design <span class="label">Ch. 2</span></dt><dd>NSFG estimates use the survey's weights, strata and clusters, so they describe the U.S. population, with intervals that reflect how the sample was drawn.</dd></div>
+        <div><dt>Fixed effects <span class="label">Ch. 3</span></dt><dd>Comparing each state with itself, and each year with the national average, removes stable differences between states and shocks shared by all of them.</dd></div>
+      </dl>
+    </div>
+
+    <div class="grid" style="margin-top:var(--s-64)">
+      <div class="c-1-4"><span class="label" style="color:var(--oxblood)">What did not work</span></div>
+      <div class="prose c-4-11">
+        <p>Negative results are reported with the same weight as positive ones, because they limit what the project can claim.</p>
+        <ul>
+          <li>Demographic models could not identify who wants a child but does not intend one on held-out data.</li>
+          <li>No forecasting method met the locked rule for replacing &ldquo;no change&rdquo;.</li>
+          <li>No interval method for the forecast passed the calibration check, so the forecast carries ranges, not probabilities.</li>
+          <li>The housing association did not survive the protocol's robustness rule.</li>
+          <li>Used as given, stated chances forecast births worse than a constant rate.</li>
+          <li>During the final audit, one forecasting statement (a cohort backtest described as &ldquo;optimistic by 7–17%&rdquo;) was found to be over-general. It was corrected through a recorded revision; no forecast, interval or accepted number changed.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top:var(--s-64)">
+      <div class="c-1-4"><span class="label" style="color:var(--oxblood)">Reproduce it</span></div>
+      <div class="c-4-13">
+        <div class="counts">
+          <div><b>5</b><span>SHA-256 freeze manifests</span></div>
+          <div><b>221</b><span>frozen research files</span></div>
+          <div><b>392</b><span>automated tests</span></div>
+          <div><b>155</b><span>checks on 50 claims</span></div>
+          <div><b>4 of 4</b><span>chapters independently recomputed</span></div>
+        </div>
+        <p class="prose">Source-only checks need no restricted data. They use Python 3.15.2:</p>
+<pre class="terminal" aria-label="Commands to verify the research"><span class="p">$</span> python -m pip install --only-binary=:all: --require-hashes -r requirements-lock.txt
+<span class="p">$</span> python audit/verify_freeze.py               <span class="c"># five manifests, 221 frozen files</span>
+<span class="p">$</span> python -m tools.release restore-run-record  <span class="c"># once per fresh clone</span>
+<span class="p">$</span> python -m unittest                          <span class="c"># restricted-data tests report "skipped"</span>
+<span class="p">$</span> python audit/verify_final_synthesis.py      <span class="c"># claim matrix; raw-data checks report SKIP</span></pre>
+        <p class="prose">Full reproduction reruns every chapter from the source data, which readers download themselves from the providers. Steps and expected outputs are in the <a href={gh("docs/final_reproducibility_guide.md")}>reproducibility guide</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,68 @@
+---
+import data from "../data/site-data.json";
+import { gh, num, pct } from "./format";
+
+const h = data.nsfg.headline.all;
+const cal = Object.fromEntries(data.nlsy.calibration.map((c) => [c.range_pct, c]));
+const logit = data.nsfg.model.holdout.find((m) => m.model === "logistic")!;
+const prim = data.m10.primary.find((p) => p.role === "primary")!;
+const f2040 = data.m11.forecast[data.m11.forecast.length - 1];
+const e = Object.fromEntries(data.m11.endpoints.map((x) => [x.c, x]));
+---
+<section class="section blueprint" id="conclusion" aria-labelledby="ch5">
+  <div class="wrap">
+    <div class="grid answer-block">
+      <div class="ch-meta c-1-4"><span class="ch-num">Conclusion</span><span class="ch-code">Synthesis · frozen November 2026</span></div>
+      <div class="c-4-13">
+        <h2 class="big" id="ch5">Whether Generation Z will have the families it wants cannot be established from the existing data.</h2>
+        <p class="standfirst">
+          A population-level answer would need two things no source provides: a numeric desired family size for Generation Z, and the completed
+          lifetime fertility of the same cohorts. An answer about individuals would also need the same people followed over time. What the evidence does
+          support is a set of separate, bounded statements. None of them is a measured gap between desire and achievement.
+        </p>
+      </div>
+    </div>
+
+    <div class="cols-2">
+      <div>
+        <h3>What the evidence supports</h3>
+        <ol class="ledger-list">
+          <li>In 2022–23, {pct(h.wants.est)} of U.S. adults aged about 18–27 wanted a child or another child, and {pct(h.intends.est)} intended one.
+            <span class="kind">Stated desire and intention · weighted survey · strong</span></li>
+          <li>Of those who wanted a child, {pct(h.divergence_among_wanters.est)} did not intend one; about {Math.round((h.sterility_among_wanters.est / h.divergence_among_wanters.est) * 100)}% of that was the survey's sterility classification. Demographic models could not predict the explicit &ldquo;no&rdquo; on unseen data (AUC {num(logit.auc, 2)} against 0.50).
+            <span class="kind">Stated intention · negative machine-learning result · strong</span></li>
+          <li>In an earlier cohort, women born 1980–84, stated chances of a birth ranked the outcomes (AUC {num(data.nlsy.forecast.auc, 3)}) but were far too extreme: {num(cal["0"].observed_pct)}% of those who said 0% had a birth, and {num(cal["100"].observed_pct)}% of those who said 100%.
+            <span class="kind">Expectations against observed births · unweighted · strong for that cohort, untested for Generation Z</span></li>
+          <li>Rent burden was not robustly associated with state birth rates: {num(prim.est, 2)} per 10 points at ages 20–24 (95% interval {num(prim.lo, 2)} to {num(prim.hi, 2)}), and none at 25–29.
+            <span class="kind">Ecological association · not causal</span></li>
+          <li>The 2040 U.S. total fertility rate forecast is the 2024 level, {num(f2040.f, 3)}. Its range failed calibration, so there is no reliable directional signal.
+            <span class="kind">Model forecast · moderate</span></li>
+          <li>If 2024 rates persist, women born in 1995 reach about {num(e[1995].p2040, 2)} births by the end of 2040, nearly complete; women born in 2012 reach about {num(e[2012].p2040, 2)}, far from complete.
+            <span class="kind">Conditional projection · not completed fertility</span></li>
+        </ol>
+      </div>
+      <div>
+        <h3>What must not be inferred</h3>
+        <ol class="ledger-list not">
+          <li><strong>A gap, by subtraction.</strong> Survey answers and projected cohort fertility describe different people, measures and times.</li>
+          <li><strong>Probabilities from the forecast ranges.</strong> They are ranges built from past errors, and they failed calibration.</li>
+          <li><strong>Completed family size from the projections.</strong> No projection to 2040 is completed lifetime fertility; those for people born after 2002 are far from it.</li>
+          <li><strong>Causes from the housing results.</strong> They are associations between states and years.</li>
+          <li><strong>Population estimates from the NLSY97 results.</strong> They are unweighted results for one earlier cohort.</li>
+        </ol>
+        <h3 style="margin-top:var(--s-48)">What would answer the question</h3>
+        <ol class="ledger-list">
+          <li>A numeric desired family-size question asked of Generation Z.</li>
+          <li>Following the same respondents until their childbearing years end, around age 45.</li>
+          <li>Forecasts whose probability intervals pass a calibration check.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="further">
+      <a href={gh("docs/final_executive_summary.md")}>Executive summary</a>
+      <a href={gh("docs/final_synthesis_manuscript.md")}>Integrated manuscript</a>
+      <a href={gh("docs/final_claim_evidence_matrix.csv")}>Claim-to-evidence matrix</a>
+      <a href={gh("docs/final_limitations_register.md")}>Limitations register</a>
+    </div>
+  </div>
+</section>

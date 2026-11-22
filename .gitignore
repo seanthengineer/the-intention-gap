@@ -72,6 +72,12 @@ dist/
 htmlcov/
 .ipynb_checkpoints/
 
+# Research website: npm packages, build output and files generated from data/public at build time
+node_modules/
+/website/.astro/
+/website/public/figures/
+/website/src/data/*.json
+
 # Editor and OS files
 .vscode/
 .idea/

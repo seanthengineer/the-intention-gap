@@ -1,0 +1,244 @@
+---
+import data from "../data/site-data.json";
+import Figure from "./Figure.astro";
+import Photo from "./Photo.astro";
+import { gh, ghTree, int, num, pct } from "./format";
+
+const s = data.nsfg;
+const h = s.headline;
+const dec = s.decomposition.all;
+const ster = h.all.sterility_among_wanters.est;
+const div = h.all.divergence_among_wanters.est;
+const logit = s.model.holdout.find((m) => m.model === "logistic")!;
+const dummy = s.model.holdout.find((m) => m.model === "dummy")!;
+const boost = s.model.holdout.find((m) => m.model === "boosting")!;
+const CAT: Record<string, string> = {
+  "positive intention": "Intend one",
+  "explicit negative": "Say they do not intend one",
+  "sterility-linked": "Not asked: they or a partner reported sterile",
+  "unknown intention": "Unknown",
+  "not provided or other": "Not provided or other",
+};
+const NCHS = "Data Source: National Center for Health Statistics, National Survey of Family Growth, 2022-2023. Analyses and conclusions are the author's, not NCHS's.";
+---
+<section class="section" id="intentions" aria-labelledby="ch2">
+  <div class="wrap">
+    <header class="grid chapter-head">
+      <div class="ch-meta c-1-4"><span class="ch-num">Chapter 2</span><span class="ch-code">M09 · NSFG 2022–2023</span></div>
+      <div class="c-4-13">
+        <h2 class="ch-title" id="ch2">What the oldest members of Generation Z say they want</h2>
+        <p class="standfirst">
+          The National Survey of Family Growth asked a nationally representative sample whether they want a child, or another child, and whether
+          they intend to have one. The answers describe a moment, not a life: they were given at one interview, by people who mostly have many
+          years of possible childbearing ahead of them.
+        </p>
+      </div>
+    </header>
+    <dl class="strip">
+      <div><dt>Population</dt><dd>U.S. household population aged about 18–27</dd></div>
+      <div><dt>Survey</dt><dd>NSFG 2022–2023, one interview each</dd></div>
+      <div><dt>Weighting</dt><dd>Design-based, with survey weights, strata and clusters</dd></div>
+      <div><dt>Measure</dt><dd>Stated desire and intention, yes or no</dd></div>
+      <div class="not"><dt>Not</dt><dd>Births, or completed family size</dd></div>
+    </dl>
+
+    <div class="grid" style="row-gap:var(--s-32)">
+      <div class="c-1-8">
+        <Photo
+          src="highsmith-asu-palm-walk-2018.jpg"
+          alt="Dithered photograph of the Palm Walk at Arizona State University in Tempe: a long path lined with palms, with people walking in the distance."
+          ratio="4 / 3"
+          focusY={0.62}
+          contrast={1.25}
+          lift={0.06}
+          credit="Palm Walk, Arizona State University, Tempe, 2018. Carol M. Highsmith, Library of Congress (public domain). Illustrative; the people shown are not survey respondents."
+        />
+      </div>
+      <div class="c-9-13 aside" style="align-self:end">
+        <span class="label">Who these are</span>
+        The survey's youngest adults, born roughly 1995–2005: the older part of Generation Z by the project's definition (born 1995–2012).
+        Most had no children yet. {pct(h.all.wants.est)} of them wanted one.
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="c-1-9">
+        <Figure
+          num="2.1"
+          anchor="fig-want-intend"
+          title="Most want a child, and most intend one"
+          sub={`Weighted share answering yes. ${int(h.all.wants.n)} respondents in the primary sample.`}
+          chart="want-intend"
+          fallback="nsfg_age_profile.png"
+          fallbackAlt="Wanting and intending a child by age group and sex."
+          minH={220}
+        >
+          <Fragment slot="controls">
+            <div class="control">
+              <span class="label">Population</span>
+              <div class="seg" data-seg="pop">
+                <button type="button" data-value="all" aria-pressed="true">All</button>
+                <button type="button" data-value="female" aria-pressed="false">Women</button>
+                <button type="button" data-value="male" aria-pressed="false">Men</button>
+              </div>
+            </div>
+          </Fragment>
+          <p><span class="k">Uncertainty</span>Design-based 95% intervals (Korn–Graubard), drawn as the thin rule under each bar.</p>
+          <p><span class="k">Source</span>{NCHS} <a href={gh("data/public/nsfg_m09/estimates.csv")}>estimates.csv</a>.</p>
+          <p class="wide cannot"><span class="k">Cannot show</span>A shortfall in births. Wanting and intending are two different questions answered by the same people at one moment. The difference between {pct(h.all.wants.est)} and {pct(h.all.intends.est)} is not a measured gap between desired and achieved family size.</p>
+          <details class="data-table">
+            <summary>Data table</summary>
+            <div class="table-scroll">
+              <table class="data">
+                <thead><tr><th>Population</th><th>Measure</th><th class="n">Respondents</th><th class="n">Estimate</th><th class="n">95% interval</th></tr></thead>
+                <tbody>
+                  {(["all", "female", "male"] as const).flatMap((p) => (["wants", "intends"] as const).map((k) => (
+                    <tr><td>{p === "all" ? "All" : p === "female" ? "Women" : "Men"}</td><td>{k === "wants" ? "Want a child" : "Intend a child"}</td><td class="n">{int(h[p][k].n)}</td><td class="n">{pct(h[p][k].est)}</td><td class="n">{pct(h[p][k].lo)}–{pct(h[p][k].hi)}</td></tr>
+                  )))}
+                </tbody>
+              </table>
+            </div>
+          </details>
+        </Figure>
+      </div>
+      <aside class="c-10-13" style="padding-top:var(--s-96)">
+        <div class="aside">
+          <span class="label">Women and men</span>
+          In these data, men were more likely than women to say they want a child ({pct(h.male.wants.est)} against {pct(h.female.wants.est)}) and to intend one
+          ({pct(h.male.intends.est)} against {pct(h.female.intends.est)}). Women in this age range were also more likely to already have children.
+        </div>
+      </aside>
+    </div>
+
+    <div class="grid">
+      <div class="c-1-13">
+        <Figure
+          num="2.2"
+          anchor="fig-decomposition"
+          title="Why some who want a child do not intend one"
+          sub={`Respondents who want a child, or another child (${int(dec[0].n)}), by how they answered the intention question.`}
+          chart="decomposition"
+          fallback="nsfg_intention_decomposition.png"
+          fallbackAlt="Stacked bars: among those who want a child, 87.5% intend one, 6.6% say no and 4.7% are classified as sterility-linked."
+          minH={300}
+        >
+          <p class="wide"><span class="k">Read carefully</span>
+            Of those who wanted a child, <strong>{pct(div)}</strong> did not intend one. About <strong>{Math.round((ster / div) * 100)}%</strong> of that was not a stated
+            &ldquo;no&rdquo; at all: these respondents were never asked about intentions, because they or their partner were reported as sterile. The survey's
+            recode classifies them, and that classification is not a preference.
+          </p>
+          <p><span class="k">Uncertainty</span>Design-based 95% intervals in the hover details and the table.</p>
+          <p><span class="k">Source</span>{NCHS} <a href={gh("data/public/nsfg_m09/response_distributions.csv")}>response_distributions.csv</a>.</p>
+          <details class="data-table">
+            <summary>Data table</summary>
+            <div class="table-scroll">
+              <table class="data">
+                <thead><tr><th>Category</th><th class="n">All</th><th class="n">Women</th><th class="n">Men</th></tr></thead>
+                <tbody>
+                  {dec.map((c, i) => (
+                    <tr><td>{CAT[c.category]}</td><td class="n">{pct(c.est)}</td><td class="n">{pct(s.decomposition.female[i].est)}</td><td class="n">{pct(s.decomposition.male[i].est)}</td></tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </details>
+        </Figure>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="c-1-13">
+        <Figure
+          num="2.3"
+          anchor="fig-subgroups"
+          title="Explore the answers by group"
+          sub="Weighted estimates with 95% intervals. Estimates that fail the NCHS reliability standard are suppressed and never drawn."
+          chart="subgroups"
+          fallback="nsfg_explicit_negative_subgroups.png"
+          fallbackAlt="Explicit-no share among those who want a child, by subgroup, with intervals."
+          minH={320}
+        >
+          <Fragment slot="controls">
+            <label class="control"><span class="label">Measure</span>
+              <select class="select" name="measure">
+                <option value="wants">Want a child</option>
+                <option value="intends">Intend a child</option>
+                <option value="divergence_among_wanters">Want, but do not intend</option>
+                <option value="explicit_among_wanters" selected>Explicit &ldquo;no&rdquo; among those who want</option>
+              </select>
+            </label>
+            <label class="control"><span class="label">Compare by</span><select class="select" name="group"></select></label>
+            <label class="control"><span class="label">Population</span>
+              <select class="select" name="pop">
+                <option value="all">All</option>
+                <option value="female">Women</option>
+                <option value="male">Men</option>
+              </select>
+            </label>
+          </Fragment>
+          <p class="wide" data-summary aria-live="polite"></p>
+          <p><span class="k">Uncertainty</span>Korn–Graubard 95% intervals. Where intervals overlap, the data cannot tell the groups apart. Planned comparisons with Holm adjustment are in <a href={gh("data/public/nsfg_m09/subgroup_tests.csv")}>subgroup_tests.csv</a>.</p>
+          <p class="cannot"><span class="k">Cannot show</span>Causes. These are cross-sectional differences; age differences mix age with birth cohort, and groups overlap.</p>
+          <p class="wide"><span class="k">Source</span>{NCHS} <a href={gh("data/public/nsfg_m09/subgroups.csv")}>subgroups.csv</a> (all subgroup estimates, including suppression flags).</p>
+        </Figure>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="c-1-9">
+        <Figure
+          num="2.4"
+          anchor="fig-auc"
+          title="Can demographics predict who says no? Not on unseen data"
+          sub={`Ranking ability (ROC AUC) of two machine-learning models against a no-information baseline, on ${int(logit.n)} respondents from survey clusters held back from all model fitting (${logit.positives} said no).`}
+          chart="auc"
+          fallback="nsfg_model_evaluation.png"
+          fallbackAlt="ROC, precision-recall and calibration panels for the holdout."
+          minH={300}
+        >
+          <p><span class="k">Uncertainty</span>95% bootstrap intervals, 2,000 replicates. The 95% interval for the logistic model's gain over the baseline runs from {num(s.model.logisticMinusDummy[0], 2)} to {num(s.model.logisticMinusDummy[1], 2)}.</p>
+          <p><span class="k">Source</span><a href={gh("data/public/nsfg_m09/model_holdout.csv")}>model_holdout.csv</a>, <a href={gh("data/public/nsfg_m09/model_bootstrap.csv")}>model_bootstrap.csv</a>, <a href={gh("data/public/nsfg_m09/model_stability.csv")}>model_stability.csv</a>.</p>
+          <p class="wide cannot"><span class="k">Cannot show</span>That demographics are unrelated to intentions. Only {logit.positives} people in the holdout said no, so the test has limited power; it shows that these characteristics do not usefully identify who says no.</p>
+        </Figure>
+      </div>
+      <aside class="c-10-13" style="padding-top:var(--s-96)">
+        <div class="aside">
+          <span class="label">What AUC means</span>
+          The chance that a model ranks a randomly chosen person who said no above a randomly chosen person who did not. 0.50 is a coin toss; 1.00 is perfect.
+        </div>
+        <div class="aside">
+          <span class="label">The result</span>
+          Logistic regression scored {num(logit.auc, 2)} and gradient boosting {num(boost.auc, 2)}, against {num(dummy.auc, 2)} for the baseline. Cross-validation on the
+          development data had suggested about {num(s.model.stability.logistic.mean, 2)}; the locked holdout did not confirm it.
+        </div>
+      </aside>
+    </div>
+
+    <div class="grid">
+      <div class="prose c-1-8">
+        <h3>Why an honest negative result matters</h3>
+        <p>
+          A model that cannot beat a coin toss on data it has never seen is a finding, not a failure to hide. It tells us that age, education, income,
+          number of children and the other characteristics the models used do not usefully pick out who, among those who want a child, says they do not intend one.
+          Reporting the cross-validation figure alone would have overstated what the models can do. The holdout was set aside before any model was
+          fitted, so it is the test that counts.
+        </p>
+      </div>
+    </div>
+
+    <div class="limits">
+      <span class="label">Limits of this chapter</span>
+      <ul>
+        <li>Desire is recorded as yes or no. There is no numeric desired family size, so no family-size gap can be computed.</li>
+        <li>One interview. Intentions change, and these answers are not outcomes.</li>
+        <li>Only ages about 18–27: the older part of Generation Z. Younger cohorts are not observed.</li>
+        <li>Suppressed estimates are omitted everywhere. The sterility-linked group is a survey classification, not a stated preference.</li>
+      </ul>
+    </div>
+    <div class="further">
+      <a href={gh("docs/nsfg_m09.md")}>Chapter report</a>
+      <a href="#archive-figures">Original figures R2.1–R2.4</a>
+      <a href={ghTree("data/public/nsfg_m09")}>Public tables</a>
+    </div>
+  </div>
+</section>

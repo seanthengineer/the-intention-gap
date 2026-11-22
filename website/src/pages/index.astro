@@ -1,0 +1,34 @@
+---
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Overview from "../components/Overview.astro";
+import Expectations from "../components/Expectations.astro";
+import Intentions from "../components/Intentions.astro";
+import Housing from "../components/Housing.astro";
+import Forecast from "../components/Forecast.astro";
+import Conclusion from "../components/Conclusion.astro";
+import Methods from "../components/Methods.astro";
+import Archive from "../components/Archive.astro";
+import Colophon from "../components/Colophon.astro";
+---
+<Base
+  title="The Intention Gap | An Independent Demographic Inquiry"
+  description="Will Generation Z have the families they say they want? Four studies of U.S. fertility expectations, intentions, housing and forecasts, and why the existing data cannot settle the question."
+>
+  <div id="top"></div>
+  <Nav />
+  <main id="main">
+    <Overview />
+    <Expectations />
+    <Intentions />
+    <Housing />
+    <Forecast />
+    <Conclusion />
+    <Methods />
+    <Archive />
+  </main>
+  <Colophon />
+  <script>
+    import "../scripts/main.ts";
+  </script>
+</Base>
