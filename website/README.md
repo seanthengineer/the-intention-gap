@@ -1,10 +1,10 @@
 # The Intention Gap: research website
 
-A static, single-page website that presents the frozen results of The Intention Gap for a general audience: four studies, 15 interactive charts, three scroll-driven transitions and an archive of all 21 project figures. It is part of this repository and reads the research outputs directly; it does not recompute or reinterpret any result.
+I use this static, single-page website to present the frozen results of The Intention Gap to a general audience: four studies, 15 original interactive research charts, scroll-driven transitions and an archive of all 21 project figures. I keep it in the same repository as the research. The website reads published results without recomputing or reinterpreting them.
 
 ![The website's opening screen: the research question beside the U.S. total fertility rate, 1953 to 2024, drawn as squares of 0.1 births per woman](../assets/readme/website-overview.png)
 
-**Status:** in review; not yet deployed. Hosting is not enabled.
+**Status:** I am reviewing the site before public release. Hosting is not enabled.
 
 ## Requirements
 
@@ -57,7 +57,7 @@ With reduced motion requested, the transitions switch between fixed states. The 
 | Figures in the Archive section | Copied at build time from `assets/figures/` | As in the [licensing register](../docs/licensing_and_attribution.md) |
 | Map geometry | us-atlas, from U.S. Census Bureau cartographic boundary files | ISC; boundary data public domain |
 
-The chapter photographs use responsive, full-color JPEGs. The original photographs and optional dithering renderer remain available. The crowd in the opening transition is generated procedurally and is illustrative; it does not depict survey participants.
+I present the chapter photographs as responsive, full-color JPEGs while retaining the original files and optional dithering renderer. The crowd in the opening transition is generated procedurally and is illustrative; it does not depict survey participants.
 
 ## Licensing and attribution
 
