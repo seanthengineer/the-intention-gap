@@ -116,12 +116,6 @@ python audit/verify_final_synthesis.py      # claim matrix; raw-data checks repo
 
 **Full reproduction** reruns every chapter from the source data. Readers download the data themselves: the NLSY97 extracts from NLS Investigator, the NSFG and natality files from CDC, ACS through the Census API, and the HFD archive with a free account. Steps and expected outputs: [reproducibility guide](docs/final_reproducibility_guide.md). Raw and respondent-level data are never committed.
 
-## Author contribution and status
-
-**Sean Nathaniel M.** developed the research question, personally selected data sources with input from technical recommendations, directed methodological decisions, and reviewed and approved the scientific results. Claude Code supported implementation, including Python coding, repetitive tasks, tests, verifiers and documentation. The [technical walkthrough](docs/technical_walkthrough.md#author-contribution-and-ai-assistance) explains the division of work.
-
-This is an independent portfolio research project, **not peer-reviewed**. The Streamlit prototype remains local and outside this repository.
-
 ## Data, licensing and attribution
 
 - **HFD.** Tables in `data/public/m11/`, the M11 figures and the header above contain extracts of estimates from the [Human Fertility Database](https://www.humanfertility.org) (Max Planck Institute for Demographic Research and Vienna Institute of Demography; USA release 2 July 2026, downloaded 20 November 2026). They are licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) and were changed by this project.
