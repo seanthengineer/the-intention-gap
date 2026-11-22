@@ -1,6 +1,6 @@
 # Licensing, attribution and data-use register
 
-**Status:** project licenses authorized by the owner on 2026-11-21. Source terms were checked against the providers' pages on 2026-11-20 (section 1). The original software is licensed under [MIT](../LICENSE); the original research text and presentation contributions are licensed under [CC BY 4.0](../LICENSE-docs.md). Third-party data retain their own terms.
+**Status:** I approved the project licenses on 2026-11-21. I used the source terms verified against the providers' pages on 2026-11-20 (section 1). The original software is licensed under [MIT](../LICENSE); the original research text and presentation contributions are licensed under [CC BY 4.0](../LICENSE-docs.md). Third-party data retain their own terms.
 
 This document closes the open licensing items of the frozen [`docs/final_sources.md`](final_sources.md) (L-SRC-1 and L-SRC-4) without editing it. Corrections to frozen text are listed in [`docs/publication_errata.md`](publication_errata.md).
 
@@ -58,7 +58,7 @@ The frozen M09 figures do not print the suggested NSFG footer. The visual atlas 
 
 **Official licensing texts:** The MIT text is included in [LICENSE](../LICENSE). The [CC BY 4.0 legal code](https://creativecommons.org/licenses/by/4.0/legalcode) is linked by [LICENSE-docs.md](../LICENSE-docs.md).
 
-**Author contribution and AI assistance:** Sean Nathaniel M. selected the datasets personally, informed by technical recommendations, directed research decisions and reviewed the results. Claude Code assisted with substantive coding and repetitive implementation, tests, verifiers and documentation. The project licenses only rights the stated copyright holder can grant. See [technical walkthrough](technical_walkthrough.md#author-contribution-and-ai-assistance).
+**My contribution and AI assistance:** I conceived and directed the research, selected the datasets after considering technical recommendations, set the methodological priorities and reviewed the results. I used ChatGPT for planning and technical exploration and Claude Code for development assistance, including substantial implementation, tests, verification tooling and documentation. I am responsible for the research's interpretations and release decisions. The project licenses only rights I can grant in the original contributions. See [technical walkthrough](technical_walkthrough.md#author-contribution-and-ai-assistance).
 
 ## 5. Frozen artifacts and redistribution
 
