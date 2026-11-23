@@ -32,8 +32,8 @@ const ari = data.m11.selection.find((s) => s.method === "ari")!;
 
     <div class="grid">
       <div class="c-1-13">
-        <h3 class="fig-title" style="margin-bottom:var(--s-16)">Every model, its benchmark and its result</h3>
-        <div class="table-scroll">
+        <h3 class="fig-title" id="methods-models" style="margin-bottom:var(--s-16)">Every model, its benchmark and its result</h3>
+        <div class="table-scroll" tabindex="0" role="region" aria-labelledby="methods-models">
           <table class="data methods-table">
             <thead><tr><th>Chapter</th><th>Task</th><th>Benchmark</th><th>Models</th><th>Out-of-sample test</th><th>Result</th></tr></thead>
             <tbody>
@@ -105,7 +105,7 @@ const ari = data.m11.selection.find((s) => s.method === "ari")!;
           <div><b>4 of 4</b><span>chapters independently recomputed</span></div>
         </div>
         <p class="prose">Source-only checks need no restricted data. They use Python 3.15.2:</p>
-<pre class="terminal" aria-label="Commands to verify the research"><span class="p">$</span> python -m pip install --only-binary=:all: --require-hashes -r requirements-lock.txt
+<pre class="terminal" tabindex="0" role="region" aria-label="Commands to verify the research"><span class="p">$</span> python -m pip install --only-binary=:all: --require-hashes -r requirements-lock.txt
 <span class="p">$</span> python audit/verify_freeze.py               <span class="c"># five manifests, 221 frozen files</span>
 <span class="p">$</span> python -m tools.release restore-run-record  <span class="c"># once per fresh clone</span>
 <span class="p">$</span> python -m unittest                          <span class="c"># restricted-data tests report "skipped"</span>

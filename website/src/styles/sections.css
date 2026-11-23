@@ -399,6 +399,11 @@
   border-bottom: 0;
 }
 
+.cohort-card .ledger dd {
+  margin: 0;
+  font: inherit;
+}
+
 .ledger .cells {
   display: grid;
   grid-template-columns: repeat(44, 1fr);

@@ -843,8 +843,9 @@ main {
   cursor: pointer;
 }
 
-.chart .hit:focus {
-  outline: none;
+.chart svg [tabindex="0"]:focus-visible {
+  outline: 2px solid var(--oxblood);
+  outline-offset: 3px;
 }
 
 .fig-foot {
@@ -984,6 +985,7 @@ table.data td.n {
 
 .tip[data-show="true"] {
   opacity: 1;
+  pointer-events: auto;
   transform: translateY(0);
 }
 

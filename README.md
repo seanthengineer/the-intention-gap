@@ -5,7 +5,7 @@
 
 # The Intention Gap
 
-**I developed The Intention Gap to investigate whether the evidence supports the claim that young Americans will fall short of the families they say they want.** I organized four complementary studies around predictive calibration, supervised classification, statistical inference and forecasting across seven official data sources. I trace material claims to frozen values and use separate verification code to check each chapter's headline results.
+**I developed The Intention Gap to investigate whether the evidence supports the claim that young Americans will fall short of the families they say they want.** I organized four studies around predictive calibration, supervised classification, statistical inference and forecasting across seven official data sources. I trace material claims to frozen values and require independently written verification code to check each chapter's headline results.
 
 [Manuscript](docs/final_synthesis_manuscript.md) · [Visual atlas](docs/visual_atlas.md) · [Interactive website](#interactive-research-website) · [How it was built](docs/engineering_decisions.md) · [Technical walkthrough](docs/technical_walkthrough.md) · [Reproduce](#reproducibility)
 
@@ -82,11 +82,11 @@ All 21 figures, with populations, units, uncertainty and limitations: **[visual 
 
 ## Interactive research website
 
-[![The website's opening screen: the research question beside the U.S. total fertility rate, 1953 to 2024, drawn as squares of 0.1 births per woman, peaking at 3.74 in 1957 and falling to 1.59 in 2024.](assets/readme/website-overview.png)](website/)
+[![The Intention Gap cinematic opening, with a relief chart of 72 annual U.S. fertility rates from 1953 to 2024.](assets/readme/website-overview.png)](website/)
 
-I present the four studies for a general audience through a single-page website in [`website/`](website/), with the original 15 interactive research charts, scroll-driven transitions and an archive of all 21 figures.
+I present the four studies for a general audience through a single-page website in [`website/`](website/), with 15 original interactive research charts, a state-by-year Housing atlas, scroll-driven transitions and an archive of all 21 research figures.
 
-**How I keep presentation separate from research.** The website presents frozen findings rather than recomputing the analysis. When it is built, it reads `data/public/`, `assets/figures/` and the visual atlas, checks every file it reads against the freeze manifests, and stops if a frozen file has changed or a published headline value no longer matches. It computes no new results and shows no suppressed survey estimate.
+**How I keep presentation separate from research.** The charts present frozen results. The Housing atlas displays a separate descriptive export of state-year aggregates with disclosure rules and source provenance. The build reads `data/public/`, `assets/figures/` and the visual atlas, verifies the frozen inputs against their recorded SHA-256 hashes, and stops if a frozen file has changed or a published headline value no longer matches. It computes no new research results and shows no suppressed survey estimates.
 
 **Run it locally** (Node.js 22.23.4 or later):
 
@@ -96,7 +96,7 @@ npm ci
 npm run dev        # http://localhost:4321
 ```
 
-Production builds, technology, assets and attribution: [website/README.md](website/README.md).
+Production builds, the GitHub Pages subpath, technology, assets and attribution are documented in the [website guide](website/README.md).
 
 **Public link:** not yet deployed. The address will be added here when the site is published.
 
@@ -134,7 +134,7 @@ python -m unittest                          # tests that need restricted data re
 python audit/verify_final_synthesis.py      # claim matrix; raw-data checks report SKIP
 ```
 
-**Full reproduction** reruns every chapter from the source data. I provide the steps, but readers obtain the original data themselves: the NLSY97 extracts from NLS Investigator, the NSFG and natality files from CDC, ACS through the Census API, and the HFD archive with a free account. Steps and expected outputs: [reproducibility guide](docs/final_reproducibility_guide.md). Raw and respondent-level data are never committed.
+**Full reproduction** reruns every chapter from the source data. I provide the steps, but readers obtain the original data themselves: NLSY97 extracts from NLS Investigator, NSFG and natality files from CDC, ACS through the Census API, and the HFD archive with a free account. Steps and expected outputs: [reproducibility guide](docs/final_reproducibility_guide.md). Raw and respondent-level data are never committed.
 
 ## Data, licensing and attribution
 

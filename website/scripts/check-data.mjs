@@ -44,8 +44,31 @@ if (d.m11.selection.some((s) => s.qualifies)) failures.push("A forecasting metho
 if (d.nsfg.subgroups.some((s) => s.rel.startsWith("suppress") && s.est !== null)) failures.push("A suppressed NSFG estimate carries a value");
 if (d.figures.length !== 21) failures.push(`Expected 21 research figures, found ${d.figures.length}`);
 
+const geo = JSON.parse(readFileSync(join(SITE, "src", "data", "geo.json"), "utf8"));
+const atlasStates = new Map(geo.states.filter((state) => state.d).map((state) => [state.id, state.name]));
+const atlasKeys = new Set();
+const atlasYears = [2014, 2015, 2016, 2017, 2018, 2019, 2021, 2022, 2023, 2024];
+if (atlasStates.size !== 51 || d.m10Atlas.years.join(",") !== atlasYears.join(",")) {
+  failures.push("M10 atlas geometry or year coverage differs from the study");
+}
+for (const row of d.m10Atlas.rows) {
+  const key = `${row.fips}/${row.year}`;
+  if (atlasKeys.has(key) || !row.name || atlasStates.get(row.fips) !== row.name || !atlasYears.includes(row.year)) {
+    failures.push(`M10 atlas duplicate or unjoinable row: ${key}`);
+  }
+  atlasKeys.add(key);
+  if (!Number.isFinite(row.burden30) || !Number.isFinite(row.burden50)
+      || row.burden50 < 0 || row.burden50 > row.burden30 || row.burden30 > 100) {
+    failures.push(`M10 atlas invalid rent burden: ${key}`);
+  }
+  if ([row.birth20, row.birth25].some((value) => !Number.isFinite(value) || value < 0)) {
+    failures.push(`M10 atlas missing or invalid rate in the verified release: ${key}`);
+  }
+}
+if (atlasKeys.size !== 510) failures.push(`Expected 510 M10 atlas state-years, found ${atlasKeys.size}`);
+
 if (failures.length) {
   console.error("Data check FAILED:\n  " + failures.join("\n  "));
   process.exit(1);
 }
-console.log("Data check passed: published headline values match the frozen sources; no suppressed estimate carries a value.");
+console.log("Data check passed: frozen headline values, NSFG suppression, research archive count and M10 atlas FIPS joins.");

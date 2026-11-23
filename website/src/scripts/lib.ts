@@ -41,13 +41,21 @@ export function onResize(el: Element, fn: (width: number) => void) {
 }
 
 let tipEl: HTMLDivElement | null = null;
+let tipAnchor: Element | null = null;
+let tipTimer = 0;
+let tipHtml = "";
 function tipNode() {
   if (!tipEl) {
     tipEl = document.createElement("div");
     tipEl.className = "tip";
     tipEl.setAttribute("role", "status");
     tipEl.setAttribute("aria-live", "polite");
+    tipEl.addEventListener("pointerenter", () => window.clearTimeout(tipTimer));
+    tipEl.addEventListener("pointerleave", deferHideTip);
     document.body.appendChild(tipEl);
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") hideTip();
+    });
   }
   return tipEl;
 }
@@ -58,34 +66,59 @@ export interface TipContent {
   note?: string;
 }
 
-export function showTip(c: TipContent, x: number, y: number) {
+export function showTip(c: TipContent, x: number, y: number, anchor: Element) {
+  window.clearTimeout(tipTimer);
   const el = tipNode();
+  const keepPosition = el.dataset.show === "true" && tipAnchor === anchor;
+  tipAnchor = anchor;
   const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
-  el.innerHTML =
+  const html =
     `<div class="t-head">${esc(c.head)}</div>` +
     c.rows.map(([k, v]) => `<div class="t-row"><span>${esc(k)}</span><span>${esc(v)}</span></div>`).join("") +
     (c.note ? `<div class="t-note">${esc(c.note)}</div>` : "");
+  if (keepPosition && tipHtml === html) return;
+  el.innerHTML = html;
+  tipHtml = html;
   el.dataset.show = "true";
   const r = el.getBoundingClientRect();
+  const maxLeft = window.innerWidth - r.width - 12;
+  const maxTop = window.innerHeight - r.height - 12;
   let left = x + 16;
   let top = y + 16;
-  if (left + r.width > window.innerWidth - 12) left = x - r.width - 16;
-  if (top + r.height > window.innerHeight - 12) top = y - r.height - 16;
-  el.style.left = `${Math.max(8, left)}px`;
-  el.style.top = `${Math.max(8, top)}px`;
+  if (keepPosition) {
+    left = Number.parseFloat(el.style.left);
+    top = Number.parseFloat(el.style.top);
+  } else {
+    if (left > maxLeft) left = x - r.width - 16;
+    if (top > maxTop) top = y - r.height - 16;
+  }
+  el.style.left = `${Math.max(8, Math.min(maxLeft, left))}px`;
+  el.style.top = `${Math.max(8, Math.min(maxTop, top))}px`;
 }
 
 export function hideTip() {
+  window.clearTimeout(tipTimer);
+  tipAnchor = null;
   if (tipEl) tipEl.dataset.show = "false";
 }
 
+export function deferHideTip() {
+  window.clearTimeout(tipTimer);
+  tipTimer = window.setTimeout(hideTip, 350);
+}
+
 export function bindTip(node: Element, content: () => TipContent) {
-  node.addEventListener("pointerenter", (e) => showTip(content(), (e as PointerEvent).clientX, (e as PointerEvent).clientY));
-  node.addEventListener("pointermove", (e) => showTip(content(), (e as PointerEvent).clientX, (e as PointerEvent).clientY));
-  node.addEventListener("pointerleave", hideTip);
+  if (!node.hasAttribute("tabindex")) node.setAttribute("tabindex", "0");
+  if (!node.hasAttribute("aria-label")) node.setAttribute("aria-label", content().head);
+  if (node instanceof SVGElement && !node.hasAttribute("role")) node.setAttribute("role", "img");
+  node.addEventListener("pointerenter", (e) => showTip(content(), (e as PointerEvent).clientX, (e as PointerEvent).clientY, node));
+  node.addEventListener("pointermove", (e) => showTip(content(), (e as PointerEvent).clientX, (e as PointerEvent).clientY, node));
+  node.addEventListener("pointerleave", () => {
+    if (node !== document.activeElement) deferHideTip();
+  });
   node.addEventListener("focus", () => {
     const r = node.getBoundingClientRect();
-    showTip(content(), r.right, r.top);
+    showTip(content(), r.right, r.top, node);
   });
   node.addEventListener("blur", hideTip);
 }

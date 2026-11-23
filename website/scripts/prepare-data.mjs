@@ -349,7 +349,25 @@ const geo = {
   nation: path(mesh(topo, topo.objects.states, (a, b) => a === b)),
 };
 
-writeFileSync(join(OUT, "site-data.json"), JSON.stringify({ nlsy, nsfg, m10, m11, final: { populationMap, evidence }, figures }));
+const atlasCsv = read(`${P}/m10/m10_geography.csv`);
+const atlasRows = csvParse(atlasCsv);
+if (atlasRows.columns.join(",") !== "state_fips,state_name,year,burden30_pct,severe50_pct,birth_rate_20_24,birth_rate_25_29") {
+  throw new Error("M10 atlas CSV does not match the public aggregate schema");
+}
+const m10Atlas = {
+  years: [2014, 2015, 2016, 2017, 2018, 2019, 2021, 2022, 2023, 2024],
+  rows: atlasRows.map((row) => ({
+    fips: row.state_fips,
+    name: row.state_name,
+    year: num(row.year),
+    burden30: num(row.burden30_pct),
+    burden50: num(row.severe50_pct),
+    birth20: num(row.birth_rate_20_24),
+    birth25: num(row.birth_rate_25_29),
+  })),
+};
+writeFileSync(join(SITE, "public", "figures", "m10-geography.csv"), atlasCsv);
+writeFileSync(join(OUT, "site-data.json"), JSON.stringify({ nlsy, nsfg, m10, m10Atlas, m11, final: { populationMap, evidence }, figures }));
 writeFileSync(join(OUT, "geo.json"), JSON.stringify(geo));
 let commit = null;
 try {

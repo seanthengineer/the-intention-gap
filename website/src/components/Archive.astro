@@ -99,7 +99,7 @@ const FIELDS: [string, string][] = [
             <table class="data provenance">
               <thead><tr><th>File</th><th>SHA-256</th><th>Manifest</th></tr></thead>
               <tbody>
-                {prov.files.map((f) => <tr><td><a href={gh(f.path)}>{f.path}</a></td><td title={f.sha256}>{f.sha256.slice(0, 16)}</td><td>{f.frozenIn ?? "not frozen"}</td></tr>)}
+                {prov.files.map((f) => <tr><td><a href={f.path === "data/public/m10/m10_geography.csv" ? base + "figures/m10-geography.csv" : gh(f.path)}>{f.path}</a></td><td title={f.sha256}>{f.sha256.slice(0, 16)}</td><td>{f.frozenIn ?? "not frozen"}</td></tr>)}
               </tbody>
             </table>
           </div>
