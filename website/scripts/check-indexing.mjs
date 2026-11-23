@@ -14,4 +14,8 @@ if (!html.includes(`rel="canonical" href="${canonical}"`)) {
 if (!sitemap.includes(`<loc>${canonical}</loc>`)) {
   throw new Error("The sitemap does not list the public website URL.");
 }
-console.log("Indexing checks passed: no noindex, canonical URL and sitemap present.");
+const verification = readFileSync(new URL("../dist/google2eb755841a1575e8.html", import.meta.url), "utf8").trim();
+if (verification !== "google-site-verification: google2eb755841a1575e8.html") {
+  throw new Error("Google Search Console verification file is missing or has the wrong contents.");
+}
+console.log("Indexing checks passed: no noindex, canonical URL, sitemap and Google verification file present.");
