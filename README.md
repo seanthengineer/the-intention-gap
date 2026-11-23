@@ -82,11 +82,11 @@ All 21 figures, with populations, units, uncertainty and limitations: **[visual 
 
 ## Interactive research website
 
-[![The website's opening screen: the research question beside the U.S. total fertility rate, 1953 to 2024, drawn as squares of 0.1 births per woman, peaking at 3.74 in 1957 and falling to 1.59 in 2024.](assets/readme/website-overview.png)](website/)
+[![The Intention Gap cinematic opening, with a relief chart of 72 annual U.S. fertility rates from 1953 to 2024.](assets/readme/website-overview.png)](website/)
 
-A single-page website in [`website/`](website/) presents the four studies for a general audience, with 15 interactive charts, scroll-driven transitions and an archive of all 21 figures.
+A single-page website in [`website/`](website/) presents the four studies for a general audience, with 15 original interactive charts, a state-by-year Housing atlas, scroll-driven transitions and an archive of all 21 research figures.
 
-**How it relates to the research.** The website only presents results. When it is built, it reads `data/public/`, `assets/figures/` and the visual atlas, checks every file it reads against the freeze manifests, and stops if a frozen file has changed or a published headline value no longer matches. It computes no new results and shows no suppressed survey estimate.
+**How it relates to the research.** The charts present frozen results. The Housing atlas displays a separate descriptive export of state-year aggregates with disclosure rules and source provenance. When it is built, it reads `data/public/`, `assets/figures/` and the visual atlas, checks the frozen inputs against their recorded SHA-256 hashes, and stops if a frozen file has changed or a published headline value no longer matches. It computes no new results and shows no suppressed survey estimate.
 
 **Run it locally** (Node.js 22.23.4 or later):
 
@@ -96,7 +96,7 @@ npm ci
 npm run dev        # http://localhost:4321
 ```
 
-Production builds, technology, assets and attribution: [website/README.md](website/README.md).
+Production builds, the GitHub Pages subpath, technology, assets and attribution are documented in the [website guide](website/README.md).
 
 **Public link:** not yet deployed. The address will be added here when the site is published.
 

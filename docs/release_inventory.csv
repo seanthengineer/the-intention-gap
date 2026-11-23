@@ -91,6 +91,7 @@ data/public/m10/m10_desc_burden_measures.csv,public aggregate data,m10_freeze.sh
 data/public/m10/m10_desc_by_year.csv,public aggregate data,m10_freeze.sha256,derived data: Census ACS and CDC WONDER natality terms
 data/public/m10/m10_desc_pre_post.csv,public aggregate data,m10_freeze.sha256,derived data: Census ACS and CDC WONDER natality terms
 data/public/m10/m10_desc_variance.csv,public aggregate data,m10_freeze.sha256,derived data: Census ACS and CDC WONDER natality terms
+data/public/m10/m10_geography.csv,public aggregate data,,derived data: Census ACS and CDC WONDER natality terms
 data/public/m10/m10_loso.csv,public aggregate data,m10_freeze.sha256,derived data: Census ACS and CDC WONDER natality terms
 data/public/m10/m10_model_summary.json,public aggregate data,m10_freeze.sha256,derived data: Census ACS and CDC WONDER natality terms
 data/public/m10/m10_models.csv,public aggregate data,m10_freeze.sha256,derived data: Census ACS and CDC WONDER natality terms
@@ -212,6 +213,7 @@ docs/m01_m08_freeze_record.md,documentation,,project documentation
 docs/m10_analysis_protocol.md,documentation,m10_freeze.sha256,project documentation
 docs/m10_data_feasibility.md,documentation,m10_freeze.sha256,project documentation
 docs/m10_freeze.sha256,research record,,project documentation
+docs/m10_geography_export.md,documentation,,project documentation
 docs/m10_housing_fertility.md,documentation,m10_freeze.sha256,project documentation
 docs/m10_protocol_lock.json,research record,m10_freeze.sha256,project documentation
 docs/m11_data_feasibility.md,documentation,m11_freeze.sha256,project documentation
@@ -249,6 +251,7 @@ tests/test_final_synthesis_freeze.py,tests,final_synthesis_freeze.sha256,project
 tests/test_freeze_integrity.py,tests,m10_freeze.sha256,project code
 tests/test_m01_m08_freeze.py,tests,,project code
 tests/test_m10_data.py,tests,m10_freeze.sha256,project code
+tests/test_m10_geography.py,tests,,project code
 tests/test_m10_models.py,tests,m10_freeze.sha256,project code
 tests/test_m11_data.py,tests,m11_freeze.sha256,project code
 tests/test_m11_forecast.py,tests,m11_freeze.sha256,project code
@@ -263,12 +266,14 @@ tests/test_supplement_extract.py,tests,m01_m08_freeze.sha256,project code
 tests/test_survey_design.py,tests,m01_m08_freeze.sha256,project code
 tests/test_temporal_validation.py,tests,m01_m08_freeze.sha256,project code
 tools/__init__.py,code,,project code
+tools/m10_geography.py,code,,project code
 tools/pyright_baseline.json,code,,project code
 tools/pyright_baseline.py,code,,project code
 tools/readme_header.py,code,,project code
 tools/release.py,code,,project code
 website/.gitignore,website,,project code
 website/README.md,website,,project documentation
+website/RELEASE.md,website,,project documentation
 website/astro.config.mjs,website,,project code
 website/package-lock.json,website,,project code
 website/package.json,website,,project code
@@ -290,6 +295,7 @@ website/src/components/Expectations.astro,website,,project code
 website/src/components/Figure.astro,website,,project code
 website/src/components/Forecast.astro,website,,project code
 website/src/components/Housing.astro,website,,project code
+website/src/components/HousingAtlas.astro,website,,project code
 website/src/components/Intentions.astro,website,,project code
 website/src/components/Methods.astro,website,,project code
 website/src/components/Nav.astro,website,,project code
@@ -301,6 +307,8 @@ website/src/pages/index.astro,website,,project code
 website/src/scripts/charts/common.ts,website,,project code
 website/src/scripts/charts/evidence.ts,website,,project code
 website/src/scripts/charts/forecast.ts,website,,project code
+website/src/scripts/charts/housing-atlas-model.ts,website,,project code
+website/src/scripts/charts/housing-atlas.ts,website,,project code
 website/src/scripts/charts/housing.ts,website,,project code
 website/src/scripts/charts/nlsy.ts,website,,project code
 website/src/scripts/charts/nsfg.ts,website,,project code

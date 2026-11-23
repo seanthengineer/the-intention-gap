@@ -10,7 +10,7 @@ export function svgIn(el: HTMLElement, width: number, height: number, label: str
     .attr("viewBox", `0 0 ${width} ${height}`)
     .attr("width", width)
     .attr("height", height)
-    .attr("role", "img")
+    .attr("role", "group")
     .attr("aria-label", label) as unknown as S;
 }
 

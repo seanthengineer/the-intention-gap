@@ -32,7 +32,11 @@ concurrency:
 
 jobs:
   build:
-    name: Install and build the website
+    name: Install and build the website (${{ matrix.build }})
+    strategy:
+      fail-fast: false
+      matrix:
+        build: [build, 'build:pages']
     runs-on: ubuntu-latest
     timeout-minutes: 15
     defaults:
@@ -56,7 +60,7 @@ jobs:
         run: npm ci
 
       - name: Build (frozen-source hashes, headline values, static site, text checks)
-        run: npm run build
+        run: npm run ${{ matrix.build }}
 
       - name: Built site is self-contained (no external scripts or styles, no local paths)
         run: |

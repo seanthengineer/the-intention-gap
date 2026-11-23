@@ -1,8 +1,8 @@
 # The Intention Gap: research website
 
-A static, single-page website that presents the frozen results of The Intention Gap for a general audience: four studies, 15 interactive charts, three scroll-driven transitions and an archive of all 21 project figures. It is part of this repository and reads the research outputs directly; it does not recompute or reinterpret any result.
+A static, single-page website that presents the frozen results of The Intention Gap for a general audience: four studies, 15 original interactive charts, a descriptive state-by-year Housing atlas, scroll-driven transitions and an archive of all 21 project figures. It is part of this repository and reads the research outputs directly; it does not recompute or reinterpret any result.
 
-![The website's opening screen: the research question beside the U.S. total fertility rate, 1953 to 2024, drawn as squares of 0.1 births per woman](../assets/readme/website-overview.png)
+![The Intention Gap cinematic opening beside an oblique chart of 72 annual U.S. fertility rates](../assets/readme/website-overview.png)
 
 **Status:** in review; not yet deployed. Hosting is not enabled.
 
@@ -35,6 +35,8 @@ npm run preview    # serves dist/ locally for a final check
 
 `INTENTION_GAP_REPO=/path/to/repository` builds from a checkout in another location.
 
+The Housing atlas uses a publication-safe state-year CSV. The [geographic data notes](../docs/m10_geography_export.md) explain the units, the 2020 gap, disclosure checks and reproduction. The [release candidate report](RELEASE.md) records verification and launch readiness.
+
 ## Technology
 
 - [Astro](https://astro.build) 7, static output; no server code and no client framework
@@ -65,13 +67,25 @@ The chapter photographs use responsive, full-color JPEGs. The original photograp
 - The page carries the data attributions required by the [licensing register](../docs/licensing_and_attribution.md): the Human Fertility Database (CC BY 4.0, changed by this project), the NSFG data-source statement, the NCHS responsibility statement and the Census Data API notice.
 - Dependencies are installed from npm and never committed. Bundled into the built site: D3, topojson and us-atlas (ISC), Astro (MIT), GSAP ([Standard "no charge" license](https://gsap.com/standard-license)) and the fonts ([SIL Open Font License 1.1](https://openfontlicense.org)).
 
-## Deployment
+## Release build and deployment
 
-Not deployed yet. `website/dist/` is a self-contained static folder: it loads no external scripts, styles or fonts, so any static host can serve it.
+GitHub Pages remains inactive. `website/dist/` is a self-contained static folder: it loads no external scripts, styles or fonts, so any static host can serve it.
 
-- **At a domain root:** serve `dist/` as built.
-- **Under a sub-path** (for example a GitHub Pages project site at `/the-intention-gap/`): build with `npx astro build --base /the-intention-gap/`, or set `base` in `astro.config.mjs`. Every asset URL follows the base.
+### Build the GitHub Pages artifact
 
-Before deploying, remove the `noindex, nofollow` robots tag in `src/layouts/Base.astro`. The page's links to this repository work once the repository is public.
+```sh
+cd website
+npm ci
+npm run build:pages
+npm run preview -- --base /the-intention-gap/
+```
 
-CI: [`.github/workflows/website.yml`](../.github/workflows/website.yml) runs `npm ci` and `npm run build` on every change to the website or to the research files it reads. It never deploys.
+Open the preview at `/the-intention-gap/`. The Astro base path is compiled into the HTML, asset URLs and client-side imports. Use `npm run build` for a host that serves the site at its domain root.
+
+### Owner-authorized launch
+
+After approving the exact commit and deciding repository visibility and indexing policy, select GitHub Actions as the Pages publishing source. Use a dedicated, owner-approved workflow to build with `npm run build:pages`, upload only `website/dist/` with the GitHub Pages artifact action, and deploy it with the Pages deployment action using the `github-pages` environment and the required Pages permissions. Recheck repository documentation links with the intended public-reader permissions. Remove the `noindex, nofollow` directive in `src/layouts/Base.astro` only if public indexing is approved.
+
+The existing Website workflow builds and checks the candidate. The release branch has no deployment workflow. See the [GitHub Pages publishing instructions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) and [Astro’s GitHub Pages guide](https://docs.astro.build/en/guides/deploy/github/).
+
+CI: [`.github/workflows/website.yml`](../.github/workflows/website.yml) runs `npm ci` and builds both the root and the GitHub Pages base paths on every change to the website or to the research files it reads. It never deploys.
