@@ -45,4 +45,4 @@ In a scripted desktop scroll through the cover, ASCII-to-map and map-to-forecast
 
 ## Deployment preparation
 
-The [website build guide](README.md) documents the project-root and GitHub Pages subpath builds. The Website workflow exercises both build variants. Public reader access to GitHub-hosted documentation and indexing are owner decisions at launch.
+The [website build guide](README.md) documents the project-root and GitHub Pages subpath builds. The Website workflow exercises both build variants. I prepared a separate, manually triggered [Pages workflow](../.github/workflows/pages.yml) with a private-repository safeguard and an explicit publishing confirmation. No deployment runs on a push or pull request. I still need to approve the repository's public visibility, GitHub Pages source, public reader access to the research links and search indexing. My [publication plan](../docs/publication_plan.md) tracks those decisions.

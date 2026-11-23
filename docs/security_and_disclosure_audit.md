@@ -47,7 +47,7 @@ These local files and folders exist in the working tree and are **not** part of 
 
 - The project uses one credential, a Census Data API key. It is read from the `CENSUS_API_KEY` environment variable and never written to disk; `audit/verify_m10.py` checks that it does not appear in any saved file.
 - Public CI needs no secrets: tests and verifiers that require data or keys report SKIP.
-- No workflow has write permission or uploads artifacts.
+- My research, integrity and routine Website workflows remain read-only and do not upload research artifacts. I have prepared a separate manual Pages workflow that uploads only the static `website/dist/` folder. Its deployment job requests `pages: write` and `id-token: write`, but the workflow refuses to publish from a private repository, from a branch other than `main`, or without my explicit release confirmation.
 
 ## 5. Owner actions on GitHub (after the repository exists)
 
