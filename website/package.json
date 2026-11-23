@@ -12,8 +12,8 @@
     "data": "node scripts/prepare-data.mjs",
     "check:data": "node scripts/check-data.mjs",
     "dev": "npm run data && astro dev",
-    "build": "npm run data && npm run check:data && astro build && node scripts/check-text.mjs",
-    "build:pages": "npm run data && npm run check:data && astro build --base /the-intention-gap/ && node scripts/check-text.mjs",
+    "build": "npm run data && npm run check:data && astro build && node scripts/check-text.mjs && node scripts/check-indexing.mjs",
+    "build:pages": "npm run data && npm run check:data && astro build --base /the-intention-gap/ && node scripts/check-text.mjs && node scripts/check-indexing.mjs",
     "preview": "astro preview"
   },
   "dependencies": {

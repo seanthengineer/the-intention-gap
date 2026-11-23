@@ -1,6 +1,6 @@
 # Website release candidate
 
-I published [The Intention Gap](https://seanthengineer.github.io/the-intention-gap/) from `main` through the manual GitHub Pages workflow. The build and deployment jobs passed, and I reviewed the live website. The repository is public. I still need to decide whether to allow search engines to index the site and whether to create an official GitHub Release.
+I published [The Intention Gap](https://seanthengineer.github.io/the-intention-gap/) from `main` through the manual GitHub Pages workflow. The build and deployment jobs passed, and I reviewed the live website. The repository is public. I approved search indexing, removed the blocking metadata in source, and added a canonical URL and sitemap. I still need to deploy these changes and decide whether to create an official GitHub Release.
 
 The V2.3 Housing atlas and V2.4 review build were developed on `feat/intention-gap-v2` and merged into `main` before publication. The measurements and browser checks below document that release candidate.
 
@@ -47,4 +47,4 @@ In a scripted desktop scroll through the cover, ASCII-to-map and map-to-forecast
 
 ## GitHub Pages deployment
 
-I built the published site at the `/the-intention-gap/` base path. The [website build guide](README.md) documents both build variants. The Website workflow verifies them; the separate [manual Pages workflow](../.github/workflows/pages.yml) deploys only with my confirmation and never runs automatically on pushes or pull requests. The public site is [here](https://seanthengineer.github.io/the-intention-gap/). I have left search indexing disabled while I decide whether to enable it. My [publication record](../docs/publication_plan.md) tracks the deployment and remaining decisions.
+I built the published site at the `/the-intention-gap/` base path. The [website build guide](README.md) documents both build variants. The Website workflow verifies them; the separate [manual Pages workflow](../.github/workflows/pages.yml) deploys only with my confirmation and never runs automatically on pushes or pull requests. The public site is [here](https://seanthengineer.github.io/the-intention-gap/). I have approved search indexing in the source. The published website will reflect that change after I manually deploy the updated `main` branch. My [publication record](../docs/publication_plan.md) tracks the deployment and remaining decisions.

@@ -4,7 +4,7 @@ I use this static, single-page website to present the frozen results of The Inte
 
 ![The Intention Gap cinematic opening beside an oblique chart of 72 annual U.S. fertility rates](../assets/readme/website-overview.png)
 
-**Status:** I published the website on [GitHub Pages](https://seanthengineer.github.io/the-intention-gap/) from the `main` branch. The deployment passed, and I checked the live site. The research repository and website are public. I have not yet enabled search indexing.
+**Status:** I published the website on [GitHub Pages](https://seanthengineer.github.io/the-intention-gap/) from the `main` branch. The deployment passed, and I checked the live site. I have now approved Google search indexing and updated the source to remove `noindex, nofollow`. I need to redeploy this version before the change reaches the live website. Google decides if and when to include it in results.
 
 ## Requirements
 
@@ -28,12 +28,13 @@ npm run build      # writes the static site to website/dist/
 npm run preview    # serves dist/ locally for a final check
 ```
 
-`npm run build` runs four steps and stops at the first failure:
+`npm run build` runs five steps and stops at the first failure:
 
 1. `scripts/prepare-data.mjs` reads only `data/public/`, `assets/figures/` and `docs/visual_atlas.md`. It hashes every file it reads and stops if a file listed in a `docs/*_freeze.sha256` manifest has changed. It writes `src/data/*.json` (site data, map geometry, and a provenance list with the source commit, shown in the site's Archive) and copies the figures to `public/figures/`. These generated files are not committed.
 2. `scripts/check-data.mjs` confirms that the published headline values (for example 69.9%, 62.8%, 11.2%, 18.4%, 73.0%, −2.77, 1.593, 1.75, 0.62) still match the data, and that no suppressed NSFG estimate carries a value.
 3. `astro build` renders the page.
 4. `scripts/check-text.mjs` fails on em dashes, emoji or marketing phrases in the built page and scripts.
+5. `scripts/check-indexing.mjs` confirms that the built page has no blocking `noindex` meta tag, sets the canonical URL, and publishes a sitemap with the public page address.
 
 `INTENTION_GAP_REPO=/path/to/repository` builds from a checkout in another location.
 
@@ -86,7 +87,7 @@ Open the preview at `/the-intention-gap/`. The Astro base path is compiled into 
 
 ### Owner-authorized launch
 
-I publish with the [manual workflow](../.github/workflows/pages.yml). It does not run automatically. It requires a public repository, the `main` branch, and my explicit confirmation before deployment. GitHub Actions is the Pages source. I will remove `noindex, nofollow` from `src/layouts/Base.astro` only if I decide to allow search indexing.
+I publish with the [manual workflow](../.github/workflows/pages.yml). It does not run automatically. It requires a public repository, the `main` branch, and my explicit confirmation before deployment. GitHub Actions is the Pages source. I approved indexing and removed the blocking tag in `src/layouts/Base.astro`. I added a canonical URL and `sitemap.xml`. I will redeploy the site from `main` using the manual workflow, then submit the public URL through Google Search Console.
 
 My [publication record](../docs/publication_plan.md) tracks the completed deployment and remaining release decisions. The existing Website workflow builds both site variants for every pull request but never deploys. See [GitHub's Pages publishing instructions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) and [Astro's GitHub Pages guide](https://docs.astro.build/en/guides/deploy/github/).
 
