@@ -96,6 +96,8 @@ npm ci
 npm run dev        # http://localhost:4321
 ```
 
+On Windows PowerShell, use `npm.cmd` instead of `npm` if the execution policy blocks `npm.ps1`. Stop running website development servers before reinstalling Node dependencies to avoid Windows file locks.
+
 Production builds, the GitHub Pages subpath, technology, assets and attribution are documented in the [website guide](website/README.md).
 
 **Public link:** not yet deployed. The address will be added here when the site is published.

@@ -19,6 +19,8 @@ npm ci             # exact versions from package-lock.json
 npm run dev        # prepares the data, then serves http://localhost:4321 with live reload
 ```
 
+Windows PowerShell note: if your execution policy blocks `npm.ps1`, use `npm.cmd ci`, `npm.cmd run build` and `npm.cmd run preview` instead. Stop any running Astro development or preview server before reinstalling packages. You do not need Administrator access or a global execution-policy change.
+
 ## Production build
 
 ```

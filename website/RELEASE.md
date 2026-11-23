@@ -1,6 +1,6 @@
 # Website release candidate
 
-The V2.3 Housing atlas and V2.4 review build are on `feat/intention-gap-v2`. The site is prepared for owner review. Public launch requires owner authorization and the intended reader permissions for the repository links.
+The V2.3 Housing atlas and V2.4 review build were developed on `feat/intention-gap-v2` and merged into `main` as the pre-publication release candidate. The repository remains private and GitHub Pages remains disabled. Public launch still requires my approval and public-reader access to the linked research documentation.
 
 ## Geographic data
 
