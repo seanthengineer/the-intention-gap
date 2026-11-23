@@ -1,6 +1,8 @@
 # My publication plan
 
-I am preparing The Intention Gap for public access in the same GitHub repository as the research. I have kept the research results frozen and the website layout unchanged. I will not publish it until I approve the release.
+I published [The Intention Gap](https://seanthengineer.github.io/the-intention-gap/) using GitHub Pages from the same repository as my research. I kept the research results frozen and the website layout unchanged. I approved the public repository and the manual deployment. I still need to decide on search indexing and the official GitHub Release.
+
+The checklist below records how I prepared publication. Some steps describe the actions I planned before the launch.
 
 ## What I have prepared
 
@@ -69,10 +71,10 @@ I will use the following settings in the repository's About section at publicati
 
 For the social preview, I can use the existing [website overview image](../assets/readme/website-overview.png), subject to checking that the preview crop looks correct. I will keep the existing research title and citation name. I will not claim a DOI, journal publication or peer review.
 
-## My final release decision
+## My publication decision
 
-I will make the repository public only after I have confirmed the privacy settings, branch protection, source licenses and live-page readiness. I will then select the manual Publish website workflow on `main`, mark the publishing confirmation and verify the result on desktop and mobile.
+I approved public access to the research repository and deployed the website with the manual Publish website workflow on `main`. GitHub reported a successful build and deployment, and I reviewed the live site.
 
-After that verification I can remove `noindex, nofollow`, link the live site in the [main README](../README.md), set the repository homepage and create the first GitHub Release. I will choose the final release tag at that point rather than create one before publication.
+I have linked the published site in the [main README](../README.md). I still need to set the GitHub repository homepage, decide whether to remove `noindex, nofollow`, and decide when to issue a tagged GitHub Release. I will not claim a DOI or peer review.
 
-**Current status:** This is a prepared release, not a published website. I have not authorized a public repository, live Pages site or indexing.
+**Current status:** The repository and website are public. Search indexing remains disabled. No GitHub Release has been published.

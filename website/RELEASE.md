@@ -1,6 +1,8 @@
 # Website release candidate
 
-The V2.3 Housing atlas and V2.4 review build were developed on `feat/intention-gap-v2` and merged into `main` as the pre-publication release candidate. The repository remains private and GitHub Pages remains disabled. Public launch still requires my approval and public-reader access to the linked research documentation.
+I published [The Intention Gap](https://seanthengineer.github.io/the-intention-gap/) from `main` through the manual GitHub Pages workflow. The build and deployment jobs passed, and I reviewed the live website. The repository is public. I still need to decide whether to allow search engines to index the site and whether to create an official GitHub Release.
+
+The V2.3 Housing atlas and V2.4 review build were developed on `feat/intention-gap-v2` and merged into `main` before publication. The measurements and browser checks below document that release candidate.
 
 ## Geographic data
 
@@ -43,6 +45,6 @@ A clean, unthrottled local Edge 158 desktop run at 1440 × 900 under the Pages s
 
 In a scripted desktop scroll through the cover, ASCII-to-map and map-to-forecast stages, each stage had a median frame interval of 16.7 ms. The 95th-percentile interval was 33.4 ms for the cover and ASCII-to-map stages and 16.8 ms for map-to-forecast. These numbers are a local production smoke measurement. Device speed, hosting and compression affect public timings. The chart assets and server-rendered atlas geometry account for a substantial share of the payload. Field data and physical-device performance remain unmeasured.
 
-## Deployment preparation
+## GitHub Pages deployment
 
-The [website build guide](README.md) documents the project-root and GitHub Pages subpath builds. The Website workflow exercises both build variants. I prepared a separate, manually triggered [Pages workflow](../.github/workflows/pages.yml) with a private-repository safeguard and an explicit publishing confirmation. No deployment runs on a push or pull request. I still need to approve the repository's public visibility, GitHub Pages source, public reader access to the research links and search indexing. My [publication plan](../docs/publication_plan.md) tracks those decisions.
+I built the published site at the `/the-intention-gap/` base path. The [website build guide](README.md) documents both build variants. The Website workflow verifies them; the separate [manual Pages workflow](../.github/workflows/pages.yml) deploys only with my confirmation and never runs automatically on pushes or pull requests. The public site is [here](https://seanthengineer.github.io/the-intention-gap/). I have left search indexing disabled while I decide whether to enable it. My [publication record](../docs/publication_plan.md) tracks the deployment and remaining decisions.

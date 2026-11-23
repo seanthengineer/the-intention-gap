@@ -7,7 +7,7 @@
 
 **I developed The Intention Gap to investigate whether the evidence supports the claim that young Americans will fall short of the families they say they want.** I organized four studies around predictive calibration, supervised classification, statistical inference and forecasting across seven official data sources. I trace material claims to frozen values and require independently written verification code to check each chapter's headline results.
 
-[Manuscript](docs/final_synthesis_manuscript.md) · [Visual atlas](docs/visual_atlas.md) · [Interactive website](#interactive-research-website) · [How it was built](docs/engineering_decisions.md) · [Technical walkthrough](docs/technical_walkthrough.md) · [Reproduce](#reproducibility)
+[Live website](https://seanthengineer.github.io/the-intention-gap/) · [Manuscript](docs/final_synthesis_manuscript.md) · [Visual atlas](docs/visual_atlas.md) · [Interactive website](#interactive-research-website) · [How it was built](docs/engineering_decisions.md) · [Technical walkthrough](docs/technical_walkthrough.md) · [Reproduce](#reproducibility)
 
 ## Research at a glance
 
@@ -82,7 +82,7 @@ All 21 figures, with populations, units, uncertainty and limitations: **[visual 
 
 ## Interactive research website
 
-[![The Intention Gap cinematic opening, with a relief chart of 72 annual U.S. fertility rates from 1953 to 2024.](assets/readme/website-overview.png)](website/)
+[![The Intention Gap cinematic opening, with a relief chart of 72 annual U.S. fertility rates from 1953 to 2024.](assets/readme/website-overview.png)](https://seanthengineer.github.io/the-intention-gap/)
 
 I present the four studies for a general audience through a single-page website in [`website/`](website/), with 15 original interactive research charts, a state-by-year Housing atlas, scroll-driven transitions and an archive of all 21 research figures.
 
@@ -100,7 +100,7 @@ On Windows PowerShell, use `npm.cmd` instead of `npm` if the execution policy bl
 
 Production builds, the GitHub Pages subpath, technology, assets and attribution are documented in the [website guide](website/README.md).
 
-**Public link:** not yet deployed. The address will be added here when the site is published.
+**My published website:** [Explore The Intention Gap](https://seanthengineer.github.io/the-intention-gap/). I host it with GitHub Pages from this repository and keep the research and interactive presentation together.
 
 ## Technical implementation
 

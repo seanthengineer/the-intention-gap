@@ -4,7 +4,7 @@ I use this static, single-page website to present the frozen results of The Inte
 
 ![The Intention Gap cinematic opening beside an oblique chart of 72 annual U.S. fertility rates](../assets/readme/website-overview.png)
 
-**Status:** I am reviewing the site before public release. Hosting is not enabled.
+**Status:** I published the website on [GitHub Pages](https://seanthengineer.github.io/the-intention-gap/) from the `main` branch. The deployment passed, and I checked the live site. The research repository and website are public. I have not yet enabled search indexing.
 
 ## Requirements
 
@@ -71,7 +71,7 @@ I present the chapter photographs as responsive, full-color JPEGs while retainin
 
 ## Release build and deployment
 
-GitHub Pages remains inactive. `website/dist/` is a self-contained static folder: it loads no external scripts, styles or fonts, so any static host can serve it.
+I host the site on [GitHub Pages](https://seanthengineer.github.io/the-intention-gap/). `website/dist/` is a self-contained static folder: it loads no external scripts, styles or fonts, so any static host can serve it.
 
 ### Build the GitHub Pages artifact
 
@@ -86,8 +86,8 @@ Open the preview at `/the-intention-gap/`. The Astro base path is compiled into 
 
 ### Owner-authorized launch
 
-I prepared a [manual publishing workflow](../.github/workflows/pages.yml). It will not run automatically, and it refuses to publish while this repository is private, from any branch other than `main`, or without my release confirmation. I will choose GitHub Actions as the Pages source and check public access to the research links when I approve a launch. I will remove `noindex, nofollow` from `src/layouts/Base.astro` only after approving indexing.
+I publish with the [manual workflow](../.github/workflows/pages.yml). It does not run automatically. It requires a public repository, the `main` branch, and my explicit confirmation before deployment. GitHub Actions is the Pages source. I will remove `noindex, nofollow` from `src/layouts/Base.astro` only if I decide to allow search indexing.
 
-My [publication plan](../docs/publication_plan.md) records the remaining account settings and release steps. The existing Website workflow builds both site variants for every pull request but never deploys. See [GitHub's Pages publishing instructions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) and [Astro's GitHub Pages guide](https://docs.astro.build/en/guides/deploy/github/).
+My [publication record](../docs/publication_plan.md) tracks the completed deployment and remaining release decisions. The existing Website workflow builds both site variants for every pull request but never deploys. See [GitHub's Pages publishing instructions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) and [Astro's GitHub Pages guide](https://docs.astro.build/en/guides/deploy/github/).
 
 CI: [`.github/workflows/website.yml`](../.github/workflows/website.yml) runs `npm ci` and builds both the root and the GitHub Pages base paths on every change to the website or to the research files it reads. It never deploys.
