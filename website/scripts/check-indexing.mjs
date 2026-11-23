@@ -4,8 +4,8 @@ const canonical = "https://seanthengineer.github.io/the-intention-gap/";
 const html = readFileSync(new URL("../dist/index.html", import.meta.url), "utf8");
 const sitemap = readFileSync(new URL("../dist/sitemap.xml", import.meta.url), "utf8");
 
-if (/<meta\\b[^>]*name=["'](?:robots|googlebot)["'][^>]*content=["'][^"']*noindex/i.test(html) ||
-    /<meta\\b[^>]*content=["'][^"']*noindex[^"']*["'][^>]*name=["'](?:robots|googlebot)/i.test(html)) {
+if (/<meta\b[^>]*name=["'](?:robots|googlebot)["'][^>]*content=["'][^"']*noindex/i.test(html) ||
+    /<meta\b[^>]*content=["'][^"']*noindex[^"']*["'][^>]*name=["'](?:robots|googlebot)/i.test(html)) {
   throw new Error("The website still blocks search indexing.");
 }
 if (!html.includes(`rel="canonical" href="${canonical}"`)) {
