@@ -5,7 +5,7 @@
 
 # The Intention Gap
 
-**An independent applied machine-learning and demographic research project testing whether the evidence supports the claim that young Americans will fall short of the families they say they want.** Four studies combine predictive calibration, supervised classification, statistical inference and forecasting across seven official data sources to produce one integrated answer. Every material claim is traced to a frozen value, and each chapter's headline results are independently recomputed.
+**I developed The Intention Gap to investigate whether the evidence supports the claim that young Americans will fall short of the families they say they want.** I organized four studies around predictive calibration, supervised classification, statistical inference and forecasting across seven official data sources. I trace material claims to frozen values and require independently written verification code to check each chapter's headline results.
 
 [Manuscript](docs/final_synthesis_manuscript.md) · [Visual atlas](docs/visual_atlas.md) · [Interactive website](#interactive-research-website) · [How it was built](docs/engineering_decisions.md) · [Technical walkthrough](docs/technical_walkthrough.md) · [Reproduce](#reproducibility)
 
@@ -16,13 +16,13 @@
 | **4 research chapters** | longitudinal survey · cross-sectional survey · state panel · cohort forecast |
 | **7 official data sources** | National Longitudinal Survey of Youth 1997 (NLSY97) · National Survey of Family Growth (NSFG) · American Community Survey (ACS) · CDC WONDER natality · National Center for Health Statistics (NCHS) · Census population estimates · Human Fertility Database (HFD) |
 | **50 claims, 155 checks** | every material claim in the manuscript traced to a frozen value |
-| **392 automated tests** | plus independent verifiers that recompute results with separate code |
+| **400 unit-test cases** | source-only CI skips tests needing local data; independent verifiers recompute key results |
 | **221 frozen files** | five SHA-256 manifests, so results cannot change silently |
 | **Status** | research complete and frozen (November 2026); not peer-reviewed |
 
 ## Why this project exists
 
-U.S. fertility has fallen to about 1.6 births per woman, while surveys show that most young adults want children. That combination invites a confident story: Generation Z wants families it will not have. This project started from that question, defining Generation Z as the cohorts born 1995–2012, and asked what the evidence can actually establish. It went step by step:
+U.S. fertility has fallen to about 1.6 births per woman, while surveys show that most young adults want children. That combination invites a confident story: Generation Z wants families it will not have. I started by questioning that assumption. I defined Generation Z as the cohorts born 1995–2012 and organized the investigation around four questions:
 - how good are people's stated fertility expectations;
 - what the oldest members of Generation Z say they want and intend;
 - whether housing costs track birth rates;
@@ -63,7 +63,7 @@ flowchart LR
 
 Text version: seven hashed data sources feed four chapters. Each chapter is independently verified, the results are combined in a synthesis tied to a claim matrix, and 221 files are frozen.
 
-Each chapter ran from protocol to baseline, model, out-of-sample evaluation, robustness and independent verification, and was closed before the next began. The header and tables round the 2040 forecast differently (1.59 and 1.593); the value is 1.593. The step-by-step pipeline and architecture are in [docs/research_pipeline.md](docs/research_pipeline.md).
+I structured each chapter around its design, baseline, models, evaluation, robustness checks and independent verification. I closed each chapter before moving to the next. The header and tables round the 2040 forecast differently (1.59 and 1.593); the value is 1.593. The step-by-step pipeline and architecture are in [docs/research_pipeline.md](docs/research_pipeline.md).
 
 ## Visual highlights
 
@@ -84,9 +84,9 @@ All 21 figures, with populations, units, uncertainty and limitations: **[visual 
 
 [![The Intention Gap cinematic opening, with a relief chart of 72 annual U.S. fertility rates from 1953 to 2024.](assets/readme/website-overview.png)](website/)
 
-A single-page website in [`website/`](website/) presents the four studies for a general audience, with 15 original interactive charts, a state-by-year Housing atlas, scroll-driven transitions and an archive of all 21 research figures.
+I present the four studies for a general audience through a single-page website in [`website/`](website/), with 15 original interactive research charts, a state-by-year Housing atlas, scroll-driven transitions and an archive of all 21 research figures.
 
-**How it relates to the research.** The charts present frozen results. The Housing atlas displays a separate descriptive export of state-year aggregates with disclosure rules and source provenance. When it is built, it reads `data/public/`, `assets/figures/` and the visual atlas, checks the frozen inputs against their recorded SHA-256 hashes, and stops if a frozen file has changed or a published headline value no longer matches. It computes no new results and shows no suppressed survey estimate.
+**How I keep presentation separate from research.** The charts present frozen results. The Housing atlas displays a separate descriptive export of state-year aggregates with disclosure rules and source provenance. The build reads `data/public/`, `assets/figures/` and the visual atlas, verifies the frozen inputs against their recorded SHA-256 hashes, and stops if a frozen file has changed or a published headline value no longer matches. It computes no new research results and shows no suppressed survey estimates.
 
 **Run it locally** (Node.js 22.23.4 or later):
 
@@ -108,7 +108,7 @@ Production builds, the GitHub Pages subpath, technology, assets and attribution 
 - **Forecasting.** ARIMA, exponential smoothing and benchmark methods written directly in NumPy/SciPy; 72 pseudo-real-time backtest origins; cohort projection on Lexis triangles; interval calibration tested, and failing.
 - **Verification engineering.** Independent recomputation for each chapter, a 155-check claim-to-evidence matrix, SHA-256 freeze manifests, Git rules that keep frozen bytes identical, hash-locked dependencies, and a release scanner for credentials and disclosure risks.
 
-What each tool is used for: [technical walkthrough](docs/technical_walkthrough.md#technology-actually-used).
+What each tool is used for: [technical walkthrough](docs/technical_walkthrough.md#technology-i-used).
 
 ## Explore the project
 
@@ -134,7 +134,7 @@ python -m unittest                          # tests that need restricted data re
 python audit/verify_final_synthesis.py      # claim matrix; raw-data checks report SKIP
 ```
 
-**Full reproduction** reruns every chapter from the source data. Readers download the data themselves: the NLSY97 extracts from NLS Investigator, the NSFG and natality files from CDC, ACS through the Census API, and the HFD archive with a free account. Steps and expected outputs: [reproducibility guide](docs/final_reproducibility_guide.md). Raw and respondent-level data are never committed.
+**Full reproduction** reruns every chapter from the source data. I provide the steps, but readers obtain the original data themselves: NLSY97 extracts from NLS Investigator, NSFG and natality files from CDC, ACS through the Census API, and the HFD archive with a free account. Steps and expected outputs: [reproducibility guide](docs/final_reproducibility_guide.md). Raw and respondent-level data are never committed.
 
 ## Data, licensing and attribution
 

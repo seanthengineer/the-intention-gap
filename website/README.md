@@ -1,10 +1,10 @@
 # The Intention Gap: research website
 
-A static, single-page website that presents the frozen results of The Intention Gap for a general audience: four studies, 15 original interactive charts, a descriptive state-by-year Housing atlas, scroll-driven transitions and an archive of all 21 project figures. It is part of this repository and reads the research outputs directly; it does not recompute or reinterpret any result.
+I use this static, single-page website to present the frozen results of The Intention Gap for a general audience: four studies, 15 original interactive research charts, a descriptive state-by-year Housing atlas, scroll-driven transitions and an archive of all 21 project figures. I keep it in the same repository as my research. The website reads published outputs directly without recomputing or reinterpreting scientific results.
 
 ![The Intention Gap cinematic opening beside an oblique chart of 72 annual U.S. fertility rates](../assets/readme/website-overview.png)
 
-**Status:** in review; not yet deployed. Hosting is not enabled.
+**Status:** I am reviewing the site before public release. Hosting is not enabled.
 
 ## Requirements
 
@@ -59,7 +59,7 @@ With reduced motion requested, the transitions switch between fixed states. The 
 | Figures in the Archive section | Copied at build time from `assets/figures/` | As in the [licensing register](../docs/licensing_and_attribution.md) |
 | Map geometry | us-atlas, from U.S. Census Bureau cartographic boundary files | ISC; boundary data public domain |
 
-The chapter photographs use responsive, full-color JPEGs. The original photographs and optional dithering renderer remain available. The crowd in the opening transition is generated procedurally and is illustrative; it does not depict survey participants.
+I present the chapter photographs as responsive, full-color JPEGs while retaining the original files and optional dithering renderer. The crowd in the opening transition is generated procedurally and is illustrative; it does not depict survey participants.
 
 ## Licensing and attribution
 
