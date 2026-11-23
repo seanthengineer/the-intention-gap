@@ -16,7 +16,7 @@
 | **4 research chapters** | longitudinal survey · cross-sectional survey · state panel · cohort forecast |
 | **7 official data sources** | National Longitudinal Survey of Youth 1997 (NLSY97) · National Survey of Family Growth (NSFG) · American Community Survey (ACS) · CDC WONDER natality · National Center for Health Statistics (NCHS) · Census population estimates · Human Fertility Database (HFD) |
 | **50 claims, 155 checks** | every material claim in the manuscript traced to a frozen value |
-| **392 automated tests** | plus independent verifiers that recompute results with separate code |
+| **400 unit-test cases** | source-only CI skips tests needing local data; independent verifiers recompute key results |
 | **221 frozen files** | five SHA-256 manifests, so results cannot change silently |
 | **Status** | research complete and frozen (November 2026); not peer-reviewed |
 
