@@ -1,11 +1,53 @@
 import { area, line, pointer, scaleLinear } from "d3";
 import data from "../../data/site-data.json";
-import { bindTip, fmt, hideTip, onResize, pct, showTip, toggle } from "../lib";
+import { bindTip, deferHideTip, fmt, hideTip, onResize, pct, showTip, toggle } from "../lib";
 import { bottomAxis, figureOf, gridX, gridY, leftAxis, svgIn, text } from "./common";
 
 const observed = data.m11.observed as [number, number][];
 const fc = data.m11.forecast;
 type FcRow = (typeof fc)[number];
+const forecastYears = [...observed.map(([year]) => year), ...fc.map((row) => row.year)];
+
+function bindKeyboardInspection(
+  node: SVGRectElement,
+  values: number[],
+  initial: number,
+  label: string,
+  inspect: (value: number, clientX: number, clientY: number) => void,
+  clear: () => void,
+) {
+  let index = Math.max(0, values.indexOf(initial));
+  const steps: Record<string, () => number> = {
+    ArrowLeft: () => Math.max(0, index - 1),
+    ArrowDown: () => Math.max(0, index - 1),
+    ArrowRight: () => Math.min(values.length - 1, index + 1),
+    ArrowUp: () => Math.min(values.length - 1, index + 1),
+    Home: () => 0,
+    End: () => values.length - 1,
+  };
+  const show = () => {
+    const rect = node.getBoundingClientRect();
+    node.setAttribute("aria-valuenow", String(values[index]));
+    inspect(values[index], rect.right, rect.top);
+  };
+
+  node.setAttribute("tabindex", "0");
+  node.setAttribute("role", "slider");
+  node.setAttribute("aria-label", `${label}. Use Left and Right Arrow keys to inspect points, Home for the first, and End for the last.`);
+  node.setAttribute("aria-valuemin", String(values[0]));
+  node.setAttribute("aria-valuemax", String(values[values.length - 1]));
+  node.setAttribute("aria-valuenow", String(values[index]));
+  node.addEventListener("focus", show);
+  node.addEventListener("blur", clear);
+  node.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") clear();
+    const next = steps[event.key];
+    if (!next) return;
+    event.preventDefault();
+    index = next();
+    show();
+  });
+}
 
 export const METHOD: Record<string, string> = {
   naive: "No change (baseline)",
@@ -61,12 +103,11 @@ export function mountForecast(el: HTMLElement) {
     text(g, narrow ? x(2024.5) - 6 : x(2024.5) + 6, y(4) + 12, "forecast from 2025", "anno-muted", narrow ? "end" : "start");
 
     if (showMethods) {
-      const lines = data.m11.methodLines as Record<string, [number, number][]>;
       const ends: { k: string; v: number }[] = [];
-      for (const [k, pts] of Object.entries(lines)) {
+      for (const [k, pts] of Object.entries(data.m11.methodLines)) {
         if (k === "naive") continue;
-        const full: [number, number][] = [[2024, observed[observed.length - 1][1]], ...pts];
-        g.append("path").datum(full).attr("fill", "none").attr("stroke", "var(--slate)").attr("stroke-width", 1.1).attr("opacity", 0.75).attr("d", line<[number, number]>().x((d) => x(d[0])).y((d) => y(d[1])));
+        const full = [[2024, observed[observed.length - 1][1]], ...pts];
+        g.append("path").datum(full).attr("fill", "none").attr("stroke", "var(--slate)").attr("stroke-width", 1.1).attr("opacity", 0.75).attr("d", line<number[]>().x((d) => x(d[0])).y((d) => y(d[1])));
         ends.push({ k, v: pts[pts.length - 1][1] });
       }
       if (!narrow) {
@@ -119,13 +160,12 @@ export function mountForecast(el: HTMLElement) {
       const f = fc.find((r) => r.year === year);
       return { year, o, f };
     };
-    hit.on("pointermove", (ev: PointerEvent) => {
-      const [px] = pointer(ev);
-      const { year, o, f } = at(x.invert(px));
+    const inspect = (value: number, clientX: number, clientY: number) => {
+      const { year, o, f } = at(value);
       const v = o ? o[1] : f!.f;
       guide.attr("x1", x(year)).attr("x2", x(year)).attr("opacity", 0.35);
       marker.attr("cx", x(year)).attr("cy", y(v)).attr("opacity", 1);
-      if (o) showTip({ head: `${year}, observed`, rows: [["Total fertility rate", o[1].toFixed(3)]], note: "Human Fertility Database." }, ev.clientX, ev.clientY);
+      if (o) showTip({ head: `${year}, observed`, rows: [["Total fertility rate", o[1].toFixed(3)]], note: "Human Fertility Database." }, clientX, clientY, hit.node()!);
       else
         showTip(
           {
@@ -137,15 +177,26 @@ export function mountForecast(el: HTMLElement) {
             ],
             note: "Ranges built from past forecast errors. They failed the calibration check: not probabilities.",
           },
-          ev.clientX,
-          ev.clientY,
+          clientX,
+          clientY,
+          hit.node()!,
         );
-    });
-    hit.on("pointerleave", () => {
+    };
+    const resetMarks = () => {
       guide.attr("opacity", 0);
       marker.attr("opacity", 0);
+    };
+    const clear = () => {
+      resetMarks();
       hideTip();
+    };
+    hit.on("pointermove", (ev: PointerEvent) => inspect(x.invert(pointer(ev)[0]), ev.clientX, ev.clientY));
+    hit.on("pointerleave", () => {
+      if (hit.node() === document.activeElement) return;
+      resetMarks();
+      deferHideTip();
     });
+    bindKeyboardInspection(hit.node()!, forecastYears, 2024, "Explore observed and forecast years", inspect, clear);
   };
   const bind = (k: string, fn: (on: boolean) => void) => {
     const b = fig.querySelector<HTMLButtonElement>(`[data-toggle='${k}']`);
@@ -183,7 +234,7 @@ export function mountBacktest(el: HTMLElement) {
     };
     sel.forEach((s, i) => {
       const yy = m.t + i * rowH + rowH / 2 + (narrow ? 8 : 0);
-      (narrow ? text(g, m.l, yy - 14, METHOD[s.method], s.method === "naive" ? "anno" : "anno-muted") : text(g, m.l - 14, yy + 4, METHOD[s.method], s.method === "naive" ? "anno" : "anno-muted", "end")).style("fill", s.method === "naive" ? "var(--oxblood)" : null);
+      (narrow ? text(g, m.l, yy - 14, METHOD[s.method], s.method === "naive" ? "anno" : "anno-muted") : text(g, m.l - 14, yy + 4, METHOD[s.method], s.method === "naive" ? "anno" : "anno-muted", "end")).style("fill", () => s.method === "naive" ? "var(--oxblood)" : null);
       const vals = [s.h5, s.h10, s.h15];
       g.append("line").attr("x1", x(Math.min(...vals))).attr("x2", x(Math.max(...vals))).attr("y1", yy).attr("y2", yy).attr("stroke", "var(--rule)").attr("stroke-width", 2);
       (["h5", "h10", "h15"] as const).forEach((h) => shapes[h](g, x(Math.min(2.05, s[h])), yy));
@@ -328,9 +379,8 @@ export function mountCohorts(el: HTMLElement) {
     }
     const guide = g.append("line").attr("y1", y(0)).attr("y2", y(2.1)).attr("stroke", "var(--ink)").attr("opacity", 0);
     const hit = g.append("rect").attr("x", m.l).attr("y", m.t).attr("width", x(45.5) - m.l).attr("height", y(0) - m.t).attr("fill", "transparent").style("cursor", "crosshair");
-    hit.on("pointermove", (ev: PointerEvent) => {
-      const [px] = pointer(ev);
-      const age = Math.round(x.invert(px));
+    const inspect = (value: number, clientX: number, clientY: number) => {
+      const age = Math.round(value);
       const pt = sel.find((t) => t.age === age);
       if (!pt) return hideTip();
       guide.attr("x1", x(age)).attr("x2", x(age)).attr("opacity", 0.3);
@@ -343,11 +393,22 @@ export function mountCohorts(el: HTMLElement) {
           ],
           note: pt.seg === "projected" ? "If 2024 age-specific rates persist. Range from past errors; not a probability." : "Human Fertility Database.",
         },
-        ev.clientX,
-        ev.clientY,
+        clientX,
+        clientY,
+        hit.node()!,
       );
+    };
+    const clear = () => {
+      guide.attr("opacity", 0);
+      hideTip();
+    };
+    hit.on("pointermove", (ev: PointerEvent) => inspect(x.invert(pointer(ev)[0]), ev.clientX, ev.clientY));
+    hit.on("pointerleave", () => {
+      if (hit.node() === document.activeElement) return;
+      guide.attr("opacity", 0);
+      deferHideTip();
     });
-    hit.on("pointerleave", () => (guide.attr("opacity", 0), hideTip()));
+    bindKeyboardInspection(hit.node()!, sel.map((pt) => pt.age), obsPts.at(-1)?.age ?? sel[0].age, `Explore ages for the ${cohort} cohort`, inspect, clear);
     if (out) {
       const o = obs.find((d) => d.c === cohort)!;
       out.innerHTML = `
@@ -357,7 +418,7 @@ export function mountCohorts(el: HTMLElement) {
         <div><dt>By the end of 2040</dt><dd>${e.p2040.toFixed(2)} <span>projected; 80% range ${e.l80.toFixed(2)}–${e.u80.toFixed(2)}</span></dd></div>
         <div><dt>Age reached in 2040</dt><dd>${e.age2040}</dd></div>
         <div><dt>Status by 2040</dt><dd class="status">${e.completion}</dd></div>
-        <div class="ledger" aria-label="Ages observed to ${o.age2024}, projected to ${o.age2040}, not covered after">${ledger(o.age2024, o.age2040)}</div>`;
+        <div class="ledger"><dt class="visually-hidden">Coverage by age</dt><dd>${ledger(o.age2024, o.age2040)}</dd></div>`;
     }
   };
   const ledger = (a24: number, a40: number) => {
@@ -366,7 +427,7 @@ export function mountCohorts(el: HTMLElement) {
       const cls = a <= a24 ? "o" : a <= a40 ? "p" : "u";
       cells.push(`<i class="${cls}" title="age ${a}"></i>`);
     }
-    return `<div class="cells">${cells.join("")}</div><div class="ledger-key"><span class="o">observed to age ${a24}</span><span class="p">projected to ${a40}</span><span class="u">beyond 2040</span></div>`;
+    return `<div class="cells" aria-hidden="true">${cells.join("")}</div><div class="ledger-key"><span class="o">observed to age ${a24}</span><span class="p">projected to ${a40}</span><span class="u">beyond 2040</span></div>`;
   };
   if (range)
     range.addEventListener("input", () => {

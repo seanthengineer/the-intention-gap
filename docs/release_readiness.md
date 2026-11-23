@@ -120,7 +120,7 @@ Also confirmed:
 
 ## 6. Release checklist
 
-**Owner decisions (required before publication):**
+**My publication decisions:**
 - [x] Approve the licences and copyright notice: MIT for original code, CC BY 4.0 for original research writing and presentation; copyright © 2026 Sean Nathaniel M. (`LICENSE`, `LICENSE-docs.md`).
 - [x] Update `CITATION.cff` with the publishing name, software license and repository URL. Do not add a public release date before publication.
 - [x] Confirm and correct the author contribution statement, including independently selected data sources informed by recommendations and Claude Code implementation assistance.
@@ -133,7 +133,7 @@ Also confirmed:
 - [ ] `python -m tools.release inventory --write`: no change.
 - [ ] `git status` shows only files in `docs/release_inventory.csv`; nothing under `data/raw` or `data/processed`; no `CLAUDE.md`, `.env` or archives.
 
-**After the first push (owner, on GitHub):**
+**My GitHub tasks after the first push:**
 - [ ] Enable secret scanning, push protection and private vulnerability reporting.
 - [ ] Protect `main`: require the CI workflow and a review for changes to `tools/`, `.github/` and `docs/*_freeze.sha256`.
 - [x] Confirm the first CI source-only run passed on Ubuntu and Windows (392 tests, 37 data-dependent skips); the integrity workflow also passed on a subsequent manual run.
@@ -196,7 +196,7 @@ The history starts at the publication commit and is not backdated; the research 
 
 **Material blockers to engineering: none.**
 
-**Owner decisions completed:** original-code MIT license, original-documentation CC BY 4.0 license, copyright name Sean Nathaniel M., citation metadata, contribution statement, and private GitHub setup. **Still pending:** final visual and security-setting review, explicit authorization to make the repository public, and a public release tag.
+**My decisions completed:** original-code MIT license, original-documentation CC BY 4.0 license, copyright name Sean Nathaniel M., citation metadata, contribution statement, and private GitHub setup. **Still pending:** final visual and security-setting review, explicit authorization to make the repository public, and a public release tag.
 
 **Nonblocking limitations:**
 - GitHub CI ran successfully on Ubuntu and Windows, including Pyright. Weekly maintenance and the macOS job have not yet run.

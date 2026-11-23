@@ -22,7 +22,7 @@ const ari = data.m11.selection.find((s) => s.method === "ari")!;
     </header>
 
     <div class="pipeline" role="list" aria-label="Research pipeline">
-      <div role="listitem"><span class="step-n">01</span><h4>Official data</h4><p>Seven public sources, downloaded and hashed. Raw and respondent-level files never leave the author's machine.</p><span class="mono-line">NLSY97 · NSFG · ACS · CDC WONDER · NCHS · Census · HFD</span></div>
+      <div role="listitem"><span class="step-n">01</span><h4>Official data</h4><p>Seven public sources, downloaded and hashed. I keep raw and respondent-level files on my machine and never publish them.</p><span class="mono-line">NLSY97 · NSFG · ACS · CDC WONDER · NCHS · Census · HFD</span></div>
       <div role="listitem"><span class="step-n">02</span><h4>Protocol</h4><p>Questions, outcomes, models and decision rules fixed in writing before analysis.</p><span class="mono-line">M10, M11 locked by SHA-256</span></div>
       <div role="listitem"><span class="step-n">03</span><h4>Baseline</h4><p>Every model faces the simplest honest benchmark: a constant rate, a class prior, no change.</p><span class="mono-line">benchmark first</span></div>
       <div role="listitem"><span class="step-n">04</span><h4>Out-of-sample test</h4><p>Held-out households, isolated survey clusters, and 72 forecast origins that only use the past.</p><span class="mono-line">no peeking at test data</span></div>
@@ -32,8 +32,8 @@ const ari = data.m11.selection.find((s) => s.method === "ari")!;
 
     <div class="grid">
       <div class="c-1-13">
-        <h3 class="fig-title" style="margin-bottom:var(--s-16)">Every model, its benchmark and its result</h3>
-        <div class="table-scroll">
+        <h3 class="fig-title" id="methods-models" style="margin-bottom:var(--s-16)">Every model, its benchmark and its result</h3>
+        <div class="table-scroll" tabindex="0" role="region" aria-labelledby="methods-models">
           <table class="data methods-table">
             <thead><tr><th>Chapter</th><th>Task</th><th>Benchmark</th><th>Models</th><th>Out-of-sample test</th><th>Result</th></tr></thead>
             <tbody>
@@ -105,7 +105,7 @@ const ari = data.m11.selection.find((s) => s.method === "ari")!;
           <div><b>4 of 4</b><span>chapters independently recomputed</span></div>
         </div>
         <p class="prose">Source-only checks need no restricted data. They use Python 3.15.2:</p>
-<pre class="terminal" aria-label="Commands to verify the research"><span class="p">$</span> python -m pip install --only-binary=:all: --require-hashes -r requirements-lock.txt
+<pre class="terminal" tabindex="0" role="region" aria-label="Commands to verify the research"><span class="p">$</span> python -m pip install --only-binary=:all: --require-hashes -r requirements-lock.txt
 <span class="p">$</span> python audit/verify_freeze.py               <span class="c"># five manifests, 221 frozen files</span>
 <span class="p">$</span> python -m tools.release restore-run-record  <span class="c"># once per fresh clone</span>
 <span class="p">$</span> python -m unittest                          <span class="c"># restricted-data tests report "skipped"</span>

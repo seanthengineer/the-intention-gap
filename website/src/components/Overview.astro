@@ -12,14 +12,14 @@ const obs = data.m11.observed as [number, number][];
 const last = obs[obs.length - 1];
 const rows = data.final.populationMap as Record<string, string>[];
 ---
-<section id="overview" aria-labelledby="q">
+<section id="overview" aria-labelledby="q" tabindex="-1">
   <div class="stage-track" id="stage-overview">
     <div class="stage">
       <canvas class="field" aria-hidden="true"></canvas>
       <div class="wrap grid hero">
         <div class="hero-text" id="hero-text">
           <span class="label kicker">An independent demographic inquiry</span>
-          <h1 id="q">Will Generation&nbsp;Z have the families they say they want?</h1>
+          <h2 id="q">Will Generation&nbsp;Z have the families they say they want?</h2>
           <p class="lede">
             Most young Americans say they want children, while U.S. fertility has fallen to about {num(last[1], 1)} births per woman.
             Together, the two facts invite a confident story: a generation that will fall short of its own plans. This project

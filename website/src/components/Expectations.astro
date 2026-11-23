@@ -7,10 +7,10 @@ const n = data.nlsy;
 const cal = Object.fromEntries(n.calibration.map((c) => [c.range_pct, c]));
 const models = Object.fromEntries(n.heldOut.models.map((m) => [m.id, m]));
 ---
-<section class="section" id="expectations" aria-labelledby="ch1">
+<section class="section editorial-chapter" id="expectations" aria-labelledby="ch1">
   <div class="wrap">
     <header class="grid chapter-head">
-      <div class="ch-meta c-1-4"><span class="ch-num">Chapter 1</span><span class="ch-code">M01–M08 · NLSY97</span></div>
+      <div class="ch-meta c-1-4"><span class="ch-num">Chapter <b>1</b></span><span class="ch-code">M01–M08 · NLSY97</span></div>
       <div class="c-4-13">
         <h2 class="ch-title" id="ch1">Stated expectations, and the births that followed</h2>
         <p class="standfirst">
@@ -62,7 +62,7 @@ const models = Object.fromEntries(n.heldOut.models.map((m) => [m.id, m]));
           </details>
         </Figure>
       </div>
-      <aside class="c-10-13" style="padding-top:var(--s-96)">
+      <aside class="c-10-13 editorial-aside">
         <div class="aside">
           <span class="label">Reading the chart</span>
           If stated chances were perfectly calibrated, every circle would sit on the diagonal: of women who said 30%, about 30% would have had a birth.
@@ -112,7 +112,7 @@ const models = Object.fromEntries(n.heldOut.models.map((m) => [m.id, m]));
           <p class="wide cannot"><span class="k">Cannot show</span>Whether the same correction would work for another cohort. A single held-out split; repeated cross-validation found the gain from background characteristics consistent but modest.</p>
         </Figure>
       </div>
-      <aside class="c-10-13" style="padding-top:var(--s-96)">
+      <aside class="c-10-13 editorial-aside">
         <div class="aside">
           <span class="label">What changed</span>
           Used as given, the stated chance forecast worse than a constant rate ({num(models.B.brier, 3)} against {num(models.A.brier, 3)}), because the answers were too extreme.

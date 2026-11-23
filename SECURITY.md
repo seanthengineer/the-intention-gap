@@ -8,7 +8,7 @@ Please report privately, not in a public issue, if you find:
 - a published statistic that breaks a data provider's disclosure rules (for example, a CDC WONDER statistic based on nine or fewer births);
 - a vulnerability in the code or the workflows.
 
-Use GitHub's **private vulnerability reporting** ("Report a vulnerability" on the repository's Security tab). The owner will enable it when the repository is published.
+Use GitHub's **private vulnerability reporting** ("Report a vulnerability" on the repository's Security tab). I plan to enable it when the repository is published.
 
 ## What the project does to prevent disclosure
 

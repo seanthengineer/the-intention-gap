@@ -264,6 +264,8 @@ def licence_class(rel: str) -> str:
         return "derived data: mixed sources (all of the above)"
     if rel.startswith("docs/source_terms/"):
         return "third-party terms quoted for the record"
+    if rel.startswith("website/public/photos/brossard-washington-square-"):
+        return "photograph: CC BY-SA 2.0 (David Brossard)"
     if rel.startswith("website/public/photos/"):
         return "public-domain photograph (Library of Congress, no known restrictions)"
     if rel.startswith("website/"):

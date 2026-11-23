@@ -1,6 +1,7 @@
 ---
 import data from "../data/site-data.json";
 import Figure from "./Figure.astro";
+import HousingAtlas from "./HousingAtlas.astro";
 import Photo from "./Photo.astro";
 import { gh, ghTree, int, num } from "./format";
 
@@ -33,10 +34,10 @@ const terminal = [
     </div>
   </div>
 
-  <div class="section" style="border-top:1px solid var(--rule)">
+  <div class="section editorial-chapter" style="border-top:1px solid var(--rule)">
     <div class="wrap">
       <header class="grid chapter-head">
-        <div class="ch-meta c-1-4"><span class="ch-num">Chapter 3</span><span class="ch-code">M10 · ACS + CDC WONDER</span></div>
+        <div class="ch-meta c-1-4"><span class="ch-num">Chapter <b>3</b></span><span class="ch-code">M10 · ACS + CDC WONDER</span></div>
         <div class="c-4-13">
           <h2 class="ch-title" id="ch3">Does rent burden track state birth rates?</h2>
           <p class="standfirst">
@@ -56,13 +57,15 @@ const terminal = [
       <div class="grid" style="row-gap:var(--s-24);margin-bottom:var(--s-48)">
         <div class="c-1-13">
           <Photo
-            src="highsmith-huntington-homes-2015.jpg"
-            alt="Dithered photograph of a row of detached houses with porches on a brick street in Huntington, West Virginia, with two parked cars."
-            ratio="21 / 8"
-            focusY={0.48}
-            contrast={1.2}
-            lift={0.03}
-            credit="Homes on a brick street, Huntington, West Virginia, 2015. Carol M. Highsmith, Library of Congress (public domain). Illustrative."
+            src="highsmith-shepherd-row-houses-1024.jpg"
+            alt="Attached brick row houses with front porches face a residential street shaded by a large tree."
+            credit="Row houses on Shepherd Street NW, Washington, D.C., 2010. Carol M. Highsmith, George F. Landegger Collection, Library of Congress, Prints and Photographs Division."
+            documentary={{
+              width: 1024, height: 536, small: "highsmith-shepherd-row-houses-640.jpg",
+              sizes: "(min-width: 1600px) 1440px, 92vw",
+              source: "https://www.loc.gov/item/2010641825/",
+              context: "The Library of Congress lists no known publication restrictions. The scene illustrates residential context and represents no measured state-level effect.",
+            }}
           />
         </div>
       </div>
@@ -99,6 +102,8 @@ const terminal = [
           </Figure>
         </div>
       </div>
+
+      <HousingAtlas />
 
       <div class="grid">
         <div class="c-1-9">
@@ -147,7 +152,7 @@ const terminal = [
             </details>
           </Figure>
         </div>
-        <aside class="c-10-13" style="padding-top:var(--s-96)">
+        <aside class="c-10-13 editorial-aside">
           <div class="aside">
             <span class="label">Between or within</span>
             Comparing states with each other suggests a large association ({num(pooled.est, 1)} pooled; {num(stateFe.est, 1)} within states). But births fell

@@ -1,0 +1,551 @@
+---
+import {
+  atlas, atlasColor, availableMetrics, dcPosition, display, fallbackFips, geographicViewBox,
+  legend, metrics, observation, states, trend, trendPlot, trendViewBox,
+} from "../scripts/charts/housing-atlas-model";
+
+const year = atlas?.years.at(-1) ?? 2024;
+const metric = availableMetrics[0] ?? "burden30";
+const metricInfo = metrics[metric];
+const initialState = states.find(({ id }) => id === fallbackFips)!;
+const initialValue = observation(fallbackFips, year, metric);
+const initialTrend = trend(fallbackFips, metric, year);
+const dcX = Number(dcPosition?.[0] ?? 0);
+const dcY = Number(dcPosition?.[1] ?? 0);
+const dataUrl = import.meta.env.BASE_URL + "figures/m10-geography.csv";
+---
+{atlas && availableMetrics.length > 0 && (
+  <section class="atlas" id="housing-atlas" aria-labelledby="atlas-title">
+    <header class="atlas-heading">
+      <span class="label atlas-kicker">Geographic explorer</span>
+      <h3 id="atlas-title">Housing and fertility, state by state</h3>
+      <p>Explore rent burden and birth rates across the 50 states and the District of Columbia.
+        Each value describes a state and year.</p>
+    </header>
+    <div class="atlas-controls" hidden>
+      <label for="atlas-metric"><span class="label">Measure</span>
+        <select id="atlas-metric" class="select">
+          {availableMetrics.map((key) => <option value={key}>{metrics[key].title}</option>)}
+        </select>
+      </label>
+      <label for="atlas-year"><span class="label">Year</span>
+        <select id="atlas-year" class="select">
+          {atlas.years.map((y) => <option value={y} selected={y === year}>{y}</option>)}
+        </select>
+      </label>
+      <label for="atlas-state-select"><span class="label">Selected state or district</span>
+        <select id="atlas-state-select" class="select">
+          {states.map(({ id, name }) => <option value={id} selected={id === fallbackFips}>{name}</option>)}
+        </select>
+      </label>
+    </div>
+    <p class="atlas-fallback">{metricInfo.title} in {year}. The tables and CSV contain the underlying values.</p>
+    <div class="atlas-views">
+      <div class="atlas-map-pane">
+        <svg class="atlas-map" viewBox={geographicViewBox} role="img"
+          aria-label={metricInfo.title + ", " + year + ". U.S. states and the District of Columbia."} aria-describedby="atlas-map-keys atlas-source">
+          <defs>
+            <pattern id="atlas-missing" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <rect width="6" height="6" fill="#f4f0e9" />
+              <line x2="0" y2="6" stroke="#a69a8c" stroke-width="2" />
+            </pattern>
+          </defs>
+          <g>
+            {states.map(({ id, d }) => (
+              <path class="atlas-state" data-state={id} d={d} fill={atlasColor(observation(id, year, metric), metric)} />
+            ))}
+          </g>
+          <path class="atlas-outline" data-atlas-outline d={initialState.d} aria-hidden="true" />
+          <g class="atlas-dc" data-atlas-dc aria-hidden="true">
+            <path d={"M" + dcX + "," + dcY + " l29,27 h31"} />
+            <circle cx={dcX} cy={dcY} r="3" />
+            <g class="atlas-dc-label">
+              <rect x={dcX + 51} y={dcY + 15} width="47" height="25" rx="1" />
+              <text x={dcX + 75} y={dcY + 32} text-anchor="middle">DC</text>
+            </g>
+          </g>
+        </svg>
+        <div class="atlas-legend" role="group" aria-label="Fixed color scale across years">
+          <p data-atlas-legend-unit>{metricInfo.unit}</p>
+          <ul>
+            {legend(metric).map(({ color, label }) => (
+              <li><span class="atlas-swatch" style={"background:" + color} aria-hidden="true"></span><span data-atlas-bin>{label}</span></li>
+            ))}
+            <li><span class="atlas-swatch atlas-missing" aria-hidden="true"></span>Not available</li>
+          </ul>
+        </div>
+        <p class="atlas-keys" id="atlas-map-keys" hidden>Choose a state on the map or in the list. On the map, use arrow keys to browse alphabetically and Enter or Space to select.</p>
+      </div>
+      <div class="atlas-detail">
+        <div class="atlas-selected-state" aria-live="polite" aria-atomic="true">
+          <p class="label atlas-selected-year">{year}</p>
+          <h4>{initialState.name}</h4>
+          <p class="atlas-selected-value">{display(initialValue, metric)}</p>
+          <p class="atlas-selected-unit">{metricInfo.unit}</p>
+        </div>
+        <div class="atlas-trend">
+          <p class="label">Historical trend</p>
+          <svg viewBox={trendViewBox} role="img" aria-label={metricInfo.title + " in " + initialState.name + ", 2014 to 2024. Gap in 2020."}>
+            <g data-atlas-grid class="atlas-trend-grid">
+              {initialTrend.ticks.map(({ value, position }) => (
+                <g transform={"translate(0," + position + ")"}>
+                  <line x1={trendPlot.left} x2={trendPlot.right} />
+                  <text x={trendPlot.left - 7} dy="0.32em" text-anchor="end">{value}</text>
+                </g>
+              ))}
+            </g>
+            <line class="atlas-trend-gap" x1={initialTrend.gap} x2={initialTrend.gap} y1={trendPlot.top} y2={trendPlot.bottom} />
+            {initialTrend.yearTicks.map(({ value, position }) => (
+              <text x={position} y={trendPlot.bottom + 18} text-anchor="middle">{value}</text>
+            ))}
+            <line class="atlas-trend-year" data-atlas-trend-year x1={initialTrend.selected.x} x2={initialTrend.selected.x} y1={trendPlot.top} y2={trendPlot.bottom} />
+            <path class="atlas-trend-line" data-atlas-trend-path d={initialTrend.path} />
+            <circle class="atlas-trend-dot" data-atlas-trend-marker cx={initialTrend.selected.x} cy={initialTrend.selected.y ?? 0}
+              visibility={initialTrend.selected.y === null ? "hidden" : "visible"} r="4" />
+          </svg>
+          <p class="atlas-gap-note">No standard ACS 1-year release for 2020. The series leaves that year blank.</p>
+        </div>
+      </div>
+    </div>
+    <div class="atlas-tables">
+      <details class="atlas-map-table">
+        <summary>Map values by state</summary>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Map values by state">
+          <table class="data atlas-table">
+            <caption data-atlas-map-caption>{metricInfo.title}, {year} ({metricInfo.unit})</caption>
+            <thead><tr><th scope="col">State or district</th><th scope="col">Value</th></tr></thead>
+            <tbody>
+              {states.map(({ id, name }) => (
+                <tr><th scope="row">{name}</th><td data-atlas-cell={id}>{display(observation(id, year, metric), metric)}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <details class="atlas-trend-table">
+        <summary>Selected state history</summary>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Selected state history">
+          <table class="data atlas-table">
+            <caption data-atlas-trend-caption>{initialState.name}: {metricInfo.title} ({metricInfo.unit})</caption>
+            <thead><tr><th scope="col">Year</th><th scope="col">Value</th></tr></thead>
+            <tbody>
+              {initialTrend.series.map(({ year: y, value }) => (
+                <tr><th scope="row">{y}</th><td data-atlas-trend-cell={y}>{y === 2020 ? "No ACS 1-year release" : display(value, metric)}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+    <footer class="atlas-source" id="atlas-source">
+      <div>
+        <span class="label">Source and units</span>
+        <p><a href="https://api.census.gov/data/2024/acs/acs1/groups/B25070.html">ACS 1-year B25070</a>. Burden measures use renter households with a computed gross rent-to-income ratio.{" "}
+          <a href="https://wonder.cdc.gov/natality.html">CDC WONDER natality</a> by mother’s state of residence, original release for 2014–2015 and expanded for 2016–2019 and 2021–2024.
+          Birth rates are per 1,000 women in the selected age group.</p>
+      </div>
+      <div>
+        <span class="label">Reading the map</span>
+        <p>Colors group descriptive values into the same numeric ranges in every year for each measure.
+          State values estimate different populations. This map cannot establish an effect of rent burden on birth rates.</p>
+        <a href={dataUrl} download>Download geographic data (CSV)</a>
+      </div>
+    </footer>
+  </section>
+)}
+<script>
+  import "../scripts/charts/housing-atlas";
+</script>
+
+<style>
+  .atlas {
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper-light);
+    color: var(--ink);
+    padding: clamp(1rem, 3.5vw, 3.75rem);
+    margin: clamp(2.4rem, 6vw, 5rem) auto;
+  }
+
+  .atlas-heading {
+    max-width: 68ch;
+    margin-bottom: 1.5rem;
+  }
+
+  .atlas-kicker {
+    color: var(--oxblood);
+  }
+
+  .atlas-heading h3 {
+    font-family: var(--serif);
+    font-size: clamp(1.85rem, 3.5vw, 3.55rem);
+    font-weight: 420;
+    line-height: 1.04;
+    letter-spacing: -.035em;
+    text-wrap: balance;
+    margin: .45rem 0 .65rem;
+  }
+
+  .atlas-heading p,
+  .atlas-fallback {
+    color: var(--ink-soft);
+    font-size: .95rem;
+    margin: 0;
+  }
+
+  .atlas-fallback {
+    margin-bottom: 1rem;
+  }
+
+  .atlas-controls:not([hidden]) {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(5rem, .5fr) minmax(0, 1fr);
+    gap: .85rem 1.4rem;
+    padding: 1.15rem 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .atlas-controls label,
+  .atlas-controls select {
+    display: block;
+    min-width: 0;
+  }
+
+  .atlas-controls label span {
+    display: block;
+    margin-bottom: .15rem;
+    color: var(--ink-soft);
+  }
+
+  .atlas-controls select {
+    font-size: 1rem;
+    min-height: 2.75rem;
+    width: 100%;
+  }
+
+  .atlas-views {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(15rem, .43fr);
+    border-block: 1px solid var(--rule);
+  }
+
+  .atlas-map-pane {
+    min-width: 0;
+    padding: clamp(.45rem, 1.2vw, 1rem) clamp(.35rem, 1.4vw, 1.25rem) 1rem;
+    background: var(--paper);
+  }
+
+  .atlas-map {
+    display: block;
+    width: 100%;
+  }
+
+  .atlas-state {
+    stroke: var(--paper-light);
+    stroke-width: .7;
+    vector-effect: non-scaling-stroke;
+    transition: fill 240ms ease;
+  }
+
+  [data-atlas-ready] :is(.atlas-state, .atlas-dc) {
+    cursor: pointer;
+  }
+
+  .atlas-state:hover {
+    stroke: var(--ink);
+    stroke-width: 1.35;
+    stroke-opacity: .65;
+  }
+
+  .atlas-state:focus-visible {
+    stroke: var(--ink);
+    stroke-width: 2.4;
+    stroke-dasharray: 4 2;
+    stroke-opacity: 1;
+    outline: none;
+  }
+
+  .atlas-outline {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+    pointer-events: none;
+  }
+
+  .atlas-dc path {
+    stroke: var(--ink);
+    stroke-width: 1;
+    fill: none;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .atlas-dc circle {
+    fill: var(--ink);
+    stroke: var(--paper-light);
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .atlas-dc rect {
+    fill: var(--paper-light);
+    stroke: var(--ink);
+    stroke-width: .7;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .atlas-dc text {
+    fill: var(--ink);
+    pointer-events: none;
+    font: 500 15px/1 var(--mono);
+  }
+
+  .atlas-dc[data-selected="true"] rect {
+    fill: var(--ink);
+  }
+
+  .atlas-dc[data-selected="true"] text {
+    fill: var(--paper-light);
+  }
+
+  .atlas-legend {
+    border-top: 1px solid var(--rule);
+    padding-top: .75rem;
+  }
+
+  .atlas-legend p {
+    font-size: .84rem;
+    color: var(--ink-soft);
+    margin: 0 0 .5rem;
+  }
+
+  .atlas-legend ul {
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    gap: .35rem .85rem;
+  }
+
+  .atlas-legend li {
+    display: flex;
+    align-items: center;
+    gap: .35rem;
+    font: 400 .75rem/1.2 var(--mono);
+  }
+
+  .atlas-swatch {
+    width: 1.2rem;
+    height: .8rem;
+    border: 1px solid var(--rule);
+  }
+
+  .atlas-missing {
+    background: repeating-linear-gradient(135deg, #f4f0e9 0 3px, #a69a8c 3px 4px);
+  }
+
+  .atlas-keys,
+  .atlas-gap-note {
+    font-size: .8rem;
+    line-height: 1.55;
+    margin: .8rem 0 0;
+    color: var(--ink-soft);
+  }
+
+  .atlas-detail {
+    min-width: 0;
+    padding: clamp(1rem, 2vw, 2rem);
+    border-left: 1px solid var(--rule);
+  }
+
+  .atlas-selected-state {
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.15rem;
+  }
+
+  .atlas-selected-state .label,
+  .atlas-trend .label {
+    margin: 0;
+    color: var(--oxblood);
+  }
+
+  .atlas-selected-state h4 {
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 2.2vw, 2.15rem);
+    line-height: 1.1;
+    letter-spacing: -.025em;
+    margin: .35rem 0 .9rem;
+  }
+
+  .atlas-selected-value {
+    font: 400 clamp(1.65rem, 3vw, 3.05rem)/1.06 var(--serif);
+    color: var(--oxblood);
+    margin: 0;
+  }
+
+  .atlas-selected-unit {
+    margin: .35rem 0 0;
+    font-size: .84rem;
+    color: var(--ink-soft);
+  }
+
+  .atlas-trend svg {
+    width: 100%;
+    display: block;
+    margin-top: .45rem;
+  }
+
+  .atlas-trend svg :global(text) {
+    font: 400 11px/1 var(--mono);
+    fill: var(--ink-soft);
+  }
+
+  .atlas-trend-grid :global(line) {
+    stroke: var(--rule);
+    stroke-width: .7;
+  }
+
+  .atlas-trend-gap {
+    stroke: #a19487;
+    stroke-dasharray: 3 3;
+    stroke-width: 1;
+  }
+
+  .atlas-trend-year {
+    stroke: var(--oxblood);
+    stroke-width: .7;
+    opacity: .45;
+  }
+
+  .atlas-trend-line {
+    stroke: var(--oxblood);
+    stroke-width: 2;
+    fill: none;
+  }
+
+  .atlas-trend-dot {
+    fill: var(--oxblood);
+    stroke: var(--paper-light);
+    stroke-width: 1.2;
+  }
+
+  .atlas-gap-note {
+    margin: 0;
+  }
+
+  .atlas-tables {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 1.5rem;
+    padding-top: .25rem;
+  }
+
+  .atlas-tables details {
+    min-width: 0;
+  }
+
+  .atlas-tables summary {
+    min-height: 2.75rem;
+    padding: .68rem .2rem;
+    cursor: pointer;
+    color: var(--oxblood);
+    font-size: .9rem;
+  }
+
+  .atlas-table caption {
+    text-align: left;
+    color: var(--ink-soft);
+    font-size: .88rem;
+    margin-bottom: .4rem;
+  }
+
+  .atlas-table tbody th {
+    text-transform: none;
+    font-family: var(--sans);
+    font-size: .86rem;
+    letter-spacing: normal;
+  }
+
+  .atlas-table :is(th, td):last-child {
+    text-align: right;
+  }
+
+  .atlas-source {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .75rem 1.8rem;
+    border-top: 1px solid var(--rule);
+    margin-top: .75rem;
+    padding-top: 1.15rem;
+    font-size: .86rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  .atlas-source .label {
+    color: var(--oxblood);
+  }
+
+  .atlas-source p {
+    margin: .25rem 0 .45rem;
+  }
+
+  .atlas-source a {
+    color: var(--ink);
+  }
+
+  @media (max-width: 61rem) {
+    .atlas-views {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .atlas-detail {
+      border: 0;
+      border-top: 1px solid var(--rule);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+      gap: 1rem;
+    }
+
+    .atlas-selected-state {
+      border: 0;
+      margin: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  @media (max-width: 38rem) {
+    .atlas-controls:not([hidden]) {
+      grid-template-columns: minmax(0, .6fr) minmax(0, 1.4fr);
+    }
+
+    .atlas-controls label:first-child {
+      grid-column: 1 / -1;
+    }
+
+    .atlas-dc-label {
+      transform-box: fill-box;
+      transform-origin: center;
+      transform: scale(1.6);
+    }
+
+    .atlas-detail,
+    .atlas-tables,
+    .atlas-source {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .atlas-selected-state {
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: .8rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .atlas-state {
+      transition: none;
+    }
+  }
+</style>

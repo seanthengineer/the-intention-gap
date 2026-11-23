@@ -1,10 +1,10 @@
 # The Intention Gap: research website
 
-A static, single-page website that presents the frozen results of The Intention Gap for a general audience: four studies, 15 interactive charts, three scroll-driven transitions and an archive of all 21 project figures. It is part of this repository and reads the research outputs directly; it does not recompute or reinterpret any result.
+I use this static, single-page website to present the frozen results of The Intention Gap for a general audience: four studies, 15 original interactive research charts, a descriptive state-by-year Housing atlas, scroll-driven transitions and an archive of all 21 project figures. I keep it in the same repository as my research. The website reads published outputs directly without recomputing or reinterpreting scientific results.
 
-![The website's opening screen: the research question beside the U.S. total fertility rate, 1953 to 2024, drawn as squares of 0.1 births per woman](../assets/readme/website-overview.png)
+![The Intention Gap cinematic opening beside an oblique chart of 72 annual U.S. fertility rates](../assets/readme/website-overview.png)
 
-**Status:** in review; not yet deployed. Hosting is not enabled.
+**Status:** I am reviewing the site before public release. Hosting is not enabled.
 
 ## Requirements
 
@@ -35,11 +35,13 @@ npm run preview    # serves dist/ locally for a final check
 
 `INTENTION_GAP_REPO=/path/to/repository` builds from a checkout in another location.
 
+The Housing atlas uses a publication-safe state-year CSV. The [geographic data notes](../docs/m10_geography_export.md) explain the units, the 2020 gap, disclosure checks and reproduction. The [release candidate report](RELEASE.md) records verification and launch readiness.
+
 ## Technology
 
 - [Astro](https://astro.build) 7, static output; no server code and no client framework
 - [D3](https://d3js.org) 7 for the charts and map; [GSAP](https://gsap.com) 3 ScrollTrigger for the scroll-driven transitions
-- A canvas particle system for the data-to-crowd, terminal-to-map and map-to-timeline transitions, and runtime Atkinson dithering for the photographs
+- A canvas particle system for the data-to-crowd, terminal-to-map and map-to-timeline transitions, and an optional runtime Atkinson dithering renderer
 - [topojson-client](https://github.com/topojson/topojson-client), [topojson-simplify](https://github.com/topojson/topojson-simplify) and [us-atlas](https://github.com/topojson/us-atlas) for the dot-matrix map
 - Self-hosted fonts through Fontsource: Source Serif 4, IBM Plex Sans and IBM Plex Mono
 
@@ -49,13 +51,15 @@ With reduced motion requested, the transitions switch between fixed states. The 
 
 | Asset | Source | Terms |
 |---|---|---|
+| `public/photos/brossard-washington-square-{640,1024}.jpg` | David Brossard, [July Evening in Washington Square](https://www.flickr.com/photos/string_bass_dave/51729207037/), New York City, 2021 | [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/), resized and recompressed without cropping |
+| `public/photos/highsmith-shepherd-row-houses-{640,1024}.jpg` | Carol M. Highsmith, [Shepherd Street NW row houses](https://www.loc.gov/item/2010641825/), Washington, D.C., 2010. George F. Landegger Collection, Library of Congress, Prints and Photographs Division | No known restrictions on publication |
 | `public/photos/highsmith-asu-palm-walk-2018.jpg` | Carol M. Highsmith, Palm Walk, Arizona State University, 2018. Library of Congress, Prints and Photographs Division, Carol M. Highsmith Archive, item [2018702287](https://www.loc.gov/item/2018702287/) | No known restrictions on publication |
 | `public/photos/highsmith-huntington-homes-2015.jpg` | Carol M. Highsmith, homes in Huntington, West Virginia, 2015. Same archive, item [2015631814](https://www.loc.gov/item/2015631814/) | No known restrictions on publication |
 | `public/favicon.svg` | Original | MIT, as project code |
 | Figures in the Archive section | Copied at build time from `assets/figures/` | As in the [licensing register](../docs/licensing_and_attribution.md) |
 | Map geometry | us-atlas, from U.S. Census Bureau cartographic boundary files | ISC; boundary data public domain |
 
-The photographs are shown dithered. The crowd in the opening transition is generated procedurally and is illustrative; it does not depict survey participants.
+I present the chapter photographs as responsive, full-color JPEGs while retaining the original files and optional dithering renderer. The crowd in the opening transition is generated procedurally and is illustrative; it does not depict survey participants.
 
 ## Licensing and attribution
 
@@ -63,13 +67,25 @@ The photographs are shown dithered. The crowd in the opening transition is gener
 - The page carries the data attributions required by the [licensing register](../docs/licensing_and_attribution.md): the Human Fertility Database (CC BY 4.0, changed by this project), the NSFG data-source statement, the NCHS responsibility statement and the Census Data API notice.
 - Dependencies are installed from npm and never committed. Bundled into the built site: D3, topojson and us-atlas (ISC), Astro (MIT), GSAP ([Standard "no charge" license](https://gsap.com/standard-license)) and the fonts ([SIL Open Font License 1.1](https://openfontlicense.org)).
 
-## Deployment
+## Release build and deployment
 
-Not deployed yet. `website/dist/` is a self-contained static folder: it loads no external scripts, styles or fonts, so any static host can serve it.
+GitHub Pages remains inactive. `website/dist/` is a self-contained static folder: it loads no external scripts, styles or fonts, so any static host can serve it.
 
-- **At a domain root:** serve `dist/` as built.
-- **Under a sub-path** (for example a GitHub Pages project site at `/the-intention-gap/`): build with `npx astro build --base /the-intention-gap/`, or set `base` in `astro.config.mjs`. Every asset URL follows the base.
+### Build the GitHub Pages artifact
 
-Before deploying, remove the `noindex, nofollow` robots tag in `src/layouts/Base.astro`. The page's links to this repository work once the repository is public.
+```sh
+cd website
+npm ci
+npm run build:pages
+npm run preview -- --base /the-intention-gap/
+```
 
-CI: [`.github/workflows/website.yml`](../.github/workflows/website.yml) runs `npm ci` and `npm run build` on every change to the website or to the research files it reads. It never deploys.
+Open the preview at `/the-intention-gap/`. The Astro base path is compiled into the HTML, asset URLs and client-side imports. Use `npm run build` for a host that serves the site at its domain root.
+
+### Owner-authorized launch
+
+After approving the exact commit and deciding repository visibility and indexing policy, select GitHub Actions as the Pages publishing source. Use a dedicated, owner-approved workflow to build with `npm run build:pages`, upload only `website/dist/` with the GitHub Pages artifact action, and deploy it with the Pages deployment action using the `github-pages` environment and the required Pages permissions. Recheck repository documentation links with the intended public-reader permissions. Remove the `noindex, nofollow` directive in `src/layouts/Base.astro` only if public indexing is approved.
+
+The existing Website workflow builds and checks the candidate. The release branch has no deployment workflow. See the [GitHub Pages publishing instructions](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) and [Astro’s GitHub Pages guide](https://docs.astro.build/en/guides/deploy/github/).
+
+CI: [`.github/workflows/website.yml`](../.github/workflows/website.yml) runs `npm ci` and builds both the root and the GitHub Pages base paths on every change to the website or to the research files it reads. It never deploys.

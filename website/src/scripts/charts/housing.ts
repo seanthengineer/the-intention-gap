@@ -290,7 +290,6 @@ export function mountLoso(el: HTMLElement) {
       p.on("pointerenter focus", function () {
         (this as SVGPathElement).setAttribute("stroke", "var(--ink)");
         (this as SVGPathElement).setAttribute("stroke-width", String(1.8 / s));
-        (this as SVGPathElement).parentNode!.appendChild(this as SVGPathElement);
       });
       p.on("pointerleave blur", function () {
         (this as SVGPathElement).setAttribute("stroke", "rgb(41 41 41 / 0.28)");
