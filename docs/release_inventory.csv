@@ -287,6 +287,7 @@ website/public/photos/highsmith-huntington-homes-2015.jpg,website,,"public-domai
 website/public/photos/highsmith-shepherd-row-houses-1024.jpg,website,,"public-domain photograph (Library of Congress, no known restrictions)"
 website/public/photos/highsmith-shepherd-row-houses-640.jpg,website,,"public-domain photograph (Library of Congress, no known restrictions)"
 website/scripts/check-data.mjs,website,,project code
+website/scripts/check-indexing.mjs,website,,project code
 website/scripts/check-text.mjs,website,,project code
 website/scripts/prepare-data.mjs,website,,project code
 website/src/components/Archive.astro,website,,project code
@@ -306,6 +307,7 @@ website/src/components/Photo.astro,website,,project code
 website/src/components/format.ts,website,,project code
 website/src/layouts/Base.astro,website,,project code
 website/src/pages/index.astro,website,,project code
+website/src/pages/sitemap.xml.ts,website,,project code
 website/src/scripts/charts/common.ts,website,,project code
 website/src/scripts/charts/evidence.ts,website,,project code
 website/src/scripts/charts/forecast.ts,website,,project code

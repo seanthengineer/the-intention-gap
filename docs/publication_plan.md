@@ -1,6 +1,6 @@
 # My publication plan
 
-I published [The Intention Gap](https://seanthengineer.github.io/the-intention-gap/) using GitHub Pages from the same repository as my research. I kept the research results frozen and the website layout unchanged. I approved the public repository and the manual deployment. I still need to decide on search indexing and the official GitHub Release.
+I published [The Intention Gap](https://seanthengineer.github.io/the-intention-gap/) using GitHub Pages from the same repository as my research. I kept the research results frozen and the website layout unchanged. I approved the public repository and the manual deployment. I approved search indexing and added a canonical URL and sitemap. I still need to redeploy the change and decide on the official GitHub Release.
 
 The checklist below records how I prepared publication. Some steps describe the actions I planned before the launch.
 
@@ -75,6 +75,6 @@ For the social preview, I can use the existing [website overview image](../asset
 
 I approved public access to the research repository and deployed the website with the manual Publish website workflow on `main`. GitHub reported a successful build and deployment, and I reviewed the live site.
 
-I have linked the published site in the [main README](../README.md). I still need to set the GitHub repository homepage, decide whether to remove `noindex, nofollow`, and decide when to issue a tagged GitHub Release. I will not claim a DOI or peer review.
+I have linked the published site in the [main README](../README.md). I set the GitHub repository homepage and approved removing `noindex, nofollow`. I am preparing the next manual deployment. After it succeeds, I can verify the canonical URL and sitemap and request indexing in Google Search Console. I still need to decide when to issue a tagged GitHub Release. I will not claim a DOI or peer review.
 
-**Current status:** The repository and website are public. Search indexing remains disabled. No GitHub Release has been published.
+**Current status:** The repository and website are public. I have approved search indexing and prepared the website changes, but they are not live until I redeploy. No GitHub Release has been published.
