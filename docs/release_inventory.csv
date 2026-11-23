@@ -4,6 +4,7 @@ path,category,frozen_manifest,licence_class
 .github/workflows/ci.yml,continuous integration,,project code
 .github/workflows/integrity.yml,continuous integration,,project code
 .github/workflows/maintenance.yml,continuous integration,,project code
+.github/workflows/pages.yml,continuous integration,,project code
 .github/workflows/website.yml,continuous integration,,project code
 .gitignore,configuration,,project code
 .python-version,configuration,,project code
@@ -229,6 +230,7 @@ docs/nsfg_m09.md,documentation,nsfg_m09_freeze.sha256,project documentation
 docs/nsfg_m09_freeze.sha256,research record,,project documentation
 docs/nsfg_stage3_validation.md,documentation,nsfg_m09_freeze.sha256,project documentation
 docs/publication_errata.md,documentation,,project documentation
+docs/publication_plan.md,documentation,,project documentation
 docs/release_readiness.md,documentation,,project documentation
 docs/research_pipeline.md,documentation,,project documentation
 docs/security_and_disclosure_audit.md,documentation,,project documentation

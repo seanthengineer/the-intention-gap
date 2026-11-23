@@ -13,14 +13,8 @@ on:
       - "docs/visual_atlas.md"
       - "docs/*_freeze.sha256"
       - ".github/workflows/website.yml"
-  pull_request:
-    paths:
-      - "website/**"
-      - "data/public/**"
-      - "assets/figures/**"
-      - "docs/visual_atlas.md"
-      - "docs/*_freeze.sha256"
-      - ".github/workflows/website.yml"
+  # I run both builds for every pull request so I can require them in branch protection.
+  pull_request: {}
   workflow_dispatch:
 
 permissions:

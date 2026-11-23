@@ -120,7 +120,7 @@ What each tool is used for: [technical walkthrough](docs/technical_walkthrough.m
 | [Visual atlas](docs/visual_atlas.md) | Chapters: [NLSY97 expectations](docs/methodology.md) · [NSFG intentions](docs/nsfg_m09.md) · [housing](docs/m10_housing_fertility.md) · [forecasts](docs/m11_fertility_forecasts.md) |
 | [How it was built](docs/engineering_decisions.md) | [Research pipeline and architecture](docs/research_pipeline.md) · [scientific audit log](audit/scientific-audit.md) |
 | [Technical walkthrough](docs/technical_walkthrough.md) | [Environment and code quality](docs/environment_and_code_quality.md) · [security and disclosure](docs/security_and_disclosure_audit.md) · [contributing](CONTRIBUTING.md) |
-| [Data sources and licences](docs/licensing_and_attribution.md) | [Bibliography](docs/bibliography.md) · [reproducibility guide](docs/final_reproducibility_guide.md) · [errata](docs/publication_errata.md) · [release readiness](docs/release_readiness.md) |
+| [Data sources and licences](docs/licensing_and_attribution.md) | [Bibliography](docs/bibliography.md) · [reproducibility guide](docs/final_reproducibility_guide.md) · [errata](docs/publication_errata.md) · [release readiness](docs/release_readiness.md) · [publication plan](docs/publication_plan.md) |
 
 ## Reproducibility
 
