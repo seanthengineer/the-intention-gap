@@ -1,5 +1,7 @@
 # Release checklist and publication-readiness report
 
+**Current pre-publication update (November 2026).** The V2.1–V2.4 website, housing atlas and first-person documentation have been integrated into `main` through pull request #3. Its pull-request checks passed on Ubuntu and Windows, including Pyright, and both website build variants passed. The repository remains **private**, GitHub Pages remains **disabled**, and the website still declares `noindex, nofollow`. No public release tag or publication approval has been issued. The dated preparation steps and earlier test totals below are retained as historical engineering records. For the latest website verification scope and limitations, see the [release candidate report](../website/RELEASE.md).
+
 **Status:** publication engineering complete; the repository was initialized and pushed to a **private** GitHub repository on 2026-11-21. CI source-only jobs passed on Ubuntu and Windows; the integrity workflow passed after a YAML correction. The weekly maintenance workflow has not yet been run. **Not publicly released:** no public visibility, tag or GitHub Release. The Streamlit dashboard is out of scope.
 
 **Decision: REVIEWABLE WITH NONBLOCKING LIMITATIONS.** Author and project licenses were approved on 2026-11-21. Final visual review, protection settings and public-release authorization remain pending.
